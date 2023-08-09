@@ -4,7 +4,6 @@
  * @Description: Coding something
  */
 module.exports = {
-
     extends: [],
     plugins: [
         '@typescript-eslint',
