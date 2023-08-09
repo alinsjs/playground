@@ -1,0 +1,27 @@
+{
+  "name": "alins-playground",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "lint": "eslint --fix",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.4",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "@vitejs/plugin-legacy": "^4.0.2",
+    "copy-util": "^1.0.1",
+    "eslint": "^8.2.0",
+    "less": "^4.1.3",
+    "terser": "^5.16.8",
+    "typescript": "^4.9.3",
+    "typescript-eslint": "0.0.1-alpha.0",
+    "vite": "^4.2.0",
+    "alins": "0.0.20-beta.1",
+    "vite-plugin-alins": "0.0.20-beta.5"
+  }
+}
