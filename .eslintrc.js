@@ -4,20 +4,13 @@
  * @Description: Coding something
  */
 module.exports = {
-    extends: [],
-    plugins: [
-        '@typescript-eslint',
-    ],
+    parser: '@typescript-eslint/parser',
+    plugins: [ 'eslint-plugin-react' ],
     'env': {
         'node': true,
     },
     rules: {
         'no-var': 'error',
-        '@typescript-eslint/consistent-type-definitions': [
-            'error',
-            'interface'
-        ],
-        '@typescript-eslint/no-unused-vars': 'error', // 使用 ts 未使用变量的规则 比如枚举类型在es中会报错
         'no-extend-native': 0,
         'no-new': 0,
         'no-useless-escape': 0,
@@ -58,7 +51,6 @@ module.exports = {
         'space-infix-ops': 2,
         'no-irregular-whitespace': 2, // 不规则的空白不允许
         'no-trailing-spaces': 2, // 一行结束后面有空格就发出警告
-        '@typescript-eslint/no-empty-function': 1,
         '@typescript-eslint/ban-ts-comment': 'off',
     }
 };

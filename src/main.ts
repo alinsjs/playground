@@ -5,3 +5,12 @@
  */
 import './counter';
 import './todo';
+
+import { parseWebAlins } from 'alins-compiler-web';
+
+console.log(parseWebAlins(`let count = 1;
+
+<button
+    $parent={document.body}
+    onclick={() => {count++;}}
+>click:{count}</button>;`));
