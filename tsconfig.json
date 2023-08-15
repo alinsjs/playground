@@ -15,7 +15,12 @@
     "noEmit": false,
     "types": [],
     "composite": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "alins": ["alins/packages/client-core"],
+      "alins-*": ["src/packages/*/index.ts"]
+    }
   },
   "include": [
     "src/*.ts",

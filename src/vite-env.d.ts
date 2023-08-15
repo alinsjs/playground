@@ -5,7 +5,7 @@
  */
 // eslint-disable-next-line spaced-comment
 /// <reference types="vite/client" />
-/// <reference types="alins" />
+import 'alins';
 
 declare let __DEV__: boolean;
 

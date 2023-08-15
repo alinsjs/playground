@@ -1,9 +1,12 @@
+// import { initStyle } from 'alins-style';
+
 /*
  * @Author: chenzhongsheng
  * @Date: 2023-08-10 01:35:35
  * @Description: Coding something
  */
-export function Item ({item, index}: {item: string, index: number}, children: any[]) {
+
+export function Item ({ item, index }: {item: string, index: number}, children: any[]) {
     let done = false;
     return <div style={{
         textDecoration: done ? 'line-through' : 'none',
