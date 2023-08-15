@@ -62,10 +62,18 @@ monaco.editor.defineTheme('vsc-light', {
     colors: {}
 });
 
-export function initMonaco (dom: HTMLElement) {
-    return monaco.editor.create(dom, {
-        value: 'function hello() {\n\talert(\'Hello world!\');\n}',
-        language: 'javascript',
-        theme: 'vsc-dark',
-    });
+export class Editor {
+    dom: HTMLElement;
+
+    eidtor: IEditor;
+
+    constructor (dom: HTMLElement) {
+        this.dom = dom;
+        this.eidtor = monaco.editor.create(dom, {
+            value: 'function hello() {\n\talert(\'Hello world!\');\n}',
+            language: 'javascript',
+            theme: 'vsc-dark',
+            fontSize: 14,
+        });
+    }
 }

@@ -9,8 +9,9 @@
 // import { parseWebAlins } from 'alins-compiler-web';
 // import {initMonaco} from './monaco';
 import { ExamplesList } from './components/assets-block/assets-list';
-import { Editor } from './components/code-block/code-editor';
+import { EditorBox } from './components/code-block/code-editor';
 import './styles/index.less';
+import { ResultBlock } from './components/result-block/result-block';
 
 // initMonaco();
 
@@ -31,10 +32,10 @@ import './styles/index.less';
             <ExamplesList/>
         </div>
         <div class='body-code-container'>
-            <Editor />
+            <EditorBox />
         </div>
         <div class='body-result-container'>
-
+            <ResultBlock />
         </div>
     </div>
     <div class='status-container'>status</div>
