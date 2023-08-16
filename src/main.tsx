@@ -16,15 +16,14 @@ import { useStatus, aaa } from './store/store'; // @reactive
 
 const status = useStatus();
 
-
-console.log(status);
+// console.log(status);
 window._status = status;
 
-let a = {};
+// let a = {};
 
-a = { a: 1 };
+// a = { a: 1 };
 
-window._aa = () => {a.a++;};
+// window._aa = () => {a.a++;};
 
 // initMonaco();
 
@@ -35,11 +34,12 @@ window._aa = () => {a.a++;};
 //     onclick={() => {count++;}}
 // >click:{count}</button>;`));
 
+function aa () {return 11;}
 
 <div
     $parent={document.body}
     class='main-container'>
-    <div class='title-container'>title {status.a + 1} {aaa.a + 1}</div>
+    <div class='title-container'>title {aa()} {status.aa} {status.a + 1} {status.getA(100)}</div>
     <div class='body-container'>
         <div class='body-assets-container'>
             <ExamplesList/>
