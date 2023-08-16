@@ -5,7 +5,10 @@
  */
 module.exports = {
     parser: '@typescript-eslint/parser',
-    plugins: [ 'eslint-plugin-react' ],
+    plugins: [
+        'eslint-plugin-react',
+        '@typescript-eslint',
+    ],
     'env': {
         'node': true,
     },
@@ -35,7 +38,7 @@ module.exports = {
         'array-bracket-spacing': [ 'error', 'always' ],
         'arrow-spacing': 'error',
         'no-multiple-empty-lines': 'error',
-        'no-unused-vars': 'error',
+        // 'no-unused-vars': 'error',
         'spaced-comment': 'error',
         'quotes': [ 'error', 'single', { 'allowTemplateLiterals': true } ],
         'no-unreachable': 'error',
@@ -52,5 +55,6 @@ module.exports = {
         'no-irregular-whitespace': 2, // 不规则的空白不允许
         'no-trailing-spaces': 2, // 一行结束后面有空格就发出警告
         '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-unused-vars': 'error',
     }
 };

@@ -6,7 +6,8 @@
 import { defineConfig } from 'vite';
 // loadEnv
 import legacy from '@vitejs/plugin-legacy';
-import alins from 'vite-plugin-alins';
+// import alins from 'vite-plugin-alins';
+import alins from './dist/vite-plugin-alins.esm.min';
 
 // https://vitejs.dev/config/
 // @ts-ignore
