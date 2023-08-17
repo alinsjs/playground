@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
     const isDev = mode === 'development';
     return {
         base: isDev ? '/' : '/fund',
+
         plugins: [
             legacy({
                 targets: [ 'defaults', 'not IE 11' ],
@@ -26,6 +27,13 @@ export default defineConfig(({ mode }) => {
         ],
         define: {
             __DEV__: mode === 'development',
+        },
+        build: {
+            rollupOptions: {
+                output: {
+                    comments: true
+                }
+            }
         },
         resolve: {
             alias: {

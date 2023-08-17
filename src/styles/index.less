@@ -21,15 +21,22 @@ body,body *{
     .body-container {
         flex: 1;
         display: flex;
+        position: relative;
         .body-assets-container{
             width: 100px;
         }
         .body-code-container{
-            flex: 1;
             display: flex;
         }
         .body-result-container{
             flex: 1;
+        }
+        .drag-bar{
+            width: 5px;
+            background-color: #007acc;
+            height: 100%;
+            user-select: none;
+            cursor: ew-resize;
         }
     }
     .status-container {

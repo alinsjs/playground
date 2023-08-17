@@ -12,41 +12,32 @@ import { ExamplesList } from './components/assets-block/assets-list';
 import { EditorBox } from './components/code-block/code-editor';
 import './styles/index.less';
 import { ResultBlock } from './components/result-block/result-block';
-import { useStatus, aaa } from './store/store'; // @reactive
+import { useStatus } from './store/store'; // @reactive
+import { DragBar } from './components/widgets/drag-bar';
 
-const status = useStatus();
+const status = useStatus(); // @static
 
-// console.log(status);
 window._status = status;
 
-// let a = {};
-
-// a = { a: 1 };
-
-// window._aa = () => {a.a++;};
-
-// initMonaco();
-
-// console.log(parseWebAlins(`let count = 1;
-
-// <button
-//     $parent={document.body}
-//     onclick={() => {count++;}}
-// >click:{count}</button>;`));
-
-function aa () {return 11;}
 
 <div
     $parent={document.body}
     class='main-container'>
-    <div class='title-container'>title {aa()} {status.aa} {status.a + 1} {status.getA(100)}</div>
+    <div class='title-container'>title</div>
     <div class='body-container'>
         <div class='body-assets-container'>
             <ExamplesList/>
         </div>
-        <div class='body-code-container'>
+        <div
+            class='body-code-container'
+            style={{ width: status.codeWidth }}
+            $mounted={(dom) => {
+                status.codeEditorLeft = dom.getBoundingClientRect().left;
+            }}
+        >
             <EditorBox />
         </div>
+        <DragBar/>
         <div class='body-result-container'>
             <ResultBlock />
         </div>

@@ -4,55 +4,75 @@
  * @Description: Coding something
  */
 
-import { react, watch, observe } from 'alins-reactive';
-window._observe = observe;
-window._watch = watch;
-export interface IStoreOptions<T> {
+import { react } from 'alins-reactive';
+
+export interface IStoreOptions<
+    State extends Record<string, any>,
+    Action = Record<string, (this: State, ...args: any[])=>any>,
+    Getter = Record<string, (this: State)=>any>,
+> {
     id?: string;
-    state: ()=>T;
-    actions?: Record<string, (this: T, ...args: any[])=>any>;
-    getters?: Record<string, (this: T)=>any>;
+    state: ()=>State;
+    actions?: Action;
+    getters?: Getter;
 }
 
-export interface IStore<T=any> {
-
+export type IStore<
+    State extends Record<string, any>,
+    Action = Record<string, (this: State, ...args: any[])=>any>,
+    Getter = Record<string, (this: State)=>any>,
+> = {
+    [key in keyof State]: State[key];
+} & {
+    [key in keyof Action]: Action[key];
+} & {
+    // @ts-ignore
+    [key in keyof Getter]: ReturnType<Getter[key]>;
 }
 
 let storeId = 0;
 
-const storeMap: Record<string, IStore> = {};
+const storeMap: Record<string, IStore<Record<string, any>>> = {};
 
-export function getStore (id: string) {
+export function getStore<T extends Record<string, any> = any, A = any, G = any> (id: string): IStore<T, A, G>|null {
+    // @ts-ignore
     return storeMap[id] || null;
 }
 
-export function createStore<T> ({
+export function createStore<
+    State extends Record<string, any>,
+    Action = Record<string, (this: State, ...args: any[])=>any>,
+    Getter = Record<string, (this: State)=>any>,
+> ({
     id,
     state,
     actions,
     getters,
-}: IStoreOptions<T>): () => any {
+}: IStoreOptions<State, Action, Getter>): () => IStore<State, Action, Getter> {
     if (!id) id = `store_${storeId++}`;
     return () => {
-        if (!id) return null;
-        let store: IStore<T> = storeMap[id];
-
+        if (!id) {throw new Error('Id is Required');};
+        let store: IStore<State, Action, Getter> = storeMap[id] as IStore<State, Action, Getter>;
         if (!store) {
+            // @ts-ignore
             store = react(state());
-            for (const k in actions) {
-                // @ts-ignore
-                store[k] = actions[k].bind(store);
-            }
-            for (const k in getters) {
-                Object.defineProperty(store, k, {
+            if (actions) {
+                for (const k in actions) {
                     // @ts-ignore
-                    get () {return getters[k].call(store);},
-                    set () {throw new Error('Cannot set getters');}
-                });
+                    store[k] = actions[k].bind(store);
+                }
+            }
+            if (getters) {
+                for (const k in getters) {
+                    Object.defineProperty(store, k, {
+                        // @ts-ignore
+                        get () {return getters[k].call(store);},
+                        set () {throw new Error('Cannot set getters');}
+                    });
+                }
             }
             storeMap[id] = store;
         }
-
         return store;
     };
 }
