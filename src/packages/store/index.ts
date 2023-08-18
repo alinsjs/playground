@@ -4,7 +4,7 @@
  * @Description: Coding something
  */
 
-import { react } from 'alins-reactive';
+import { react, watch } from 'alins-reactive';
 
 export interface IStoreOptions<
     State extends Record<string, any>,
@@ -28,6 +28,10 @@ export type IStore<
 } & {
     // @ts-ignore
     [key in keyof Getter]: ReturnType<Getter[key]>;
+} & {
+    $watch<T extends keyof State>(T: (keyof State), listener: (nv: State[T], ov: State[T])=>void): void;
+    $watch<T extends keyof Getter>(T: (keyof Getter), listener: (nv: Getter[T], ov: Getter[T])=>void): void;
+    $watch<T>(T: (()=>T), listener: (nv: T, ov: T)=>void): void;
 }
 
 let storeId = 0;
@@ -71,7 +75,16 @@ export function createStore<
                     });
                 }
             }
+            // @ts-ignore
             storeMap[id] = store;
+
+            store.$watch = (v: any, listener: (v1: any, v2: any) => void) => {
+                if (typeof v === 'string') {
+                    const prop = v;
+                    v = () => store[prop];
+                }
+                return watch(v, listener);
+            };
         }
         return store;
     };

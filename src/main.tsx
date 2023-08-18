@@ -30,7 +30,7 @@ window._status = status;
         </div>
         <div
             class='body-code-container'
-            style={{ width: status.codeWidth }}
+            style={{ width: status.codeWidthPx }}
             $mounted={(dom) => {
                 status.codeEditorLeft = dom.getBoundingClientRect().left;
             }}

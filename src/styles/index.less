@@ -24,12 +24,10 @@ body,body *{
         position: relative;
         .body-assets-container{
             width: 100px;
+            min-width: 100px;
         }
         .body-code-container{
             display: flex;
-        }
-        .body-result-container{
-            flex: 1;
         }
         .drag-bar{
             width: 5px;
@@ -40,5 +38,39 @@ body,body *{
         }
     }
     .status-container {
+    }
+}
+
+.body-result-container{
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    .result-header{
+        display: flex;
+        padding: 0 10px;
+        span{
+            padding: 5px 10px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            &.active{
+                border-color: #007acc;
+            }
+        }
+    }
+    .highlight-container {
+        white-space: pre;
+        font-family: Menlo, Monaco, "Courier New", monospace;
+        font-weight: normal;
+        font-size: 14px;
+        font-feature-settings: "liga" 0, "calt" 0;
+        font-variation-settings: normal;
+        line-height: 21px;
+        letter-spacing: 0px;
+        padding: 10px;
+        height: 100%;
+        background-color: #1e1e1e;
+        flex: 1;
     }
 }

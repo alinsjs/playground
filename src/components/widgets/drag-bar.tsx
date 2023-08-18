@@ -3,7 +3,7 @@
  * @Date: 2023-08-17 08:13:08
  * @Description: Coding something
  */
-import { useStatus } from '../../store/store';
+import { useStatus } from 'src/store/store';
 
 export function DragBar () {
 
@@ -13,7 +13,6 @@ export function DragBar () {
 
     function mouseMove (e: MouseEvent) {
         if (_isDown) {
-            console.log(e);
             status.onDragSize(e.clientX);
         }
     }

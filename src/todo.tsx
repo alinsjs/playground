@@ -1,7 +1,12 @@
-import {Item} from './todo-item';
+/*
+ * @Author: chenzhongsheng
+ * @Date: 2023-08-10 01:35:35
+ * @Description: Coding something
+ */
+import { Item } from './todo-item';
 
 function List () {
-    const list = ['todo1'];
+    const list = [ 'todo1' ];
     const value = '';
     return <div>
         <div>

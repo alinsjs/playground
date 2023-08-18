@@ -4,7 +4,11 @@
  * @Description: Coding <something></something>
  */
 
+import { useStatus } from 'src/store/store';
+
 export function ResultBlock () {
+
+    const status = useStatus();
 
     let naviIndex: number = 0;
 
@@ -14,10 +18,12 @@ export function ResultBlock () {
 
     window.cc = () => naviIndex = 0;
 
-    return <div>
-        <div>
-            <span class={{ active: () => isActive(0) }}>0</span>
-            <span class={{ active: () => isActive(1) }}>1</span>
+
+    return <>
+        <div class='result-header'>
+            <span class={{ active: () => isActive(0) }}>Result</span>
+            <span class={{ active: () => isActive(1) }}>Output</span>
         </div>
-    </div>;
+        <div class='highlight-container' $html={status.showCode}></div>
+    </>;
 }

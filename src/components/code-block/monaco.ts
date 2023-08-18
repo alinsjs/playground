@@ -16,6 +16,7 @@ import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
 import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 // @ts-ignore
 import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
+import { useStatus } from 'src/store/store';
 
 export type IEditor = monaco.editor.IStandaloneCodeEditor;
 
@@ -65,15 +66,41 @@ monaco.editor.defineTheme('vsc-light', {
 export class Editor {
     dom: HTMLElement;
 
-    eidtor: IEditor;
+    editor: IEditor;
 
-    constructor (dom: HTMLElement) {
+    constructor ({ dom, onchange }: {
+        dom: HTMLElement,
+        onchange?: (v: string)=>void,
+    }) {
         this.dom = dom;
-        this.eidtor = monaco.editor.create(dom, {
-            value: 'function hello() {\n\talert(\'Hello world!\');\n}',
+        this.editor = monaco.editor.create(dom, {
+            value: `let count = 1;
+<button
+    $parent={document.body}
+    onclick={() => {count++;}}
+>click:{count}</button>;`,
             language: 'javascript',
             theme: 'vsc-dark',
             fontSize: 14,
         });
+        useStatus().$watch('codeWidthPx', () => {
+            this.editor.layout();
+        });
+
+        if (onchange) {
+            this.editor.onDidChangeModelContent(() => {
+                onchange(this.code());
+            });
+        }
+    }
+    code(): string;
+    code(v: string): this;
+    code (v?: string) {
+        if (typeof v === 'string') {
+            this.editor.setValue(v);
+            return this;
+        } else {
+            return this.editor.getValue();
+        }
     }
 }

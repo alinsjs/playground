@@ -12,12 +12,12 @@ import alins from './dist/vite-plugin-alins.esm.min';
 // https://vitejs.dev/config/
 // @ts-ignore
 export default defineConfig(({ mode }) => {
-    // command,
     // const env = loadEnv(mode, process.cwd(), '');
     // console.log(mode);
     const isDev = mode === 'development';
     return {
-        base: isDev ? '/' : '/fund',
+        // base: isDev ? '/' : '/fund',
+        base: '/',
 
         plugins: [
             legacy({
@@ -26,24 +26,27 @@ export default defineConfig(({ mode }) => {
             alins(),
         ],
         define: {
-            __DEV__: mode === 'development',
+            __DEV__: isDev,
         },
-        build: {
-            rollupOptions: {
-                output: {
-                    comments: true
-                }
-            }
-        },
+        // build: {
+        //     rollupOptions: {
+        //         output: {
+        //             comments: true
+        //         }
+        //     }
+        // },
         resolve: {
             alias: {
+                'alins': '/alins/packages/client-core',
+                'src': '/src',
                 'alins-router': '/src/packages/router/index.ts',
                 'alins-store': '/src/packages/store/index.ts',
                 'alins-style': '/src/packages/style/index.ts',
                 'alins-ui': '/src/packages/ui/index.ts',
-                'alins': '/alins/packages/client-core',
                 'alins-reactive': '/alins/packages/client-reactive',
-                'alins-utils': '/alins/packages/client-utils'
+                'alins-utils': '/alins/packages/client-utils',
+                'alins-compiler-web': '/alins/packages/compiler-web',
+                'alins-compiler-core': '/alins/packages/compiler-core',
             }
         }
     };

@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@babel/preset-env': ^7.21.4
+  '@babel/standalone': ^7.22.10
   '@typescript-eslint/eslint-plugin': ^5.4.0
   '@typescript-eslint/parser': ^5.4.0
   '@vitejs/plugin-legacy': ^4.0.2
@@ -9,6 +10,7 @@ specifiers:
   copy-util: ^1.0.1
   eslint: 8.2.0
   eslint-plugin-react: ^7.33.1
+  highlight.js: ^11.8.0
   less: ^4.1.3
   monaco-editor: ^0.41.0
   terser: ^5.16.8
@@ -22,12 +24,14 @@ dependencies:
 
 devDependencies:
   '@babel/preset-env': registry.npmmirror.com/@babel/preset-env/7.21.4
+  '@babel/standalone': 7.22.10
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.57.1_oi2zffh2z5bc52ykhwsulvpf54
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/5.57.1_3xzeybwh22wzrsav3fvkeqdv34
   '@vitejs/plugin-legacy': registry.npmmirror.com/@vitejs/plugin-legacy/4.0.2_terser@5.16.8+vite@4.2.1
   copy-util: registry.npmmirror.com/copy-util/1.0.1
   eslint: 8.2.0
   eslint-plugin-react: 7.33.1_eslint@8.2.0
+  highlight.js: 11.8.0
   less: registry.npmmirror.com/less/4.1.3
   monaco-editor: 0.41.0
   terser: registry.npmmirror.com/terser/5.16.8
@@ -389,7 +393,6 @@ packages:
   /@babel/standalone/7.22.10:
     resolution: {integrity: sha512-VmK2sWxUTfDDh9mPfCtFJPIehZToteqK+Zpwq8oJUjJ+WeeKIFTTQIrDzH7jEdom+cAaaguU7FI/FBsBWFkIeQ==}
     engines: {node: '>=6.9.0'}
-    dev: false
 
   /@babel/template/7.22.5:
     resolution: {integrity: sha512-X7yV7eiwAxdj9k94NEylvbVHLiVG1nvzCV2EAowhxLTwODV1jl9UzZ48leOC0sH7OnuHrIkllaBgneUykIcZaw==}
@@ -1414,6 +1417,11 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+    dev: true
+
+  /highlight.js/11.8.0:
+    resolution: {integrity: sha512-MedQhoqVdr0U6SSnWPzfiadUcDHfN/Wzq25AkXiQv9oiOO/sG0S7XkvpFIqWBl9Yq1UYyYOOVORs5UW2XlPyzg==}
+    engines: {node: '>=12.0.0'}
     dev: true
 
   /ignore/4.0.6:
