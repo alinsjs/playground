@@ -11,6 +11,11 @@ export function DragBar () {
 
     let _isDown = false;
 
+    function setDown (b: boolean) {
+        _isDown = b;
+        status.dragActive = b;
+    }
+
     function mouseMove (e: MouseEvent) {
         if (_isDown) {
             status.onDragSize(e.clientX);
@@ -21,13 +26,14 @@ export function DragBar () {
     window.addEventListener('mouseup', () => {
         if (_isDown) {
             _isDown = false;
+            setDown(false);
         }
     });
 
     return <div
-        class='drag-bar'
-        onmousedown={() => {_isDown = true;}}
-        onmouseup={() => {_isDown = false;}}
+        class={`drag-bar ${status.dragActive ? 'active' : ''}`}
+        onmousedown={() => {setDown(true);}}
+        onmouseup={() => {setDown(false);}}
         onmousemove={mouseMove}
     ></div>;
 }

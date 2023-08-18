@@ -10,20 +10,20 @@ export function ResultBlock () {
 
     const status = useStatus();
 
-    let naviIndex: number = 0;
-
-    const isActive = (i: number) => naviIndex === i;
-
-    const b = !isActive(1);
-
-    window.cc = () => naviIndex = 0;
-
+    const isActive = (i: number) => status.resultNaviIndex === i;
 
     return <>
         <div class='result-header'>
-            <span class={{ active: () => isActive(0) }}>Result</span>
-            <span class={{ active: () => isActive(1) }}>Output</span>
+            <span class={`${isActive(0) ? 'active' : ''}`}
+                onclick={() => {status.resultNaviIndex = 0;}}>Result</span>
+            <span class={`${isActive(1) ? 'active' : ''}`}
+                onclick={() => {status.resultNaviIndex = 1;}}>Output</span>
         </div>
-        <div class='highlight-container' $html={status.showCode}></div>
+        <If data={isActive(0)}>
+            <div id='App'></div>
+        </If>
+        <ElseIf data={isActive(1)}>
+            <div class='highlight-container' style={`color: ${status.syntaxError ? '#f44' : 'inherit'}`} $html={status.outputCode}></div>
+        </ElseIf>
     </>;
 }

@@ -23,7 +23,16 @@ window._status = status;
 <div
     $parent={document.body}
     class='main-container'>
-    <div class='title-container'>title</div>
+    <div class='title-container'>
+        <span class='title-item'>
+            <img style='height: 30px' src="https://shiyix.cn/images/alins.png" alt="" />
+            <span style='color: var(--theme-color)'>Alins Playground</span>
+        </span>
+        <span class='title-item right'>
+            <span style='color: var(--theme-color)' onclick={() => window.open('https://alinsjs.github.io/docs/')}>Docs</span>
+            <span style='color: var(--theme-color)' onclick={() => window.open('https://github.com/alinsjs/alins')}>GitHub</span>
+        </span>
+    </div>
     <div class='body-container'>
         <div class='body-assets-container'>
             <ExamplesList/>
@@ -35,6 +44,7 @@ window._status = status;
                 status.codeEditorLeft = dom.getBoundingClientRect().left;
             }}
         >
+            <div class='editor-title'>{status.exampleName}</div>
             <EditorBox />
         </div>
         <DragBar/>
@@ -42,5 +52,5 @@ window._status = status;
             <ResultBlock />
         </div>
     </div>
-    <div class='status-container'>status</div>
+    {/* <div class='status-container'>status</div> */}
 </div>;

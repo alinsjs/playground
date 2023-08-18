@@ -8,23 +8,25 @@ import { debounce } from 'src/utils';
 import { Editor } from './monaco';
 
 export function EditorBox () {
-    let _editor: Editor;
-    const dom = <div
+    return <div
         style={{
             width: '100%',
             height: '100%',
         }}
         $mounted={(dom) => {
+            const status = useStatus();
             const parseCode = (v: string) => {
-                useStatus().setCode(v);
+                status.setCode(v);
             };
-            _editor = new Editor({
+            const _editor = new Editor({
                 dom,
+                code: status.exampleCode,
                 onchange: debounce(parseCode),
+            });
+            status.$watch('exampleCode', (code) => {
+                _editor.code(code);
             });
             parseCode(_editor.code());
         }}
     ></div>;
-
-    return dom;
 }

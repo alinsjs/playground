@@ -8,8 +8,8 @@ import { react, watch } from 'alins-reactive';
 
 export interface IStoreOptions<
     State extends Record<string, any>,
-    Action = Record<string, (this: State, ...args: any[])=>any>,
-    Getter = Record<string, (this: State)=>any>,
+    Action = Record<string, (this: IStore<State>, ...args: any[])=>any>,
+    Getter = Record<string, (this: IStore<State>)=>any>,
 > {
     id?: string;
     state: ()=>State;
@@ -19,8 +19,8 @@ export interface IStoreOptions<
 
 export type IStore<
     State extends Record<string, any>,
-    Action = Record<string, (this: State, ...args: any[])=>any>,
-    Getter = Record<string, (this: State)=>any>,
+    Action = Record<string, (this: IStore<State>, ...args: any[])=>any>,
+    Getter = Record<string, (this: IStore<State>)=>any>,
 > = {
     [key in keyof State]: State[key];
 } & {
@@ -45,8 +45,8 @@ export function getStore<T extends Record<string, any> = any, A = any, G = any> 
 
 export function createStore<
     State extends Record<string, any>,
-    Action = Record<string, (this: State, ...args: any[])=>any>,
-    Getter = Record<string, (this: State)=>any>,
+    Action = Record<string, (this: IStore<State>, ...args: any[])=>any>,
+    Getter = Record<string, (this: IStore<State>)=>any>,
 > ({
     id,
     state,

@@ -68,17 +68,14 @@ export class Editor {
 
     editor: IEditor;
 
-    constructor ({ dom, onchange }: {
+    constructor ({ dom, onchange, code = '' }: {
         dom: HTMLElement,
+        code?: string,
         onchange?: (v: string)=>void,
     }) {
         this.dom = dom;
         this.editor = monaco.editor.create(dom, {
-            value: `let count = 1;
-<button
-    $parent={document.body}
-    onclick={() => {count++;}}
->click:{count}</button>;`,
+            value: code,
             language: 'javascript',
             theme: 'vsc-dark',
             fontSize: 14,
