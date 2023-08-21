@@ -15,9 +15,9 @@ export function ResultBlock () {
     return <>
         <div class='result-header'>
             <span class={`${isActive(0) ? 'active' : ''}`}
-                onclick={() => {status.resultNaviIndex = 0;}}>Result</span>
+                onclick={status.resultNaviIndex = 0}>Result</span>
             <span class={`${isActive(1) ? 'active' : ''}`}
-                onclick={() => {status.resultNaviIndex = 1;}}>Output</span>
+                onclick={status.resultNaviIndex = 1}>Output</span>
         </div>
         <If data={isActive(0)}>
             <div id='App'></div>

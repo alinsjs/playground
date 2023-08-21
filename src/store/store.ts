@@ -16,8 +16,14 @@ function resultError (e: any, stack = true) {
     const app = document.getElementById('App');
     if (!app) return;
     const str = stack ? e.stack : e.toString();
-    app.innerHTML = `<pre style='color:#f44'>${str.replace(/</g, '&lt;')}</pre>`;
+    app.innerHTML = `<pre style='color:#f44;font-family: var(--font);'>${str.replace(/</g, '&lt;')}</pre>`;
 };
+
+function loadingResult () {
+    const app = document.getElementById('App');
+    if (!app) return;
+    app.innerHTML = `<div style='color:var(--theme-color)'>The results are loading...</div>`;
+}
 
 export const useStatus = createStore({
     state: () => {
@@ -40,6 +46,8 @@ export const useStatus = createStore({
     },
     actions: {
         switchExample (index: number) {
+            this.resultNaviIndex = 0;
+            loadingResult();
             this.exampleIndex = index;
             this.exampleName = Examples[index].name;
             this.exampleCode =  Examples[index].code;
@@ -48,7 +56,7 @@ export const useStatus = createStore({
         setCode (v: string) {
             let result = '';
             try {
-                result = parseWebAlins(v, { useImport: true });
+                result = parseWebAlins(v, { useImport: true, ts: true, filename: 'demo.tsx' });
             } catch (e: any) {
                 this.outputCode = e.toString().replace(/</g, '&lt;');
                 this.syntaxError = true;

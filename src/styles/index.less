@@ -2,7 +2,10 @@
     --theme-color: #ec5c2f;
     --font: Menlo, Monaco, "Courier New", monospace;
 }
-
+body,html{
+    height: 100%;
+    width: 100%;
+}
 body {
     margin: 0;
     padding: 0;
@@ -57,7 +60,7 @@ body,body *{
                 &.active{
                     color: var(--theme-color);
                     background-color: #1e1e1e;
-                    border-right: 2px solid var(--theme-color);
+                    border-left: 2px solid var(--theme-color);
                 }
             }
         }
@@ -109,6 +112,7 @@ body,body *{
         }
     }
     .highlight-container {
+        font-family: var(--font);
         white-space: pre;
         font-weight: normal;
         font-size: 14px;
@@ -117,18 +121,9 @@ body,body *{
         line-height: 21px;
         letter-spacing: 0px;
         padding: 10px;
-        height: 100%;
-        background-color: #1e1e1e;
-        flex: 1;
-        width: fit-content;
-        min-width: 100%;
     }
     #App{
         padding: 10px;
-        background-color: #1e1e1e;
-        flex: 1;
-        width: fit-content;
-        min-width: 100%;
 
         button, input{
             margin: 5px;
@@ -145,4 +140,36 @@ body,body *{
             background-color: #ccc;
         }
     }
+
+    #App,.highlight-container{
+        height: calc(100vh - 83px);
+        background-color: #1e1e1e;
+        overflow: auto;
+        // flex: 1;
+        // width: fit-content;
+        min-width: 100%;
+    }
+}
+
+::-webkit-scrollbar {
+    width:5px;
+    cursor: pointer;
+    height: 5px;
+}
+::-webkit-scrollbar-button    {
+    display: none;
+}
+::-webkit-scrollbar-track     {
+    display: none;
+}
+::-webkit-scrollbar-track-piece {
+    background-color:#88888811;
+}
+::-webkit-scrollbar-thumb{
+    background-color:#88888866;
+    cursor: pointer;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color:#88888888;
+    cursor: pointer;
 }

@@ -8,7 +8,7 @@ export const Examples = [
     {
         name: 'Hello World',
         code: `const msg = 'World';
-<div $parent='#App'>Hello {msg}!</div>;`
+<div $$App>Hello {msg}!</div>;`
     },
     {
         name: 'Counter',
