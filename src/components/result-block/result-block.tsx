@@ -12,6 +12,13 @@ export function ResultBlock () {
 
     const isActive = (i: number) => status.resultNaviIndex === i;
 
+    status.$watch('resultNaviIndex', v => {
+        if (v === 0) {
+            setTimeout(() => {
+                status.runCodeResult();
+            });
+        }
+    });
     return <>
         <div class='result-header'>
             <span class={`${isActive(0) ? 'active' : ''}`}

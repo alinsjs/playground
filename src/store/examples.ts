@@ -1,7 +1,7 @@
 export default [
     {
         "name": "Hello World",
-        "code": "const msg = 'World';\n<div $$App>Hello {msg}!</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-22 11:03:06\n * @Description: Coding something\n */\nconst msg = 'World';\nconst a = { a () {alert(111);} };\n<div onclick={a.a} $$App>Hello {msg}!</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "head": "Introduction"
     },
     {

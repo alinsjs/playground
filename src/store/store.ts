@@ -44,6 +44,7 @@ export const useStatus = createStore({
             exampleIndex,
             exampleName: Examples[exampleIndex].name,
             exampleCode: Examples[exampleIndex].code,
+            codeChange: false,
         };
     },
     actions: {
@@ -76,21 +77,18 @@ export const useStatus = createStore({
             this.runCode = result.replace('import { _$$ } from "alins";', 'const _$$$$ = window.Alins._$$$$;');
             this.syntaxError = false;
 
+            this.codeChange = true;
+
             if (this.resultNaviIndex === 0) {
                 this.runCodeResult();
             }
-
-            // this.$watch('resultNaviIndex', v => {
-            //     if (v === 0) {
-            //         this.runCodeResult();
-            //     }
-            // });
 
         },
         onDragSize (x: number) {
             this.codeEditorWidth = x - this.codeEditorLeft;
         },
         runCodeResult () {
+            if (!this.codeChange) return;
             // @ts-ignore
             document.getElementById('App').innerHTML = '';
             try {
@@ -99,14 +97,16 @@ export const useStatus = createStore({
                 console.error(e);
                 resultError(e);
             }
+            this.codeChange = false;
         },
         download () {
+            // store
             if (!downloadLink) {
                 downloadLink = document.createElement('a');
                 downloadLink.setAttribute('style', 'position: fixed;top: -100px');
                 document.body.appendChild(downloadLink);
             }
-            downloadLink.setAttribute('download', `${this.exampleName}.alins.html`);
+            downloadLink.setAttribute('download', `${this.exampleName.replace(/ /g, '-')}.alins.html`);
             const blob = new Blob([ createAlinsHTML(this.exampleName, this.exampleCode) ], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             downloadLink.href = url;
@@ -120,6 +120,11 @@ export const useStatus = createStore({
     }
 });
 
+// const status = useStatus();
+// status.download();
+
+// useStatus().download;
+// useStatus().codeWidthPx;
 
 function createAlinsHTML (name: string, code: string) {
     return `<!DOCTYPE html>

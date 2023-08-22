@@ -26,12 +26,10 @@ window._status = status;
         <span class='title-item'>
             <img style='height: 30px' src="https://shiyix.cn/images/alins.png" alt="" />
             <span style='color: var(--theme-color)'>Alins Playground</span>
+            <i onclick={status.download()} class="ei-download-alt"></i>
+            <i onclick={status.runCodeResult} class="ei-refresh"></i>
         </span>
         <span class='title-item right'>
-            <span onclick={status.download()}>
-                <i class="ei-download-alt"></i>
-                Download
-            </span>
             <span onclick={() => window.open('https://alinsjs.github.io/docs/')}>
                 <i class="ei-file-text-o"></i>
                 Docs
