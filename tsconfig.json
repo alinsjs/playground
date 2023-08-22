@@ -16,7 +16,6 @@
     "types": [],
     "composite": true,
     "allowSyntheticDefaultImports": true,
-    "jsxImportSource": "alins",
     "baseUrl": ".",
     "paths": {
       "alins": ["alins/packages/client-core"],
@@ -33,6 +32,8 @@
     "src/*.tsx",
     "src/**/*.tsx",
     "src/**/*.ts",
+    "src/**/*.json",
+    "examples/**/*.tsx",
     "vite.config.ts"
   ]
 }

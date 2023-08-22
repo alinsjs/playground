@@ -55,8 +55,7 @@ export function createStore<
 }: IStoreOptions<State, Action, Getter>): () => IStore<State, Action, Getter> {
     if (!id) id = `store_${storeId++}`;
     return () => {
-        if (!id) {throw new Error('Id is Required');};
-        let store: IStore<State, Action, Getter> = storeMap[id] as IStore<State, Action, Getter>;
+        let store: IStore<State, Action, Getter> = storeMap[id!] as IStore<State, Action, Getter>;
         if (!store) {
             // @ts-ignore
             store = react(state());

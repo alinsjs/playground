@@ -3,9 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host",
+    "example": "node scripts/genarate-example.js",
+    "watch:example": "onchange 'examples/**/*.tsx' -- npm run example",
+    "dev": "npm run example && vite --host",
     "lint": "eslint --fix",
-    "build": "vite build",
+    "build": "npm run example && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -22,6 +24,7 @@
     "monaco-editor": "^0.41.0",
     "monaco-editor-textmate": "^4.0.0",
     "monaco-textmate": "^3.0.1",
+    "onchange": "^7.1.0",
     "onigasm": "^2.0.0",
     "terser": "^5.16.8",
     "typescript": "^4.9.3",
@@ -30,7 +33,6 @@
     "vite-plugin-alins": "0.0.24"
   },
   "dependencies": {
-    "alins-compiler-web": "0.0.24",
-    "solid-js": "^1.7.11"
+    "alins-compiler-web": "0.0.24"
   }
 }

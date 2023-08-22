@@ -1,0 +1,35 @@
+/*
+ * @Author: chenzhongsheng
+ * @Date: 2023-08-21 14:21:06
+ * @Description: Coding something
+ */
+const fs = require('fs');
+const path = require('path');
+
+const dirs = fs.readdirSync(path.resolve(__dirname, '../examples'));
+
+const list = [];
+
+dirs.forEach(dirName => {
+    const subDirs = fs.readdirSync(path.resolve(__dirname, `../examples/${dirName}`));
+    let title = formatName(dirName);
+    subDirs.forEach(fileName => {
+        const itemName = formatName(fileName, fileName.indexOf('.'));
+        const item = {
+            name: itemName,
+            code: fs.readFileSync(path.resolve(__dirname, `../examples/${dirName}/${fileName}`), 'utf8'),
+        };
+        if (title) {
+            item.head = title;
+            title = '';
+        }
+        list.push(item);
+    });
+});
+
+fs.writeFileSync(path.resolve(__dirname, '../src/store/examples.ts'), `export default ${JSON.stringify(list, null, 4)};`, 'utf8');
+
+function formatName (fileName, end) {
+    const name = fileName.substring(fileName.indexOf('-') + 1, end);
+    return name.split('-').map(item => item[0].toUpperCase() + item.substring(1)).join(' ');
+}

@@ -10,15 +10,14 @@
 // import {initMonaco} from './monaco';
 import { ExamplesList } from './components/assets-block/assets-list';
 import { EditorBox } from './components/code-block/code-editor';
-import './styles/index.less';
 import { ResultBlock } from './components/result-block/result-block';
-import { useStatus } from './store/store'; // @reactive
+import { useStatus } from './store/store';
 import { DragBar } from './components/widgets/drag-bar';
+import './styles/index.less';
 
-const status = useStatus(); // @static
+const status = useStatus();
 
 window._status = status;
-
 
 <div
     $parent={document.body}
@@ -29,8 +28,18 @@ window._status = status;
             <span style='color: var(--theme-color)'>Alins Playground</span>
         </span>
         <span class='title-item right'>
-            <span style='color: var(--theme-color)' onclick={() => window.open('https://alinsjs.github.io/docs/')}>Docs</span>
-            <span style='color: var(--theme-color)' onclick={() => window.open('https://github.com/alinsjs/alins')}>GitHub</span>
+            <span onclick={status.download()}>
+                <i class="ei-download-alt"></i>
+                Download
+            </span>
+            <span onclick={() => window.open('https://alinsjs.github.io/docs/')}>
+                <i class="ei-file-text-o"></i>
+                Docs
+            </span>
+            <span onclick={() => window.open('https://github.com/alinsjs/alins')}>
+                <i class="ei-github"></i>
+                GitHub
+            </span>
         </span>
     </div>
     <div class='body-container'>

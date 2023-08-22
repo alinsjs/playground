@@ -24,18 +24,42 @@ import onigasm from 'onigasm/lib/onigasm.wasm?url';
 import { loadWASM } from 'onigasm';
 import vsDark from './vs_dark_good.json';
 
+// const modelUri = Uri.file('source.tsx');
+
+// const codeModel = editor.createModel(
+//     `
+//     class Foo {
+//         private value = 42;
+//         render() {
+//             return <div>
+//                 <div>
+//                     Hello World
+//                 </div>
+//                 <div>The value is {this.value}</div>
+//             </div>
+//         }
+//     }
+//     `,
+//     'typescript',
+//     modelUri // Pass the file name to the model here.
+// );
+
 const compilerOptions: languages.typescript.CompilerOptions = {
-    strict: true,
-    target: languages.typescript.ScriptTarget.ESNext,
-    module: languages.typescript.ModuleKind.ESNext,
-    moduleResolution: languages.typescript.ModuleResolutionKind.NodeJs,
-    jsx: languages.typescript.JsxEmit.Preserve,
-    jsxImportSource: 'solid-js',
+    jsx: languages.typescript.JsxEmit.React,
+    jsxFactory: 'React.createElement',
+    reactNamespace: 'React',
     allowNonTsExtensions: true,
+    allowJs: true,
+    target: languages.typescript.ScriptTarget.Latest,
 };
 
 languages.typescript.typescriptDefaults.setCompilerOptions(compilerOptions);
 languages.typescript.javascriptDefaults.setCompilerOptions(compilerOptions);
+
+languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+    noSemanticValidation: true,
+    noSyntaxValidation: true
+});
 
 export type IEditor = editor.IStandaloneCodeEditor;
 
@@ -51,7 +75,7 @@ const registry = new Registry({
 // @ts-ignore
 self.MonacoEnvironment = {
     getWorker (_, label) {
-        console.log(_, label);
+        // console.log(_, label);
         if (label === 'json') {
             return new jsonWorker();
         }
@@ -66,6 +90,7 @@ self.MonacoEnvironment = {
         }
         return new editorWorker();
     },
+    // @ts-ignore
     onigasm,
 };
 // editor.defineTheme('vsc-dark', {
@@ -100,7 +125,6 @@ grammars.set('javascript', 'source.tsx');
 grammars.set('css', 'source.css');
 
 editor.defineTheme('vs-dark-plus', vsDark as editor.IStandaloneThemeData);
-
 
 const hookLanguages = languages.setLanguageConfiguration;
 
@@ -142,6 +166,8 @@ export class Editor {
             lineDecorationsWidth: 5,
             lineNumbersMinChars: 3,
         });
+
+        // this.editor.setModel(codeModel);
 
         if (onchange) {
             this.editor.onDidChangeModelContent(() => {

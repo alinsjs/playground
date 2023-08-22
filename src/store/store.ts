@@ -10,7 +10,9 @@ import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';// Then register the languages you need
 
 import 'highlight.js/styles/vs2015.css';
-import { Examples } from './examples';
+import Examples from './examples';
+
+let downloadLink: any;
 
 function resultError (e: any, stack = true) {
     const app = document.getElementById('App');
@@ -46,6 +48,7 @@ export const useStatus = createStore({
     },
     actions: {
         switchExample (index: number) {
+            if (index === this.exampleIndex) return;
             this.resultNaviIndex = 0;
             loadingResult();
             this.exampleIndex = index;
@@ -96,6 +99,18 @@ export const useStatus = createStore({
                 console.error(e);
                 resultError(e);
             }
+        },
+        download () {
+            if (!downloadLink) {
+                downloadLink = document.createElement('a');
+                downloadLink.setAttribute('style', 'position: fixed;top: -100px');
+                document.body.appendChild(downloadLink);
+            }
+            downloadLink.setAttribute('download', `${this.exampleName}.alins.html`);
+            const blob = new Blob([ createAlinsHTML(this.exampleName, this.exampleCode) ], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            downloadLink.href = url;
+            downloadLink.click();
         }
     },
     getters: {
@@ -104,3 +119,26 @@ export const useStatus = createStore({
         }
     }
 });
+
+
+function createAlinsHTML (name: string, code: string) {
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${name}</title>
+    <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
+</head>
+<body>
+    <!--
+        This demo is only used for development and debugging. 
+        For official use, please refer to https://alinsjs.github.io/docs/
+    -->
+    <div id="App"></div>
+    <script type="text/alins">
+${code}
+    </script>
+</body>
+</html>`;
+}
