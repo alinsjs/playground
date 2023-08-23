@@ -65,6 +65,7 @@ body,body *{
             background-color: #111;
             padding-top: 10px;
             font-family: var(--font);
+            padding-bottom: 100px;
             .example-item{
                 padding: 10px;
                 padding-left: 20px;
@@ -105,6 +106,21 @@ body,body *{
                 padding: 10px;
                 font-size: 16px;
                 padding-left: 20px;
+                display: flex;
+                justify-content: space-between;
+                .editor-btns{
+                    display: flex;
+                    gap: 10px;
+                    padding-right: 5px;
+                    font-size: 18px;
+                    i{
+                        cursor: pointer;
+                        transition: color .1s linear;
+                        &:hover{
+                            color: var(--theme-color);
+                        }
+                    }
+                }
             }
         }
         .drag-bar{

@@ -1,11 +1,15 @@
 function Main () {
-    let count = 0;
+    let count: number = 0;
+    const add = () => {count++};
     return <>
-        <If data={count>2}>
-            <div>Now count > 2</div>
+        <If data={count > 3}>
+            <div>Now count > 3</div>
         </If>
+        <ElseIf data={count > 2}>
+            <button onclick:add>continue[count>2]</button>
+        </ElseIf>
         <Else>
-            <button onclick={count++}>count={count}</button>
+            <button onclick:add>count={count}</button>
         </Else>
     </>;
 }

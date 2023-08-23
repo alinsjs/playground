@@ -17,6 +17,7 @@ import './styles/index.less';
 
 const status = useStatus();
 
+// @ts-ignore
 window._status = status;
 
 <div
@@ -26,15 +27,13 @@ window._status = status;
         <span class='title-item'>
             <img style='height: 30px' src="https://shiyix.cn/images/alins.png" alt="" />
             <span style='color: var(--theme-color)'>Alins Playground</span>
-            <i onclick={status.download()} class="ei-download-alt"></i>
-            <i onclick={status.runCodeResult} class="ei-refresh"></i>
         </span>
         <span class='title-item right'>
-            <span onclick={() => window.open('https://alinsjs.github.io/docs/')}>
+            <span onclick={window.open('https://alinsjs.github.io/docs/')}>
                 <i class="ei-file-text-o"></i>
                 Docs
             </span>
-            <span onclick={() => window.open('https://github.com/alinsjs/alins')}>
+            <span onclick={window.open('https://github.com/alinsjs/alins')}>
                 <i class="ei-github"></i>
                 GitHub
             </span>
@@ -51,7 +50,13 @@ window._status = status;
                 status.codeEditorLeft = dom.getBoundingClientRect().left;
             }}
         >
-            <div class='editor-title'>{status.exampleName}</div>
+            <div class='editor-title'>
+                <span>{status.exampleName}</span>
+                <span class='editor-btns'>
+                    <i onclick={status.download} title='Download' class="ei-download-alt"></i>
+                    <i onclick={status.runCodeResult(true)} title='Refresh Result' class="ei-refresh"></i>
+                </span>
+            </div>
             <EditorBox />
         </div>
         <DragBar/>

@@ -87,8 +87,8 @@ export const useStatus = createStore({
         onDragSize (x: number) {
             this.codeEditorWidth = x - this.codeEditorLeft;
         },
-        runCodeResult () {
-            if (!this.codeChange) return;
+        runCodeResult (force = false) {
+            if (!this.codeChange && !force) return;
             // @ts-ignore
             document.getElementById('App').innerHTML = '';
             try {

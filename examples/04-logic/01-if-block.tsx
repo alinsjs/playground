@@ -1,8 +1,11 @@
 function Main () {
-    let count = 0;
-    if(count > 2){
-        return <div>Now count > 2</div>;
+    let count: number = 0;
+    const add = () => {count++};
+    if (count > 3) {
+        return <div>Now count > 3</div>;
+    } else if (count > 2){
+        return <button onclick:add>continue[count>2]</button>;
     }
-    return <button onclick={count++}>count={count}</button>
+    return <button onclick:add>count={count}</button>
 }
 <Main $$App/>;
