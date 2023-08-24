@@ -24,7 +24,9 @@ function resultError (e: any, stack = true) {
 function loadingResult () {
     const app = document.getElementById('App');
     if (!app) return;
-    app.innerHTML = `<div style='color:var(--theme-color)'>The results are loading...</div>`;
+    app.innerHTML = `<div class='code-loading'>
+        <i class=" ei-spinner-snake ei-spin"></i>
+    </div>`;
 }
 
 export const useStatus = createStore({
@@ -43,11 +45,21 @@ export const useStatus = createStore({
             resultNaviIndex: 0,
             exampleIndex,
             exampleName: Examples[exampleIndex].name,
+            exampleTitle: Examples[exampleIndex].title,
             exampleCode: Examples[exampleIndex].code,
             codeChange: false,
+            info: '',
+            timer: null as any,
         };
     },
     actions: {
+        showInfo(info: string, time = 2000){
+            clearTimeout(this.timer);
+            this.info = info;
+            this.timer = setTimeout(()=>{
+                this.info = '';
+            }, time);
+        },
         switchExample (index: number) {
             if (index === this.exampleIndex) return;
             this.resultNaviIndex = 0;
@@ -55,6 +67,7 @@ export const useStatus = createStore({
             this.exampleIndex = index;
             this.exampleName = Examples[index].name;
             this.exampleCode =  Examples[index].code;
+            this.exampleTitle =  Examples[index].title;
             location.hash = `${index}`;
         },
         setCode (v: string) {
@@ -96,8 +109,10 @@ export const useStatus = createStore({
             } catch (e) {
                 console.error(e);
                 resultError(e);
+                return false;
             }
             this.codeChange = false;
+            return true;
         },
         download () {
             // store
@@ -111,6 +126,7 @@ export const useStatus = createStore({
             const url = URL.createObjectURL(blob);
             downloadLink.href = url;
             downloadLink.click();
+            this.showInfo(`Example "${this.exampleName}" Downloaded!`)
         }
     },
     getters: {

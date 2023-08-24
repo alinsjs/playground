@@ -13,15 +13,17 @@ const list = [];
 dirs.forEach(dirName => {
     const subDirs = fs.readdirSync(path.resolve(__dirname, `../examples/${dirName}`));
     let title = formatName(dirName);
+    let titleName = title
     subDirs.forEach(fileName => {
         const itemName = formatName(fileName, fileName.indexOf('.'));
         const item = {
             name: itemName,
             code: fs.readFileSync(path.resolve(__dirname, `../examples/${dirName}/${fileName}`), 'utf8'),
+            title,
         };
-        if (title) {
-            item.head = title;
-            title = '';
+        if (titleName) {
+            item.head = titleName;
+            titleName = '';
         }
         list.push(item);
     });

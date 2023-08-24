@@ -28,6 +28,7 @@ window._status = status;
             <img style='height: 30px' src="https://shiyix.cn/images/alins.png" alt="" />
             <span style='color: var(--theme-color)'>Alins Playground</span>
         </span>
+        <span class='title-item info'>{status.info}</span>
         <span class='title-item right'>
             <span onclick={window.open('https://alinsjs.github.io/docs/')}>
                 <i class="ei-file-text-o"></i>
@@ -40,7 +41,10 @@ window._status = status;
         </span>
     </div>
     <div class='body-container'>
-        <div class='body-assets-container'>
+        <div class='body-assets-container' $mounted={(dom)=>{
+            // @ts-ignore
+            dom.scrollTop = document.querySelector('.example-item.active')!.offsetTop - 100
+        }}>
             <ExamplesList/>
         </div>
         <div
@@ -51,10 +55,17 @@ window._status = status;
             }}
         >
             <div class='editor-title'>
-                <span>{status.exampleName}</span>
+                <span>
+                    <span style='color:#999'>{status.exampleTitle}: </span> 
+                    {status.exampleName}
+                </span>
                 <span class='editor-btns'>
                     <i onclick={status.download} title='Download' class="ei-download-alt"></i>
-                    <i onclick={status.runCodeResult(true)} title='Refresh Result' class="ei-refresh"></i>
+                    <i onclick={()=>{
+                        if(status.runCodeResult(true)){
+                            status.showInfo('Refresh succeeded!')
+                        }
+                    }} title='Refresh Result' class="ei-refresh"></i>
                 </span>
             </div>
             <EditorBox />
