@@ -35,6 +35,7 @@ body,body *{
         font-weight: bold;
         border-bottom: 1px solid var(--theme-color);
         justify-content: space-between;
+        height: 51px;
         font-family: var(--font);
         .title-item{
             display: flex;
@@ -71,7 +72,7 @@ body,body *{
             height: calc(100vh - 51px);
             overflow-y: auto;
             width: 200px;
-            min-width: 100px;
+            min-width: 200px;
             background-color: #111;
             padding-top: 10px;
             font-family: var(--font);
@@ -136,7 +137,7 @@ body,body *{
             height: 100%;
             cursor: ew-resize;
             user-select: none;
-            background-color: transparent;
+            background-color: #ec5c2f26;
             transition: background-color .3s linear;
             &.active, &:hover{
                 background-color: var(--theme-color)
@@ -215,14 +216,31 @@ body,body *{
         overflow: auto;
         min-width: 100%;
     }
+    .console-title{
+        position: relative;
+        height: 0;
+        .console-btns{
+            position: absolute;
+            bottom: 5px;
+            left: 10px;
+            display: flex;
+            gap: 10px;
+            i {
+                cursor: pointer;
+                transition: color .1s linear;
+                &:hover{
+                    color: var(--theme-color);
+                }
+            }
+        }
+    }
     .console-block{
         overflow: auto;
         font-family: var(--font);
         padding: 5px;
         position: relative;
-        .console-title{
-
-        }
+        font-size: 13px;
+        color: #bbb;
         .console-item{
             padding: 3px 5px;
             border-bottom: 1px solid #444;

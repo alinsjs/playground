@@ -56,10 +56,10 @@ export const useStatus = createStore({
             timer: null as any,
 
             console: {
-                show: true,
                 list: [] as string[],
                 // console 拖拽条
                 height: window.innerHeight * 0.3,
+                prevHeight: 0,
                 dragActive: false,
             }
         };
@@ -67,7 +67,14 @@ export const useStatus = createStore({
     actions: {
 
         toggleConsole(){
-            this.console.show = !this.console.show;
+            const cs = this.console;
+            if(cs.prevHeight){
+                cs.height = cs.prevHeight;
+                cs.prevHeight = 0;
+            }else{
+                cs.prevHeight = cs.height;
+                cs.height = 0;
+            }
         },
 
         clearConsole(){
@@ -133,7 +140,9 @@ export const useStatus = createStore({
             if (!this.codeChange && !force) return;
             // @ts-ignore
             document.getElementById('App').innerHTML = '';
+
             try {
+                this.clearConsole();
                 new Function(this.runCode)();
             } catch (e) {
                 console.error(e);

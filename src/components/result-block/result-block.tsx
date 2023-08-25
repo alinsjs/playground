@@ -30,8 +30,7 @@ export function ResultBlock () {
             <div id='App' style={{height: status.resultPanelHeightCss}}></div>
         </If>
         <ElseIf data={isActive(1)}>
-            <div class='highlight-container' 
-                class:has-console={status.console.show}
+            <div class='highlight-container'
                 style={{
                     color: status.syntaxError ? '#f44' : 'inherit',
                     height: status.resultPanelHeightCss

@@ -64,16 +64,22 @@ window._status = status;
                     <i onclick={status.download} title='Download' class="ei-download-alt"></i>
                     <i onclick={()=>{
                         if(status.runCodeResult(true)){
-                            status.showInfo('Refresh succeeded!')
+                            status.showInfo('Refresh succeeded!');
                         }
                     }} title='Refresh Result' class="ei-refresh"></i>
                 </span>
             </div>
             <EditorBox />
         </div>
-        {/* <DragBar type='code'/> */}
+        <DragBar />
         <div class='body-result-container'>
             <ResultBlock />
+            <div class='console-title'>
+                <div class='console-btns'>
+                    <i class="ei-terminal" onclick={status.toggleConsole}></i>
+                    <i class="ei-trash" onclick={status.clearConsole}></i>
+                </div>
+            </div>
             <DragBar type='console'/>
             <ConsoleBlock />
         </div>

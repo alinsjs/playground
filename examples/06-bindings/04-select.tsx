@@ -1,8 +1,3 @@
-/*
- * @Author: chenzhongsheng
- * @Date: 2023-08-24 21:40:34
- * @Description: Coding something
- */
 let selected = 'Apple';
 
 let fruitList = ['Apple', 'Banana', 'Orange'];

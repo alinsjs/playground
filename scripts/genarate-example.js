@@ -11,6 +11,7 @@ const dirs = fs.readdirSync(path.resolve(__dirname, '../examples'));
 const list = [];
 
 dirs.forEach(dirName => {
+    if(dirName === '.DS_Store') return;
     const subDirs = fs.readdirSync(path.resolve(__dirname, `../examples/${dirName}`));
     let title = formatName(dirName);
     let titleName = title

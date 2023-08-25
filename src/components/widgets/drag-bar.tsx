@@ -5,19 +5,16 @@
  */
 import { useStatus } from 'src/store/store';
 
-export function DragBar (props: any) {
-    console.log(props)
-    const pp = {type: 'console'}
+export function DragBar ({type = 'code'}: {type?: 'code'|'console'}) {
+    const onDragSize = type === 'code' ? 'onDragSize': 'onDragConsoleSize';
 
-    console.log(props)
-
-    const onDragSize = pp.type === 'code' ? 'onDragSize': 'onDragConsoleSize';
+    console.log(type, onDragSize);
     
     const status = useStatus();
 
-    let dragActive = pp.type === 'code' ? status.dragActive: status.console.dragActive; 
+    let dragActive = type === 'code' ? status.dragActive: status.console.dragActive; 
         set: (b:boolean)=>{
-            if(pp.type === 'code'){
+            if(type === 'code'){
                 status.dragActive = b;
             }else{
                 status.console.dragActive = b;
@@ -33,7 +30,7 @@ export function DragBar (props: any) {
 
     function mouseMove (e: MouseEvent) {
         if (_isDown) {
-            status[onDragSize](e[(pp.type === 'code')?'clientX':'clientY']);
+            status[onDragSize](e[(type === 'code')?'clientX':'clientY']);
         }
     }
 
@@ -49,7 +46,7 @@ export function DragBar (props: any) {
         class={{
             'drag-bar': true,
             active: dragActive,
-            horizen: pp.type === 'console',
+            horizen: type === 'console',
         }}
         onmousedown={() => {setDown(true);}}
         onmouseup={() => {setDown(false);}}

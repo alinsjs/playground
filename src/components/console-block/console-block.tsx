@@ -8,24 +8,24 @@ import { useStatus } from 'src/store/store';
 
 export function ConsoleBlock () {
 
-    const $status = useStatus();
+    const status = useStatus();
 
-    let list = [];
-    
     const origin = console.log;
 
     console.log = (...args) => {
-        $status.log(args);
-        list.push(args.join(''))
+        status.log(args);
         origin.apply(console, args);
     }
 
     return <div class='console-block' 
-            style={{height: $status.consoleHeightPX}}
-            $show={$status.console.show}>
-        <div class='console-title'></div>
-        <For data={$status.console.list}>
-            <div class='console-item'>{$item}</div>
-        </For>
+        style={{height: status.consoleHeightPX}}>
+        <If data={status.console.list.length === 0}>
+            <div>Console is empty.</div>
+        </If>
+        <Else>
+            <For data={status.console.list}>
+                <div class='console-item'>{$item}</div>
+            </For>
+        </Else>
     </div>;
 }
