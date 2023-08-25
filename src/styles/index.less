@@ -13,6 +13,12 @@ body {
 body,body *{
     box-sizing: border-box;
 }
+
+.text-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 .main-container {
     background-color: #222;
     position: fixed;
@@ -74,9 +80,7 @@ body,body *{
                 padding: 10px;
                 padding-left: 20px;
                 cursor: pointer;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
+                .text-ellipsis;
                 border-left: 2px solid transparent;
                 &.active{
                     color: var(--theme-color);
@@ -91,7 +95,7 @@ body,body *{
                 padding: 10px;
                 font-size: 13px;
                 color: #aaa;
-                background-color: #111;
+                background-color: #ec5c2f11;
                 margin-bottom: 5px;
                 font-weight: bold;
                 cursor: auto;
@@ -129,13 +133,18 @@ body,body *{
         }
         .drag-bar{
             width: 3px;
-            background-color: transparent;
             height: 100%;
-            user-select: none;
             cursor: ew-resize;
+            user-select: none;
+            background-color: transparent;
             transition: background-color .3s linear;
             &.active, &:hover{
                 background-color: var(--theme-color)
+            }
+            &.horizen{
+                cursor: ns-resize;
+                height: 3px;
+                width: 100%;
             }
         }
     }
@@ -178,7 +187,7 @@ body,body *{
     #App{
         padding: 10px;
 
-        button, input{
+        button, input, select{
             margin: 5px;
             padding: 5px 8px;
             background-color: #eee;
@@ -186,7 +195,7 @@ body,body *{
             border-radius: 1px;
             outline: none;
         }
-        button{
+        button, select{
             cursor: pointer;
         }
         button:active{
@@ -202,12 +211,22 @@ body,body *{
     }
 
     #App,.highlight-container{
-        height: calc(100vh - 83px);
         background-color: #1e1e1e;
         overflow: auto;
-        // flex: 1;
-        // width: fit-content;
         min-width: 100%;
+    }
+    .console-block{
+        overflow: auto;
+        font-family: var(--font);
+        padding: 5px;
+        position: relative;
+        .console-title{
+
+        }
+        .console-item{
+            padding: 3px 5px;
+            border-bottom: 1px solid #444;
+        }
     }
 }
 

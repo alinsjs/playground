@@ -156,8 +156,18 @@ export default [
         "title": "Bindings"
     },
     {
-        "name": "Hello World",
-        "code": "const msg = 'World';\n<div $$App>Hello {msg}!</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "name": "Select",
+        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-24 21:40:34\n * @Description: Coding something\n */\nlet selected = 'Apple';\n\nlet fruitList = ['Apple', 'Banana', 'Orange'];\n\n<div $$App>\n    <select value={selected}>\n        <For data={fruitList}>\n            <option>{$item}</option>\n        </For>\n    </select>\n    <div>Selected Fruit: {selected}</div>\n</div>",
+        "title": "Bindings"
+    },
+    {
+        "name": "DOM Reference",
+        "code": "let ref: HTMLElement;\n<button $$App \n    $dom:ref\n    onclick={alert(`Say ${ref!.textContent}`)}\n>Hello!</button>",
+        "title": "Bindings"
+    },
+    {
+        "name": "Lifecycles",
+        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-23 09:11:13\n * @Description: Coding something\n */\n// let ref: HTMLElement;\n// function created(dom){\n//     // console.log(`created: parent=${dom.parentElement}`, )\n// }\n// function appended(dom){\n//     // console.log(`appended: parent=${dom.parentElement}`)\n// }\n// function mounted(dom){\n//     // console.log(`mounted: parent=${dom.parentElement}`)\n// }\n// function removed(dom){\n//     // console.log(`removed: parent=${dom.parentElement}`)\n// }\n\n// <div $$App>\n//     <div\n//         $dom:ref\n//         $created:created\n//         $appended:appended\n//         $mounted:mounted\n//         $removed:removed\n//     >Hello World!</div>\n//     <button onclick={ref.remove()}>Remove DOM</button>\n// </div>;",
         "title": "Lifecycle",
         "head": "Lifecycle"
     },

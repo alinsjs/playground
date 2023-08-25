@@ -15,6 +15,7 @@ import Examples from './examples';
 let downloadLink: any;
 
 function resultError (e: any, stack = true) {
+    console.warn(e);
     const app = document.getElementById('App');
     if (!app) return;
     const str = stack ? e.stack : e.toString();
@@ -34,14 +35,17 @@ export const useStatus = createStore({
         const codeEditorWidth = window.innerWidth * 0.5;
         hljs.registerLanguage('javascript', javascript);
         const exampleIndex = location.hash ? parseInt(location.hash.substring(1)) : 0;
+
         return {
+            // 编辑器拖拽条
             codeEditorWidth,
             codeEditorLeft: 0,
+            dragActive: false,
+
             syntaxError: false,
             editorCode: '',
             outputCode: '',
             runCode: '',
-            dragActive: false,
             resultNaviIndex: 0,
             exampleIndex,
             exampleName: Examples[exampleIndex].name,
@@ -50,9 +54,30 @@ export const useStatus = createStore({
             codeChange: false,
             info: '',
             timer: null as any,
+
+            console: {
+                show: true,
+                list: [] as string[],
+                // console 拖拽条
+                height: window.innerHeight * 0.3,
+                dragActive: false,
+            }
         };
     },
     actions: {
+
+        toggleConsole(){
+            this.console.show = !this.console.show;
+        },
+
+        clearConsole(){
+            this.console.list = [];
+        },
+
+        log(args: any[]){
+            this.console.list.push(args.map(arg=>arg.toString()).join(' '))
+        },
+
         showInfo(info: string, time = 2000){
             clearTimeout(this.timer);
             this.info = info;
@@ -90,6 +115,7 @@ export const useStatus = createStore({
             this.runCode = result.replace('import { _$$ } from "alins";', 'const _$$$$ = window.Alins._$$$$;');
             this.syntaxError = false;
 
+
             this.codeChange = true;
 
             if (this.resultNaviIndex === 0) {
@@ -99,6 +125,9 @@ export const useStatus = createStore({
         },
         onDragSize (x: number) {
             this.codeEditorWidth = x - this.codeEditorLeft;
+        },
+        onDragConsoleSize (y: number) {
+            this.console.height = window.innerHeight - y;
         },
         runCodeResult (force = false) {
             if (!this.codeChange && !force) return;
@@ -132,6 +161,12 @@ export const useStatus = createStore({
     getters: {
         codeWidthPx () {
             return `${this.codeEditorWidth}px`;
+        },
+        consoleHeightPX () {
+            return `${this.console.height}px`;
+        },
+        resultPanelHeightCss(){
+            return `${window.innerHeight - 83 - this.console.height}px`;
         }
     }
 });

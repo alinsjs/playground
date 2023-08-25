@@ -14,6 +14,7 @@ import { ResultBlock } from './components/result-block/result-block';
 import { useStatus } from './store/store';
 import { DragBar } from './components/widgets/drag-bar';
 import './styles/index.less';
+import {ConsoleBlock} from './components/console-block/console-block';
 
 const status = useStatus();
 
@@ -55,7 +56,7 @@ window._status = status;
             }}
         >
             <div class='editor-title'>
-                <span>
+                <span class='text-ellipsis'>
                     <span style='color:#999'>{status.exampleTitle}: </span> 
                     {status.exampleName}
                 </span>
@@ -70,9 +71,11 @@ window._status = status;
             </div>
             <EditorBox />
         </div>
-        <DragBar/>
+        {/* <DragBar type='code'/> */}
         <div class='body-result-container'>
             <ResultBlock />
+            <DragBar type='console'/>
+            <ConsoleBlock />
         </div>
     </div>
     {/* <div class='status-container'>status</div> */}

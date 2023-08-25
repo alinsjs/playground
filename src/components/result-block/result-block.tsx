@@ -19,7 +19,7 @@ export function ResultBlock () {
             });
         }
     });
-    return <>
+    return <div>
         <div class='result-header'>
             <span class={`${isActive(0) ? 'active' : ''}`}
                 onclick={status.resultNaviIndex = 0}>Result</span>
@@ -27,10 +27,16 @@ export function ResultBlock () {
                 onclick={status.resultNaviIndex = 1}>Output</span>
         </div>
         <If data={isActive(0)}>
-            <div id='App'></div>
+            <div id='App' style={{height: status.resultPanelHeightCss}}></div>
         </If>
         <ElseIf data={isActive(1)}>
-            <div class='highlight-container' style={`color: ${status.syntaxError ? '#f44' : 'inherit'}`} $html={status.outputCode}></div>
+            <div class='highlight-container' 
+                class:has-console={status.console.show}
+                style={{
+                    color: status.syntaxError ? '#f44' : 'inherit',
+                    height: status.resultPanelHeightCss
+                }} 
+                $html={status.outputCode}></div>
         </ElseIf>
-    </>;
+    </div>;
 }
