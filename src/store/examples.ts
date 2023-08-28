@@ -1,7 +1,7 @@
 export default [
     {
         "name": "Hello World",
-        "code": "const msg = 'World';\n<div $$App>Hello {msg}!</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Introduction",
         "head": "Introduction"
     },
@@ -173,7 +173,7 @@ export default [
     },
     {
         "name": "Hello World",
-        "code": "const msg = 'World';\n<div $$App>Hello {msg}!</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Rules",
         "head": "Rules"
     },

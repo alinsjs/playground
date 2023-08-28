@@ -32,7 +32,7 @@ function loadingResult () {
 
 export const useStatus = createStore({
     state: () => {
-        const codeEditorWidth = window.innerWidth * 0.5;
+        const codeEditorWidth = (window.innerWidth - 200) * 0.5;
         hljs.registerLanguage('javascript', javascript);
         const exampleIndex = location.hash ? parseInt(location.hash.substring(1)) : 0;
 

@@ -12,8 +12,11 @@ export function ConsoleBlock () {
 
     const origin = console.log;
 
+    // let _inLog = false;
     console.log = (...args) => {
-        status.log(args);
+        // todo 无限引用的问题
+        // _inLog = true;
+        // status.log(args);
         origin.apply(console, args);
     }
 
