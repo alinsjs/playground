@@ -1,7 +1,7 @@
 /*
  * @Author: chenzhongsheng
  * @Date: 2023-08-15 21:22:40
- * @Description: Coding <something></something>
+ * @Description: Coding something
  */
 
 import { useStatus } from 'src/store/store';
@@ -27,14 +27,14 @@ export function ResultBlock () {
                 onclick={status.resultNaviIndex = 1}>Output</span>
         </div>
         <If data={isActive(0)}>
-            <div id='App' style={{height: status.resultPanelHeightCss}}></div>
+            <div id='App' style={{ height: status.resultPanelHeightCss }}></div>
         </If>
         <ElseIf data={isActive(1)}>
             <div class='highlight-container'
                 style={{
                     color: status.syntaxError ? '#f44' : 'inherit',
                     height: status.resultPanelHeightCss
-                }} 
+                }}
                 $html={status.outputCode}></div>
         </ElseIf>
     </div>;

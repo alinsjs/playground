@@ -1,8 +1,3 @@
-/*
- * @Author: chenzhongsheng
- * @Date: 2023-08-21 22:43:18
- * @Description: Coding something
- */
 const style = {
     color: '#f44',
     fontSize: '20px',
@@ -16,3 +11,4 @@ const style = {
     }}>Modify Style</button>
     <div $style>Alins is COOL!</div>
 </div>;
+// $style (or style:style) is short for style={style}

@@ -1,5 +1,5 @@
 let ref: HTMLElement;
 <button $$App 
     $dom:ref
-    onclick={alert(`Say ${ref!.textContent}`)}
+    onclick={console.log(`Say ${ref!.textContent}`)}
 >Hello!</button>

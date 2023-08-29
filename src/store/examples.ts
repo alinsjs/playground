@@ -12,7 +12,7 @@ export default [
     },
     {
         "name": "Styling String",
-        "code": "let redNumber = 100;\nlet fontSize = 14;\n\n<div $$App>\n    <button onclick={() => {\n        redNumber += 10;\n        fontSize ++;\n    }}>Modify Style</button>\n    <div style={`\n        color: rgb(${redNumber}, 100, 100); \n        font-size: ${fontSize}px;\n        font-weight: bold;\n    `}>Alins is COOL!</div>\n</div>;",
+        "code": "let redNumber = 100;\nlet fontSize = 14;\n\n<div $$App>\n    <button onclick={() => {\n        redNumber += 10;\n        fontSize ++;\n    }}>Modify Style</button>\n    <div style={`\n        color: rgb(${redNumber}, 100, 100); \n        font-size: ${fontSize}px;\n        font-weight: bold;\n    `}>Alins is COOL!</div>\n</div>;\n// add style and class 章节",
         "title": "Introduction"
     },
     {
@@ -22,7 +22,7 @@ export default [
     },
     {
         "name": "Styling Object2",
-        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-21 22:43:18\n * @Description: Coding something\n */\nconst style = {\n    color: '#f44',\n    fontSize: '20px',\n    fontWeight: 'bold',\n};\n\n<div $$App>\n    <button onclick={() => {\n        style.color = '#4f4';\n        style.fontSize = '30px';\n    }}>Modify Style</button>\n    <div $style>Alins is COOL!</div>\n</div>;",
+        "code": "const style = {\n    color: '#f44',\n    fontSize: '20px',\n    fontWeight: 'bold',\n};\n\n<div $$App>\n    <button onclick={() => {\n        style.color = '#4f4';\n        style.fontSize = '30px';\n    }}>Modify Style</button>\n    <div $style>Alins is COOL!</div>\n</div>;\n// $style (or style:style) is short for style={style}",
         "title": "Introduction"
     },
     {
@@ -42,6 +42,11 @@ export default [
         "title": "Reactivity"
     },
     {
+        "name": "Computed",
+        "code": "let count = 1;\n\nlet countAdd2 = count + 2;\n\nlet countAdd3 = countAdd2 + 1;\n\nfunction countMultiply2 () {\n    return count * 2\n}\n\n<div $$App>\n    <button onclick={count++}>\n        click:{count}\n    </button>;\n    <div>count + 2 = {countAdd2}</div>\n    <div>count + 3 = {countAdd3}</div>\n    <div>count * 2 = {countMultiply2}</div>\n    <div>count * 2 = {countMultiply2()}</div>\n</div>",
+        "title": "Reactivity"
+    },
+    {
         "name": "Props",
         "code": "let count = 0;\n\n<div $$App>\n    <Component $count/>\n    <button onclick={count++}>Increse</button>\n</div>;\n\nfunction Component ({ count }) {\n    return <div>count={count}</div>;\n}",
         "title": "Component",
@@ -51,6 +56,47 @@ export default [
         "name": "Spread Props",
         "code": "const data = {\n    name: 'Alins',\n    age: 0,\n};\n\nfunction Component ({ name, age }) {\n    return <div>{name}: age={age}</div>;\n}\n\n<div $$App>\n    <Component {...data}/>\n    <button onclick={data.age++}>Modify</button>\n</div>;",
         "title": "Component"
+    },
+    {
+        "name": "Basic Use",
+        "code": "let count = 0;\nfunction add () {\n    count++;\n}\n<div $$App>\n    <button onclick={count++}>count={count}</button>\n    <button onclick={()=>count++}>count={count}</button>\n    <button onclick={add}>count={count}</button>\n    <button onclick={add()}>count={count}</button>\n    <button onclick:add>count={count}</button>\n</div>;\n// onclick:add is short for onclick={add}",
+        "title": "Events",
+        "head": "Events"
+    },
+    {
+        "name": "Event Object",
+        "code": "let x = 0, y = 0;\nfunction onclick (e) {\n    x = e.clientX;\n    y = e.clientY;\n}\n<div $$App>\n    <button onclick={(e)=>{\n        x = e.clientX;\n        y = e.clientY;\n    }}>Button 1</button>\n    <button onclick={onclick}>Button 2</button>\n    <div>ClientX={x}; ClientY={y}</div>\n</div>;",
+        "title": "Events"
+    },
+    {
+        "name": "Prevent Default",
+        "code": "function click(){\n    console.log('Prevent checkbox checked!');\n}\n<div $$App>\n    Normal: <input type='checkbox'/><br/>\n    Prevent And Alert: <input onclick:prevent={click} type='checkbox'/><br/>\n    Only Prevent: <input onclick:prevent type='checkbox'/>\n</div>",
+        "title": "Events"
+    },
+    {
+        "name": "Stop Propagation",
+        "code": "function click(from: string){\n    console.log(`Click from ${from}!`);\n}\n<div $$App>\n    <div onclick={click('parent')}>\n        Normal: \n        <button onclick={click('child')}>Click Me!</button>\n    </div>\n    <div onclick={click('parent')}>\n        StopPropagation With Alert: \n        <button onclick:stop={click('child')}>Click Me!</button>\n    </div>\n    <div onclick={click('parent')}>\n        Only StopPropagation: \n        <button onclick:stop>Click Me!</button>\n    </div>\n</div>",
+        "title": "Events"
+    },
+    {
+        "name": "Event Capture",
+        "code": "function click(from: string){\n    console.log(`Click from ${from}!`);\n}\n<div $$App>\n    <div onclick={click('parent')}>\n        Normal: \n        <button onclick={click('child')}>Click Me!</button>\n    </div>\n    <div onclick:capture={click('parent')}>\n        With Capture: \n        <button onclick:capture={click('child')}>Click Me!</button>\n    </div>\n</div>",
+        "title": "Events"
+    },
+    {
+        "name": "Once",
+        "code": "function click(){\n    console.log('Clicked, try again!');\n}\n<div $$App>\n    <div>\n        Normal: \n        <button onclick={click}>Click Me!</button>\n    </div>\n    <div>\n        Only Once: \n        <button onclick:once={click}>Click Me!</button>\n    </div>\n</div>",
+        "title": "Events"
+    },
+    {
+        "name": "Self",
+        "code": "function click(from: string){\n    console.log(`Click from ${from}!`);\n}\n<div $$App>\n    <div onclick={click('parent')}>\n        Normal: \n        <button onclick={click('child')}>Click Me!</button>\n    </div>\n    <div onclick:self={click('parent')}>\n        With Self: \n        <button onclick={click('child')}>Click Me!</button>\n    </div>\n</div>\n",
+        "title": "Events"
+    },
+    {
+        "name": "Pure Event",
+        "code": "function click(from: string){\n    console.log(`Execute click from ${from}`)\n    // The pure decorator is used to keep event expressions from being compiled\n    return ()=>{\n        console.log(`Click from ${from}!`);\n    }\n}\n<div $$App>\n    <div>\n        Normal [Won't Work]: \n        <button onclick={click('child1')}>Click Me!</button>\n    </div>\n    <div>\n        With Pure: \n        <button onclick:pure={click('child2')}>Click Me!</button>\n    </div>\n</div>",
+        "title": "Events"
     },
     {
         "name": "If Block",
@@ -99,47 +145,6 @@ export default [
         "title": "Logic"
     },
     {
-        "name": "Basic Use",
-        "code": "let count = 0;\nfunction add () {\n    count++;\n}\n<div $$App>\n    <button onclick={count++}>count={count}</button>\n    <button onclick={()=>count++}>count={count}</button>\n    <button onclick={add}>count={count}</button>\n    <button onclick={add()}>count={count}</button>\n    <button onclick:add>count={count}</button>\n</div>;",
-        "title": "Events",
-        "head": "Events"
-    },
-    {
-        "name": "Event Object",
-        "code": "let x = 0, y = 0;\nfunction onclick (e) {\n    x = e.clientX;\n    y = e.clientY;\n}\n<div $$App>\n    <button onclick={(e)=>{\n        x = e.clientX;\n        y = e.clientY;\n    }}>Button 1</button>\n    <button onclick={onclick}>Button 2</button>\n    <div>ClientX={x}; ClientY={y}</div>\n</div>;",
-        "title": "Events"
-    },
-    {
-        "name": "Prevent Default",
-        "code": "function click(){\n    alert('Prevent checkbox checked!');\n}\n<div $$App>\n    Normal: <input type='checkbox'/><br/>\n    Prevent And Alert: <input onclick:prevent={click} type='checkbox'/><br/>\n    Only Prevent: <input onclick:prevent type='checkbox'/>\n</div>",
-        "title": "Events"
-    },
-    {
-        "name": "Stop Propagation",
-        "code": "function click(from: string){\n    alert(`Click from ${from}!`);\n}\n<div $$App>\n    <div onclick={click('parent')}>\n        Normal: \n        <button onclick={click('child')}>Click Me!</button>\n    </div>\n    <div onclick={click('parent')}>\n        StopPropagation With Alert: \n        <button onclick:stop={click('child')}>Click Me!</button>\n    </div>\n    <div onclick={click('parent')}>\n        Only StopPropagation: \n        <button onclick:stop>Click Me!</button>\n    </div>\n</div>",
-        "title": "Events"
-    },
-    {
-        "name": "Event Capture",
-        "code": "function click(from: string){\n    alert(`Click from ${from}!`);\n}\n<div $$App>\n    <div onclick={click('parent')}>\n        Normal: \n        <button onclick={click('child')}>Click Me!</button>\n    </div>\n    <div onclick:capture={click('parent')}>\n        With Capture: \n        <button onclick:capture={click('child')}>Click Me!</button>\n    </div>\n</div>",
-        "title": "Events"
-    },
-    {
-        "name": "Once",
-        "code": "function click(){\n    alert('Clicked, try again!');\n}\n<div $$App>\n    <div>\n        Normal: \n        <button onclick={click}>Click Me!</button>\n    </div>\n    <div>\n        Only Once: \n        <button onclick:once={click}>Click Me!</button>\n    </div>\n</div>",
-        "title": "Events"
-    },
-    {
-        "name": "Self",
-        "code": "function click(from: string){\n    alert(`Click from ${from}!`);\n}\n<div $$App>\n    <div onclick={click('parent')}>\n        Normal: \n        <button onclick={click('child')}>Click Me!</button>\n    </div>\n    <div onclick:self={click('parent')}>\n        With Self: \n        <button onclick={click('child')}>Click Me!</button>\n    </div>\n</div>\n",
-        "title": "Events"
-    },
-    {
-        "name": "Pure Event",
-        "code": "function click(from: string){\n    // The pure decorator is used to keep event expressions from being compiled\n    return ()=>{\n        alert(`Click from ${from}!`);\n    }\n}\n<div $$App>\n    <div>\n        Normal [Won't Work]: \n        <button onclick={click('child')}>Click Me!</button>\n    </div>\n    <div>\n        With Pure: \n        <button onclick:pure={click('child')}>Click Me!</button>\n    </div>\n</div>",
-        "title": "Events"
-    },
-    {
         "name": "Text Input",
         "code": "let value = 'Hello';\n\n<div $$App>\n    <input value={value} /><br/>\n    <textarea value={value}></textarea>\n    <p>Content = \"{value}\"</p>\n</div>\n// Or use the abbreviation $value instead of value={value}",
         "title": "Bindings",
@@ -162,7 +167,7 @@ export default [
     },
     {
         "name": "DOM Reference",
-        "code": "let ref: HTMLElement;\n<button $$App \n    $dom:ref\n    onclick={alert(`Say ${ref!.textContent}`)}\n>Hello!</button>",
+        "code": "let ref: HTMLElement;\n<button $$App \n    $dom:ref\n    onclick={console.log(`Say ${ref!.textContent}`)}\n>Hello!</button>",
         "title": "Bindings"
     },
     {
@@ -172,21 +177,61 @@ export default [
         "head": "Lifecycle"
     },
     {
-        "name": "Hello World",
+        "name": "Computed Set",
         "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Rules",
         "head": "Rules"
     },
     {
-        "name": "Hello World",
+        "name": "Short Attribute",
+        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "title": "Rules"
+    },
+    {
+        "name": "Single Class",
+        "code": "",
+        "title": "Rules"
+    },
+    {
+        "name": "Single Style",
+        "code": "",
+        "title": "Rules"
+    },
+    {
+        "name": "Variable Naming",
+        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "title": "Rules"
+    },
+    {
+        "name": "Comments",
+        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "title": "Rules"
+    },
+    {
+        "name": "Enable Attribute",
+        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "title": "Rules"
+    },
+    {
+        "name": "Create Store",
         "code": "const msg = 'World';\n<div $$App>Hello {msg}!</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Store",
         "head": "Store"
     },
     {
-        "name": "Hello World",
-        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-23 09:11:19\n * @Description: Coding something\n */\nlet count = 1;\nconst add = ()=>{\n    count++\n}\n<div $$App>\n    <button onclick={count++}></button>\n    <button onclick={()=>count++}></button>\n    <button onclick={add}></button>\n    <button onclick={add()}></button>\n</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "name": "This",
+        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-29 09:27:16\n * @Description: Coding something\n */\nstore: store = {\n    state(){\n        return {}\n    }\n};",
+        "title": "Store"
+    },
+    {
+        "name": "Counter",
+        "code": "",
         "title": "Applications",
         "head": "Applications"
+    },
+    {
+        "name": "Todo List",
+        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-23 09:11:19\n * @Description: Coding something\n */\nlet count = 1;\nconst add = ()=>{\n    count++\n}\n<div $$App>\n    <button onclick={count++}></button>\n    <button onclick={()=>count++}></button>\n    <button onclick={add}></button>\n    <button onclick={add()}></button>\n</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "title": "Applications"
     }
 ];

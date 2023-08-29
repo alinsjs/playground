@@ -1,5 +1,5 @@
 function click(){
-    alert('Prevent checkbox checked!');
+    console.log('Prevent checkbox checked!');
 }
 <div $$App>
     Normal: <input type='checkbox'/><br/>

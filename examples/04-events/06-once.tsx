@@ -1,5 +1,5 @@
 function click(){
-    alert('Clicked, try again!');
+    console.log('Clicked, try again!');
 }
 <div $$App>
     <div>

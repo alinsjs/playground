@@ -8,7 +8,7 @@ import { useStatus } from 'src/store/store';
 export function DragBar ({type = 'code'}: {type?: 'code'|'console'}) {
     const onDragSize = type === 'code' ? 'onDragSize': 'onDragConsoleSize';
 
-    console.log(type, onDragSize);
+    // console.log(type, onDragSize);
     
     const status = useStatus();
 

@@ -165,6 +165,9 @@ export class Editor {
             fontSize: 14,
             lineDecorationsWidth: 5,
             lineNumbersMinChars: 3,
+            minimap: {
+                enabled: false,
+            }
         });
 
         // this.editor.setModel(codeModel);

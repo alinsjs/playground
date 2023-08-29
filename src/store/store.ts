@@ -94,6 +94,7 @@ export const useStatus = createStore({
         },
         switchExample (index: number) {
             if (index === this.exampleIndex) return;
+            this.clearConsole();
             this.resultNaviIndex = 0;
             loadingResult();
             this.exampleIndex = index;
@@ -122,13 +123,11 @@ export const useStatus = createStore({
             this.runCode = result.replace('import { _$$ } from "alins";', 'const _$$$$ = window.Alins._$$$$;');
             this.syntaxError = false;
 
-
             this.codeChange = true;
 
             if (this.resultNaviIndex === 0) {
-                this.runCodeResult();
+                this.runCodeResult(false);
             }
-
         },
         onDragSize (x: number) {
             this.codeEditorWidth = x - this.codeEditorLeft;

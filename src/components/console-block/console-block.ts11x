@@ -16,7 +16,7 @@ export function ConsoleBlock () {
 
     let _inLog = false;
     console.log = (...args) => {
-        if (_inLog) {
+        if(_inLog) {
             origin.apply(console, args);
             return;
         }
@@ -25,16 +25,16 @@ export function ConsoleBlock () {
         origin.apply(console, args);
         // console.log(dom.scrollHeight);
 
-        dom.scrollTop = dom.scrollHeight;
+        // dom.scrollTop = dom.scrollHeight;
 
         _inLog = false;
-    };
+    }
 
-    return <div class='console-block'
+    return <div class='console-block' 
         $dom:dom
-        style={{ height: status.consoleHeightPX }}>
+        style={{height: status.consoleHeightPX}}>
         <If data={status.console.list.length === 0}>
-            <div style:padding='3px 5px'>Console is empty.</div>
+            <div>Console is empty.</div>
         </If>
         <Else>
             <For data={status.console.list}>

@@ -9,3 +9,4 @@ function add () {
     <button onclick={add()}>count={count}</button>
     <button onclick:add>count={count}</button>
 </div>;
+// onclick:add is short for onclick={add}

@@ -1,5 +1,5 @@
 function click(from: string){
-    alert(`Click from ${from}!`);
+    console.log(`Click from ${from}!`);
 }
 <div $$App>
     <div onclick={click('parent')}>
