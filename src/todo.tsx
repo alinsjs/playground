@@ -20,4 +20,4 @@ function List () {
         </For>
     </div>;
 }
-<List $parent={document.body}/>;
+<List $mount={document.body}/>;

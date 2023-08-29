@@ -1,7 +1,7 @@
 export default [
     {
         "name": "Hello World",
-        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Introduction",
         "head": "Introduction"
     },
@@ -167,24 +167,24 @@ export default [
     },
     {
         "name": "DOM Reference",
-        "code": "let ref: HTMLElement;\n<button $$App \n    $dom:ref\n    onclick={console.log(`Say ${ref!.textContent}`)}\n>Hello!</button>",
+        "code": "let ref: HTMLElement;\n<button $$App \n    $ref:ref\n    onclick={console.log(`Say ${ref!.textContent}`)}\n>Hello!</button>",
         "title": "Bindings"
     },
     {
         "name": "Lifecycles",
-        "code": "let ref: HTMLElement;\nfunction created(dom){\n    console.log(`created: parent=${dom.parentElement?.tagName}`, )\n}\nfunction appended(dom){\n    const parent = dom.parentElement;\n    console.log(`appended: parent=${parent.tagName}; \n        mount parent=${parent.parentElement?.tagName}`)\n}\nfunction mounted(dom){\n    const parent = dom.parentElement;\n    console.log(`mounted: parent=${parent.tagName}; \n        mount parent=${parent.parentElement?.tagName}`)\n}\nfunction removed(dom){\n    console.log(`removed: parent=${dom.parentElement}`)\n}\n\n<div $$App>\n    <div\n        $dom:ref\n        $created:created\n        $appended:appended\n        $mounted:mounted\n        $removed:removed\n    >Hello World!</div>\n    <button onclick={ref.remove()}>Remove DOM</button>\n</div>;",
+        "code": "let ref: HTMLElement;\nfunction created(dom){\n    console.log(`created: parent=${dom.parentElement?.tagName}`, )\n}\nfunction appended(dom){\n    const parent = dom.parentElement;\n    console.log(`appended: parent=${parent.tagName}; \n        mount parent=${parent.parentElement?.tagName}`)\n}\nfunction mounted(dom){\n    const parent = dom.parentElement;\n    console.log(`mounted: parent=${parent.tagName}; \n        mount parent=${parent.parentElement?.tagName}`)\n}\nfunction removed(dom){\n    console.log(`removed: parent=${dom.parentElement}`)\n}\n\n<div $$App>\n    <div\n        $ref:ref\n        $created:created\n        $appended:appended\n        $mounted:mounted\n        $removed:removed\n    >Hello World!</div>\n    <button onclick={ref.remove()}>Remove DOM</button>\n</div>;",
         "title": "Lifecycle",
         "head": "Lifecycle"
     },
     {
         "name": "Computed Set",
-        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Rules",
         "head": "Rules"
     },
     {
         "name": "Short Attribute",
-        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Rules"
     },
     {
@@ -199,17 +199,17 @@ export default [
     },
     {
         "name": "Variable Naming",
-        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Rules"
     },
     {
         "name": "Comments",
-        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Rules"
     },
     {
         "name": "Enable Attribute",
-        "code": "const msg = 'World';\n<div $parent='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Rules"
     },
     {

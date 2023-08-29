@@ -22,7 +22,7 @@ const status = useStatus();
 window._status = status;
 
 <div
-    $parent={document.body}
+    $mount={document.body}
     class='main-container'>
     <div class='title-container'>
         <span class='title-item'>

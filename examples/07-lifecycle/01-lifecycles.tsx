@@ -18,7 +18,7 @@ function removed(dom){
 
 <div $$App>
     <div
-        $dom:ref
+        $ref:ref
         $created:created
         $appended:appended
         $mounted:mounted

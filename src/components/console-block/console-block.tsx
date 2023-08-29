@@ -31,7 +31,7 @@ export function ConsoleBlock () {
     };
 
     return <div class='console-block'
-        $dom:dom
+        $ref:dom
         style={{ height: status.consoleHeightPX }}>
         <If data={status.console.list.length === 0}>
             <div style:padding='3px 5px'>Console is empty.</div>

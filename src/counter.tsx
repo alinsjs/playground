@@ -12,7 +12,7 @@ parseWebAlins(``);
 let count: number = 1;
 
 <button
-    $parent={document.body}
+    $mount={document.body}
     onclick={() => {count++;}}
 >click:{count}</button>;
 
