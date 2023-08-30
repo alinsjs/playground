@@ -1,4 +1,19 @@
-const msg = 'World';
-<div $mount='#App'>Hello {msg}!</div>;
-// $parennt='#App' can be abbreviated as $$App.
-// Or use `document.getElementById('App').appendChild(<div/>)`
+let msg = 'Hello';
+
+function modifyMsg(e){
+    msg += '!';
+    console.log(e.target.outerHTML);
+}
+
+<button 
+    $$App
+    $msg 
+    msg2:msg 
+    onclick:modifyMsg>
+        Modify Msg
+</button>;
+/* 
+    $$App is short for $mount='#App'
+    $msg is short for msg={msg}
+    msg2:msg is short for msg2={msg}
+*/

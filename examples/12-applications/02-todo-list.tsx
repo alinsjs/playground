@@ -1,9 +1,3 @@
-/*
- * @Author: chenzhongsheng
- * @Date: 2023-08-23 09:11:19
- * @Description: Coding something
- */
-
 function List () {
     const list = ['todo1'];
     let value = '';

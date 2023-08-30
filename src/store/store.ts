@@ -79,6 +79,7 @@ export const useStatus = createStore({
 
         clearConsole(){
             this.console.list = [];
+            // console.clear();
         },
 
         log(args: any[]){

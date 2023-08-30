@@ -210,38 +210,23 @@ export default [
     },
     {
         "name": "Computed Set",
-        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "let a = 1;\n\nlet b = a + 1; set: v => a = v + 1;\n\n<div $$App>\n    <button onclick={b++}>Modify B</button>\n    <div>a={a}; b={b}</div>\n</div>",
         "title": "Rules",
         "head": "Rules"
     },
     {
         "name": "Short Attribute",
-        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
-        "title": "Rules"
-    },
-    {
-        "name": "Single Class",
-        "code": "",
-        "title": "Rules"
-    },
-    {
-        "name": "Single Style",
-        "code": "",
+        "code": "let msg = 'Hello';\n\nfunction modifyMsg(e){\n    msg += '!';\n    console.log(e.target.outerHTML);\n}\n\n<button \n    $$App\n    $msg \n    msg2:msg \n    onclick:modifyMsg>\n        Modify Msg\n</button>;\n/* \n    $$App is short for $mount='#App'\n    $msg is short for msg={msg}\n    msg2:msg is short for msg2={msg}\n*/",
         "title": "Rules"
     },
     {
         "name": "Variable Naming",
-        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "let _name = 1;\n_name ++;\n// Variables starting with _ are compiled as static data even if the value changes\n\nlet $name = 2;\n// Variables starting with $ are compiled into reactive data even if the value does not change\n\nconst $$shallowReactive = {a:1};\n// Variables starting with $$ are compiled into shallow reactive data\n\n<div $$App>Click output to view the compilation product</div>",
         "title": "Rules"
     },
     {
         "name": "Comments",
-        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
-        "title": "Rules"
-    },
-    {
-        "name": "Enable Attribute",
-        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "let name1 = 1; // @static\nname1 ++;\n// static coment mark a variable as static data even if the value changes\n\nlet a = 1,b = 1,c = 1; // @static(a)\na++; b++; c++;\n\nlet name2 = 2; // @reactive\n// reactive comment mark a variable as reactive data even if the value does not change\n\nlet d = 1,e = 1,f = 1; // @reactive(d)\n\nconst shallowReactive = {a:1}; // @shallow\n// shallow comment mark a variable as shallow reactive data\n\n<div $$App>Click output to view the compilation product</div>",
         "title": "Rules"
     },
     {
@@ -263,7 +248,7 @@ export default [
     },
     {
         "name": "Todo List",
-        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-23 09:11:19\n * @Description: Coding something\n */\n\nfunction List () {\n    const list = ['todo1'];\n    let value = '';\n    return <div>\n        <div>\n            <input type=\"text\" value={value}/>\n            <button onclick={list.push(value)}>add</button>\n        </div>\n        <For data={list}>\n            <Item item={$item} index={$index}>\n                <button onclick={list.splice($index, 1)}>delete</button>\n            </Item>\n        </For>\n    </div>;\n}\n\nfunction Item ({item, index}, children) {\n    let done = false;\n    return <div style={{\n        textDecoration: done ? 'line-through' : 'none',\n        color: done ? '#888' : 'inherit',\n    }}>\n        <span>{index + 1}: {item}</span>\n        <button onclick={ done = !done }>done</button>\n        {children}\n    </div>;\n}\n\n<List $$App/>;",
+        "code": "function List () {\n    const list = ['todo1'];\n    let value = '';\n    return <div>\n        <div>\n            <input type=\"text\" value={value}/>\n            <button onclick={list.push(value)}>add</button>\n        </div>\n        <For data={list}>\n            <Item item={$item} index={$index}>\n                <button onclick={list.splice($index, 1)}>delete</button>\n            </Item>\n        </For>\n    </div>;\n}\n\nfunction Item ({item, index}, children) {\n    let done = false;\n    return <div style={{\n        textDecoration: done ? 'line-through' : 'none',\n        color: done ? '#888' : 'inherit',\n    }}>\n        <span>{index + 1}: {item}</span>\n        <button onclick={ done = !done }>done</button>\n        {children}\n    </div>;\n}\n\n<List $$App/>;",
         "title": "Applications"
     }
 ];
