@@ -11,7 +11,7 @@ function countMultiply2 () {
 <div $$App>
     <button onclick={count++}>
         click:{count}
-    </button>;
+    </button>
     <div>count + 2 = {countAdd2}</div>
     <div>count + 3 = {countAdd3}</div>
     <div>count * 2 = {countMultiply2}</div>

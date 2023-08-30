@@ -1,33 +1,23 @@
 export default [
     {
         "name": "Hello World",
-        "code": "const msg = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $parennt='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "const msg: string = 'World';\n<div $mount='#App'>Hello {msg}!</div>;\n// $mount='#App' can be abbreviated as $$App.\n// Or use `document.getElementById('App').appendChild(<div/>)`",
         "title": "Introduction",
         "head": "Introduction"
     },
     {
         "name": "Dynamic Attribute",
-        "code": "let src: string = 'https://shiyix.cn/images/alins.png';\nconst altName: string = 'Alins';\n\n<img $src alt={`${altName} logo`} title:altName $$App />;\n<button onclick={src = ''} $$App >Clear Src</button>;\n// $src (or src:src) is short for src={src}",
+        "code": "let src: string = 'https://shiyix.cn/images/alins.png';\nconst altName: string = 'Alins';\n\n<div $mount='#App'>\n    <img src={src} alt={`${altName} logo`} title={altName}/>\n    <button onclick={src = ''}>Clear Src</button>\n</div>",
         "title": "Introduction"
     },
     {
-        "name": "Styling String",
-        "code": "let redNumber = 100;\nlet fontSize = 14;\n\n<div $$App>\n    <button onclick={() => {\n        redNumber += 10;\n        fontSize ++;\n    }}>Modify Style</button>\n    <div style={`\n        color: rgb(${redNumber}, 100, 100); \n        font-size: ${fontSize}px;\n        font-weight: bold;\n    `}>Alins is COOL!</div>\n</div>;\n// add style and class 章节",
-        "title": "Introduction"
-    },
-    {
-        "name": "Styling Object",
-        "code": "let redNumber = 100;\nlet fontSize = 14;\n\n<div $$App>\n    <button onclick={() => {\n        redNumber += 10;\n        fontSize ++;\n    }}>Modify Style</button>\n    <div style={{\n        color: `rgb(${redNumber}, 100, 100)`,\n        fontSize,\n        fontWeight: `bold`,\n    }}>Alins is COOL!</div>\n</div>;",
-        "title": "Introduction"
-    },
-    {
-        "name": "Styling Object2",
-        "code": "const style = {\n    color: '#f44',\n    fontSize: '20px',\n    fontWeight: 'bold',\n};\n\n<div $$App>\n    <button onclick={() => {\n        style.color = '#4f4';\n        style.fontSize = '30px';\n    }}>Modify Style</button>\n    <div $style>Alins is COOL!</div>\n</div>;\n// $style (or style:style) is short for style={style}",
+        "name": "Enable Attribute",
+        "code": "let enable = false;\n\n<button $mount='#App'\n    msg={{value: 'Hello', enable}}\n    onclick={e => {\n        enable = !enable;\n        console.log(e.target.outerHTML)\n    }}\n>toggle attr</button>",
         "title": "Introduction"
     },
     {
         "name": "Html Tags",
-        "code": "let html: string = `Here's some <strong>HTML!!!</strong>`;\n\n<p $html:html $$App />;\n<button onclick={\n    html = '<h1>H1 title</h1>'\n} $$App>Modify html</button>;\n// $html:html is short for $html={html}",
+        "code": "let html: string = `Here's some <strong>HTML!!!</strong>`;\n\n<div $mount='#App'>\n    <p $html={html}/>\n    <button onclick={\n        html = '<h1>H1 title</h1>'\n    }>Modify html</button>\n</div>",
         "title": "Introduction"
     },
     {
@@ -43,19 +33,50 @@ export default [
     },
     {
         "name": "Computed",
-        "code": "let count = 1;\n\nlet countAdd2 = count + 2;\n\nlet countAdd3 = countAdd2 + 1;\n\nfunction countMultiply2 () {\n    return count * 2\n}\n\n<div $$App>\n    <button onclick={count++}>\n        click:{count}\n    </button>;\n    <div>count + 2 = {countAdd2}</div>\n    <div>count + 3 = {countAdd3}</div>\n    <div>count * 2 = {countMultiply2}</div>\n    <div>count * 2 = {countMultiply2()}</div>\n</div>",
+        "code": "let count = 1;\n\nlet countAdd2 = count + 2;\n\nlet countAdd3 = countAdd2 + 1;\n\nfunction countMultiply2 () {\n    return count * 2\n}\n\n<div $$App>\n    <button onclick={count++}>\n        click:{count}\n    </button>\n    <div>count + 2 = {countAdd2}</div>\n    <div>count + 3 = {countAdd3}</div>\n    <div>count * 2 = {countMultiply2}</div>\n    <div>count * 2 = {countMultiply2()}</div>\n</div>",
         "title": "Reactivity"
     },
     {
-        "name": "Props",
-        "code": "let count = 0;\n\n<div $$App>\n    <Component $count/>\n    <button onclick={count++}>Increse</button>\n</div>;\n\nfunction Component ({ count }) {\n    return <div>count={count}</div>;\n}",
-        "title": "Component",
-        "head": "Component"
+        "name": "Styling String",
+        "code": "let redNumber = 100;\nlet fontSize = 14;\n\n<div $$App>\n    <button onclick={() => {\n        redNumber += 10;\n        fontSize ++;\n    }}>Modify Style</button>\n    <div style={`\n        color: rgb(${redNumber}, 100, 100); \n        font-size: ${fontSize}px;\n        font-weight: bold;\n    `}>Alins is COOL!</div>\n</div>;\n",
+        "title": "Style",
+        "head": "Style"
     },
     {
-        "name": "Spread Props",
-        "code": "const data = {\n    name: 'Alins',\n    age: 0,\n};\n\nfunction Component ({ name, age }) {\n    return <div>{name}: age={age}</div>;\n}\n\n<div $$App>\n    <Component {...data}/>\n    <button onclick={data.age++}>Modify</button>\n</div>;",
-        "title": "Component"
+        "name": "Styling Object",
+        "code": "let redNumber = 100;\nlet fontSize = 14;\n\n<div $$App>\n    <button onclick={() => {\n        redNumber += 10;\n        fontSize ++;\n    }}>Modify Style</button>\n    <div style={{\n        color: `rgb(${redNumber}, 100, 100)`,\n        fontSize,\n        fontWeight: `bold`,\n    }}>Alins is COOL!</div>\n</div>;",
+        "title": "Style"
+    },
+    {
+        "name": "Styling Object2",
+        "code": "const style = {\n    color: '#f44',\n    fontSize: '20px',\n    fontWeight: 'bold',\n};\n\n<div $$App>\n    <button onclick={() => {\n        style.color = '#4f4';\n        style.fontSize = '30px';\n    }}>Modify Style</button>\n    <div $style>Alins is COOL!</div>\n</div>;\n// $style (or style:style) is short for style={style}",
+        "title": "Style"
+    },
+    {
+        "name": "Single Style",
+        "code": "let redNumber = 100;\nlet fontSize = 14;\n\n<div $$App>\n    <button onclick={() => {\n        redNumber += 10;\n        fontSize ++;\n    }}>Modify Style</button>\n    <div style='font-weight: bold'\n        style:color={`rgb(${redNumber}, 100, 100)`}\n        style:fontSize={`${fontSize}px`}\n    >Alins is COOL!</div>\n</div>;\n// add style and class 章节",
+        "title": "Style"
+    },
+    {
+        "name": "Class String",
+        "code": "let classList = [];\nlet index = 0;\n\nfunction addClass(e){\n    classList.push(`a${index++}`);\n    console.log(e.target.className);\n}\n\n<div $$App>\n    <button \n        class={`a ${classList.join(' ')}`} \n        onclick={addClass}\n    >Add Class</button>\n</div>;",
+        "title": "Class",
+        "head": "Class"
+    },
+    {
+        "name": "Class Object",
+        "code": "let a1Flag = false;\nlet a2Count = 0;\n\nfunction toggleClass(e){\n    a1Flag = !a1Flag;\n    a2Count ++;\n    console.log(e.target.className)\n}\n\n<div $$App>\n    <button class={{\n        a: true,\n        a1: a1Flag,\n        a2: a2Count % 2 === 0\n    }}\n    onclick={toggleClass}>\n        Toggle Class\n    </button>\n</div>;",
+        "title": "Class"
+    },
+    {
+        "name": "Class Object2",
+        "code": "const classObject = {\n    a: true,\n    a1: false,\n    a2: true\n}\n\nfunction toggleClass(e){\n    classObject.a1 = !classObject.a1;\n    classObject.a2 = !classObject.a2;\n    console.log(e.target.className)\n}\n\n<div $$App>\n    <button class={classObject}\n        onclick={toggleClass}>\n        Toggle Class\n    </button>\n</div>;",
+        "title": "Class"
+    },
+    {
+        "name": "Single Class",
+        "code": "let a1Flag = false;\nlet a2Count = 0;\n\nfunction toggleClass(e){\n    a1Flag = !a1Flag;\n    a2Count ++;\n    console.log(e.target.className)\n}\n\n<div $$App>\n    <button class='a'\n        class:a1={a1Flag}\n        class:a2={a2Count % 2 === 0}\n        onclick={toggleClass}>\n        Toggle Class\n    </button>\n</div>;",
+        "title": "Class"
     },
     {
         "name": "Basic Use",
@@ -97,6 +118,17 @@ export default [
         "name": "Pure Event",
         "code": "function click(from: string){\n    console.log(`Execute click from ${from}`)\n    // The pure decorator is used to keep event expressions from being compiled\n    return ()=>{\n        console.log(`Click from ${from}!`);\n    }\n}\n<div $$App>\n    <div>\n        Normal [Won't Work]: \n        <button onclick={click('child1')}>Click Me!</button>\n    </div>\n    <div>\n        With Pure: \n        <button onclick:pure={click('child2')}>Click Me!</button>\n    </div>\n</div>",
         "title": "Events"
+    },
+    {
+        "name": "Props",
+        "code": "let count = 0;\n\n<div $$App>\n    <Component $count/>\n    <button onclick={count++}>Increse</button>\n</div>;\n\nfunction Component ({ count }) {\n    return <div>count={count}</div>;\n}",
+        "title": "Component",
+        "head": "Component"
+    },
+    {
+        "name": "Spread Props",
+        "code": "const data = {\n    name: 'Alins',\n    age: 0,\n};\n\nfunction Component ({ name, age }) {\n    return <div>{name}: age={age}</div>;\n}\n\n<div $$App>\n    <Component {...data}/>\n    <button onclick={data.age++}>Modify</button>\n</div>;",
+        "title": "Component"
     },
     {
         "name": "If Block",
@@ -225,13 +257,13 @@ export default [
     },
     {
         "name": "Counter",
-        "code": "",
+        "code": "let count = 1;\n<div $$App>\n    <input type=\"number\" value={count} />\n    <button onclick={count++}>\n        click:{count}\n    </button>\n    <div>count * 2 = {count * 2}</div>\n</div>",
         "title": "Applications",
         "head": "Applications"
     },
     {
         "name": "Todo List",
-        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-23 09:11:19\n * @Description: Coding something\n */\nlet count = 1;\nconst add = ()=>{\n    count++\n}\n<div $$App>\n    <button onclick={count++}></button>\n    <button onclick={()=>count++}></button>\n    <button onclick={add}></button>\n    <button onclick={add()}></button>\n</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-23 09:11:19\n * @Description: Coding something\n */\n\nfunction List () {\n    const list = ['todo1'];\n    let value = '';\n    return <div>\n        <div>\n            <input type=\"text\" value={value}/>\n            <button onclick={list.push(value)}>add</button>\n        </div>\n        <For data={list}>\n            <Item item={$item} index={$index}>\n                <button onclick={list.splice($index, 1)}>delete</button>\n            </Item>\n        </For>\n    </div>;\n}\n\nfunction Item ({item, index}, children) {\n    let done = false;\n    return <div style={{\n        textDecoration: done ? 'line-through' : 'none',\n        color: done ? '#888' : 'inherit',\n    }}>\n        <span>{index + 1}: {item}</span>\n        <button onclick={ done = !done }>done</button>\n        {children}\n    </div>;\n}\n\n<List $$App/>;",
         "title": "Applications"
     }
 ];
