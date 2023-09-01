@@ -21,7 +21,7 @@ function Item ({item, index}, children) {
         color: done ? '#888' : 'inherit',
     }}>
         <span>{index + 1}: {item}</span>
-        <button onclick={ done = !done }>done</button>
+        <button onclick={ done = !done }>{done ? 'undo' : 'done'}</button>
         {children}
     </div>;
 }

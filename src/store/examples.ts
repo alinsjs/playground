@@ -22,7 +22,7 @@ export default [
     },
     {
         "name": "Counter",
-        "code": "let count = 1;\n<button onclick={count++} $$App>\n    click:{count}\n</button>;",
+        "code": "let count = 1;\n<button onclick={count++} $$App>\n    count:{count}\n</button>;",
         "title": "Reactivity",
         "head": "Reactivity"
     },
@@ -248,7 +248,7 @@ export default [
     },
     {
         "name": "Todo List",
-        "code": "function List () {\n    const list = ['todo1'];\n    let value = '';\n    return <div>\n        <div>\n            <input type=\"text\" value={value}/>\n            <button onclick={list.push(value)}>add</button>\n        </div>\n        <For data={list}>\n            <Item item={$item} index={$index}>\n                <button onclick={list.splice($index, 1)}>delete</button>\n            </Item>\n        </For>\n    </div>;\n}\n\nfunction Item ({item, index}, children) {\n    let done = false;\n    return <div style={{\n        textDecoration: done ? 'line-through' : 'none',\n        color: done ? '#888' : 'inherit',\n    }}>\n        <span>{index + 1}: {item}</span>\n        <button onclick={ done = !done }>done</button>\n        {children}\n    </div>;\n}\n\n<List $$App/>;",
+        "code": "function List () {\n    const list = ['todo1'];\n    let value = '';\n    return <div>\n        <div>\n            <input type=\"text\" value={value}/>\n            <button onclick={list.push(value)}>add</button>\n        </div>\n        <For data={list}>\n            <Item item={$item} index={$index}>\n                <button onclick={list.splice($index, 1)}>delete</button>\n            </Item>\n        </For>\n    </div>;\n}\n\nfunction Item ({item, index}, children) {\n    let done = false;\n    return <div style={{\n        textDecoration: done ? 'line-through' : 'none',\n        color: done ? '#888' : 'inherit',\n    }}>\n        <span>{index + 1}: {item}</span>\n        <button onclick={ done = !done }>{done ? 'undo' : 'done'}</button>\n        {children}\n    </div>;\n}\n\n<List $$App/>;",
         "title": "Applications"
     }
 ];
