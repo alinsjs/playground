@@ -14,7 +14,8 @@ import { ResultBlock } from './components/result-block/result-block';
 import { useStatus } from './store/store';
 import { DragBar } from './components/widgets/drag-bar';
 import './styles/index.less';
-import {ConsoleBlock} from './components/console-block/console-block';
+import { ConsoleBlock } from './components/console-block/console-block';
+import { copy } from './utils';
 
 const status = useStatus();
 
@@ -42,10 +43,12 @@ window._status = status;
         </span>
     </div>
     <div class='body-container'>
-        <div class='body-assets-container' $mounted={(dom)=>{
-            // @ts-ignore
-            dom.scrollTop = document.querySelector('.example-item.active')!.offsetTop - 100
-        }}>
+        <div class='body-assets-container'
+            style={`width: ${status.sidebarWidth}px;min-width: ${status.sidebarWidth}px;`}
+            $mounted={(dom) => {
+                // @ts-ignore
+                dom.scrollTop = document.querySelector('.example-item.active')!.offsetTop - 100;
+            }}>
             <ExamplesList/>
         </div>
         <div
@@ -57,13 +60,17 @@ window._status = status;
         >
             <div class='editor-title'>
                 <span class='text-ellipsis'>
-                    <span style='color:#999'>{status.exampleTitle}: </span> 
+                    <span style='color:#999'>{status.exampleTitle}: </span>
                     {status.exampleName}
                 </span>
                 <span class='editor-btns'>
+                    <i onclick={() => {
+                        copy(status.exampleCode);
+                        status.showInfo('Copy succeeded!');
+                    }} title='Copy Code' class="ei-copy"></i>
                     <i onclick={status.download} title='Download' class="ei-download-alt"></i>
-                    <i onclick={()=>{
-                        if(status.runCodeResult(true)){
+                    <i onclick={() => {
+                        if (status.runCodeResult(true)) {
                             status.showInfo('Refresh succeeded!');
                         }
                     }} title='Refresh Result' class="ei-refresh"></i>

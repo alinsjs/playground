@@ -19,6 +19,10 @@ export default defineConfig(({ mode }) => {
         // base: isDev ? '/' : '/fund',
         base: '/',
 
+        server: {
+            port: 5174
+        },
+
         plugins: [
             legacy({
                 targets: [ 'defaults', 'not IE 11' ],
@@ -26,7 +30,9 @@ export default defineConfig(({ mode }) => {
             alins(),
         ],
         define: {
-            __DEV__: isDev,
+            __DEV__: `${isDev}`,
+            __DEBUG__: `${true}`,
+            __VERSION__: '"__DEV__"',
         },
         // build: {
         //     rollupOptions: {
@@ -48,6 +54,6 @@ export default defineConfig(({ mode }) => {
                 'alins-compiler-web': '/alins/packages/compiler-web',
                 'alins-compiler-core': '/alins/packages/compiler-core',
             }
-        }
+        },
     };
 });

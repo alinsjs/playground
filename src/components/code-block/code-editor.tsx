@@ -4,16 +4,18 @@
  * @Description: Coding something
  */
 import { useStatus } from 'src/store/store';
-import { debounce } from 'src/utils';
+// import { debounce } from 'src/utils';
 import { Editor } from './monaco';
 
 export function EditorBox () {
+    debugger;
     return <div
         style={{
             width: '100%',
             height: '100%',
         }}
         $mounted={(dom) => {
+            debugger;
             const status = useStatus();
             const parseCode = (v: string) => {
                 status.setCode(v);
@@ -21,9 +23,10 @@ export function EditorBox () {
             const _editor = new Editor({
                 dom,
                 code: status.exampleCode,
-                onchange: debounce(parseCode),
+                onchange: parseCode,
             });
             status.$watch('exampleCode', (code) => {
+                console.log('examplecode');
                 _editor.code(code);
             });
             parseCode(_editor.code());

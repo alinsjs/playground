@@ -11,6 +11,13 @@ import javascript from 'highlight.js/lib/languages/javascript';// Then register 
 
 import 'highlight.js/styles/vs2015.css';
 import Examples from './examples';
+import { initCustomCode } from 'src/function/custom-code';
+import { getUrlParam } from 'src/utils';
+
+const custom = initCustomCode();
+if (custom) {
+    Examples.unshift(custom);
+}
 
 let downloadLink: any;
 
@@ -32,7 +39,10 @@ function loadingResult () {
 
 export const useStatus = createStore({
     state: () => {
-        const codeEditorWidth = (window.innerWidth - 200) * 0.5;
+
+        const sidebarWidth = getUrlParam('side') === '0' ? 0 : 200;
+
+        const codeEditorWidth = (window.innerWidth - sidebarWidth) * 0.5;
         hljs.registerLanguage('javascript', javascript);
         const exampleIndex = location.hash ? parseInt(location.hash.substring(1)) : 0;
 
@@ -61,35 +71,37 @@ export const useStatus = createStore({
                 height: window.innerHeight * 0.3,
                 prevHeight: 0,
                 dragActive: false,
-            }
+            },
+
+            sidebarWidth,
         };
     },
     actions: {
 
-        toggleConsole(){
+        toggleConsole () {
             const cs = this.console;
-            if(cs.prevHeight){
+            if (cs.prevHeight) {
                 cs.height = cs.prevHeight;
                 cs.prevHeight = 0;
-            }else{
+            } else {
                 cs.prevHeight = cs.height;
                 cs.height = 0;
             }
         },
 
-        clearConsole(){
+        clearConsole () {
             this.console.list = [];
             // console.clear();
         },
 
-        log(args: any[]){
-            this.console.list.push(args.map(arg=>arg.toString()).join(' '))
+        log (args: any[]) {
+            this.console.list.push(args.map(arg => arg.toString()).join(' '));
         },
 
-        showInfo(info: string, time = 2000){
+        showInfo (info: string, time = 2000) {
             clearTimeout(this.timer);
             this.info = info;
-            this.timer = setTimeout(()=>{
+            this.timer = setTimeout(() => {
                 this.info = '';
             }, time);
         },
@@ -138,8 +150,7 @@ export const useStatus = createStore({
         },
         runCodeResult (force = false) {
             if (!this.codeChange && !force) return;
-            // @ts-ignore
-            document.getElementById('App').innerHTML = '';
+            document.getElementById('App')!.innerHTML = '';
 
             try {
                 this.clearConsole();
@@ -164,7 +175,7 @@ export const useStatus = createStore({
             const url = URL.createObjectURL(blob);
             downloadLink.href = url;
             downloadLink.click();
-            this.showInfo(`Example "${this.exampleName}" Downloaded!`)
+            this.showInfo(`Example "${this.exampleName}" Downloaded!`);
         }
     },
     getters: {
@@ -174,7 +185,7 @@ export const useStatus = createStore({
         consoleHeightPX () {
             return `${this.console.height}px`;
         },
-        resultPanelHeightCss(){
+        resultPanelHeightCss () {
             return `${window.innerHeight - 83 - this.console.height}px`;
         }
     }
