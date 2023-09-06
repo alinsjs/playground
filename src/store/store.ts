@@ -133,7 +133,7 @@ export const useStatus = createStore({
             );
             this.outputCode = highlightedCode.value;
 
-            this.runCode = result.replace('import { _$$ } from "alins";', 'const _$$$$ = window.Alins._$$$$;');
+            this.runCode = result.replace(/import \{ (.*?) \} from "alins";/i, 'const { $1 } = window.Alins;');
             this.syntaxError = false;
 
             this.codeChange = true;
@@ -150,6 +150,7 @@ export const useStatus = createStore({
         },
         runCodeResult (force = false) {
             if (!this.codeChange && !force) return;
+            if (force) this.resultNaviIndex = 0;
             document.getElementById('App')!.innerHTML = '';
 
             try {

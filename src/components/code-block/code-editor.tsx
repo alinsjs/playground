@@ -8,14 +8,12 @@ import { useStatus } from 'src/store/store';
 import { Editor } from './monaco';
 
 export function EditorBox () {
-    debugger;
     return <div
         style={{
             width: '100%',
             height: '100%',
         }}
         $mounted={(dom) => {
-            debugger;
             const status = useStatus();
             const parseCode = (v: string) => {
                 status.setCode(v);
@@ -26,7 +24,7 @@ export function EditorBox () {
                 onchange: parseCode,
             });
             status.$watch('exampleCode', (code) => {
-                console.log('examplecode');
+                // console.log('examplecode');
                 _editor.code(code);
             });
             parseCode(_editor.code());
