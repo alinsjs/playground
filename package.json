@@ -31,9 +31,8 @@
     "typescript": "^4.9.3",
     "typescript-eslint": "0.0.1-alpha.0",
     "vite": "^4.2.0",
-    "vite-plugin-alins": "0.0.24"
-  },
-  "dependencies": {
-    "alins-compiler-web": "0.0.24"
+    "vite-plugin-alins": "0.0.27",
+    "alins": "0.0.27",
+    "alins-compiler-web": "0.0.27"
   }
 }

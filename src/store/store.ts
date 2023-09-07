@@ -3,7 +3,7 @@
  * @Date: 2023-08-16 16:24:25
  * @Description: Coding something
  */
-import { createStore } from 'alins-store';
+import { createStore } from 'alins';
 import { parseWebAlins } from 'alins-compiler-web';
 
 import hljs from 'highlight.js/lib/core';
