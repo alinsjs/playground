@@ -231,13 +231,13 @@ export default [
     },
     {
         "name": "Create Store",
-        "code": "const msg = 'World';\n<div $$App>Hello {msg}!</div>;\n// $$App is short for $parennt='#App'\n// Or use `document.getElementById('App').appendChild(<div/>)`",
+        "code": "import { createStore } from 'alins';\nconst useStore = createStore({\n    state: () => ({\n        count: 0,\n    }),\n    actions: {\n        increase () {\n            this.count ++;\n        },\n        countAddX (x: number) {\n            return this.count + x;\n        }\n    },\n    getters: {\n        countAdd2 () {\n            return this.count + 2;\n        },\n        getCountAddX () {\n            return this.countAddX(3);\n        }\n    }\n});\n\nconst store = useStore();\n\n<div $$App>\n    <div>Count = {store.count}</div>\n    <div>countAdd2 = {store.countAdd2}</div>\n    <div>countAddX = {store.countAddX(4)}</div>\n    <div>getCountAddX = {store.getCountAddX}</div>\n    <button onclick={store.increase}>Increase Count</button>\n</div>;",
         "title": "Store",
         "head": "Store"
     },
     {
-        "name": "This",
-        "code": "/*\n * @Author: chenzhongsheng\n * @Date: 2023-08-29 09:27:16\n * @Description: Coding something\n */\nstore: store = {\n    state(){\n        return {}\n    }\n};",
+        "name": "Watch Store",
+        "code": "import { createStore } from 'alins';\nconst useStore = createStore({\n    state: () => ({\n        count: 0,\n    }),\n    actions: {\n        increase () {\n            this.count ++;\n        },\n        countAddX (x: number) {\n            return this.count + x;\n        }\n    },\n    getters: {\n        countAdd2 () {\n            return this.count + 2;\n        },\n        getCountAddX () {\n            return this.countAddX(3);\n        }\n    }\n});\n\nconst store = useStore();\n\nstore.$watch('count', (newValue, oldValue) => {\n    console.log('store.count change', newValue, oldValue);\n});\nstore.$watch('countAdd2', (newValue, oldValue) => {\n    console.log('store.countAdd2 change', newValue, oldValue);\n});\nstore.$watch(() => store.countAddX(4), (newValue, oldValue) => {\n    console.log('store.countAddX(4) change', newValue, oldValue);\n});\n\n<div $$App>\n    <div>Count = {store.count}</div>\n    <div>countAdd2 = {store.countAdd2}</div>\n    <div>countAddX = {store.countAddX(4)}</div>\n    <div>getCountAddX = {store.getCountAddX}</div>\n    <button onclick={store.increase}>Increase Count</button>\n</div>;",
         "title": "Store"
     },
     {

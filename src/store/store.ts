@@ -10,14 +10,9 @@ import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';// Then register the languages you need
 
 import 'highlight.js/styles/vs2015.css';
+import 'src/function/custom-code';
+import { compressCode, copy, countCodeSize, createAlinsHTML, getUrlParam } from 'src/utils';
 import Examples from './examples';
-import { initCustomCode } from 'src/function/custom-code';
-import { getUrlParam } from 'src/utils';
-
-const custom = initCustomCode();
-if (custom) {
-    Examples.unshift(custom);
-}
 
 let downloadLink: any;
 
@@ -45,6 +40,7 @@ export const useStatus = createStore({
         const codeEditorWidth = (window.innerWidth - sidebarWidth) * 0.5;
         hljs.registerLanguage('javascript', javascript);
         const exampleIndex = location.hash ? parseInt(location.hash.substring(1)) : 0;
+        const example = Examples[exampleIndex];
 
         return {
             // 编辑器拖拽条
@@ -53,14 +49,14 @@ export const useStatus = createStore({
             dragActive: false,
 
             syntaxError: false,
-            editorCode: '',
+            editorCode: example.code,
             outputCode: '',
             runCode: '',
             resultNaviIndex: 0,
             exampleIndex,
-            exampleName: Examples[exampleIndex].name,
-            exampleTitle: Examples[exampleIndex].title,
-            exampleCode: Examples[exampleIndex].code,
+            exampleName: example.name,
+            exampleTitle: example.title,
+            exampleCode: example.code,
             codeChange: false,
             info: '',
             timer: null as any,
@@ -119,6 +115,7 @@ export const useStatus = createStore({
         setCode (v: string) {
             let result = '';
             try {
+                this.editorCode = v;
                 result = parseWebAlins(v, { useImport: true, ts: true, filename: 'demo.tsx' });
             } catch (e: any) {
                 this.outputCode = e.toString().replace(/</g, '&lt;');
@@ -132,8 +129,7 @@ export const useStatus = createStore({
                 { language: 'javascript' }
             );
             this.outputCode = highlightedCode.value;
-
-            this.runCode = result.replace(/import \{ (.*?) \} from "alins";/i, 'const { $1 } = window.Alins;');
+            this.runCode = result.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
             this.syntaxError = false;
 
             this.codeChange = true;
@@ -172,11 +168,14 @@ export const useStatus = createStore({
                 document.body.appendChild(downloadLink);
             }
             downloadLink.setAttribute('download', `${this.exampleName.replace(/ /g, '-')}.alins.html`);
-            const blob = new Blob([ createAlinsHTML(this.exampleName, this.exampleCode) ], { type: 'text/html' });
+            const blob = new Blob([ createAlinsHTML(this.exampleName, this.editorCode) ], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             downloadLink.href = url;
             downloadLink.click();
             this.showInfo(`Example "${this.exampleName}" Downloaded!`);
+        },
+        copyLink () {
+            copy(`${location.origin}?name=${this.exampleName}&code=${compressCode(this.editorCode)}`);
         }
     },
     getters: {
@@ -188,6 +187,12 @@ export const useStatus = createStore({
         },
         resultPanelHeightCss () {
             return `${window.innerHeight - 83 - this.console.height}px`;
+        },
+        codeSize () {
+            return countCodeSize(this.editorCode);
+        },
+        outputSize () {
+            return countCodeSize(this.runCode);
         }
     }
 });
@@ -197,25 +202,3 @@ export const useStatus = createStore({
 
 // useStatus().download;
 // useStatus().codeWidthPx;
-
-function createAlinsHTML (name: string, code: string) {
-    return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${name}</title>
-    <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
-</head>
-<body>
-    <!--
-        This demo is only used for development and debugging. 
-        For official use, please refer to https://alinsjs.github.io/docs/
-    -->
-    <div id="App"></div>
-    <script type="text/alins">
-${code}
-    </script>
-</body>
-</html>`;
-}

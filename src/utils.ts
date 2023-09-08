@@ -25,7 +25,6 @@ export function decompressCode (code: string) {
     return decompressFromEncodedURIComponent(code);
 }
 
-
 export function copy (str: string) {
     let input = document.getElementById('_copy_input_') as any;
     if (!input) {
@@ -76,4 +75,33 @@ export function parseUrlParam (search: string, name: string, defVal?: string) {
         param[pArr[0]] = pArr[1];
     });
     return param;
+}
+
+export function countCodeSize (code: string) {
+    const textEncoder = new TextEncoder();
+    const size = textEncoder.encode(code).length;
+    if (size > 1024) return (size / 1024).toFixed(2) + ' kb';
+    return size + ' byte';
+}
+
+export function createAlinsHTML (name: string, code: string) {
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${name}</title>
+    <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
+</head>
+<body>
+    <!--
+        This demo is only used for development and debugging. 
+        For official use, please refer to https://alinsjs.github.io/docs/
+    -->
+    <div id="App"></div>
+    <script type="text/alins">
+${code}
+    </script>
+</body>
+</html>`;
 }

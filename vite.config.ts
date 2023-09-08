@@ -12,15 +12,12 @@ import alins from 'vite-plugin-alins';
 // https://vitejs.dev/config/
 // @ts-ignore
 export default defineConfig(({ mode }) => {
-    // const env = loadEnv(mode, process.cwd(), '');
-    // console.log(mode);
     const isDev = mode === 'development';
     return {
-        // base: isDev ? '/' : '/fund',
-        base: '/',
+        base: isDev ? '/' : '/playground',
 
         server: {
-            port: 5174
+            port: 5173
         },
 
         plugins: [
@@ -34,13 +31,13 @@ export default defineConfig(({ mode }) => {
             __DEBUG__: `${true}`,
             __VERSION__: '"__DEV__"',
         },
-        // build: {
-        //     rollupOptions: {
-        //         output: {
-        //             comments: true
-        //         }
-        //     }
-        // },
+        build: {
+            rollupOptions: {
+                output: {
+                    dir: 'docs',
+                }
+            }
+        },
         resolve: {
             alias: {
                 'src': '/src',

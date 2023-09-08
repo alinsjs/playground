@@ -23,7 +23,7 @@
       // "alins-utils": ["alins/packages/client-utils"],
       // "alins-compiler-web": ["alins/packages/compiler-web"],
       // "alins-compiler-core": ["alins/packages/compiler-core"],
-      "alins-*": ["src/packages/*/index.ts"],
+      // "alins-*": ["src/packages/*/index.ts"],
       "src/*": ["src/*"]
     }
   },

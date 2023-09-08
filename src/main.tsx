@@ -16,6 +16,7 @@ import { DragBar } from './components/widgets/drag-bar';
 import './styles/index.less';
 import { ConsoleBlock } from './components/console-block/console-block';
 import { copy } from './utils';
+import { version } from 'alins';
 
 const status = useStatus();
 
@@ -26,9 +27,9 @@ window._status = status;
     $mount={document.body}
     class='main-container'>
     <div class='title-container'>
-        <span class='title-item'>
+        <span class='title-item main' onclick={window.open('https://github.com/alinsjs/playground/')}>
             <img style='height: 30px' src="https://shiyix.cn/images/alins.png" alt="" />
-            <span style='color: var(--theme-color)'>Alins Playground</span>
+            <span style='color: var(--theme-color)'>Alins Playground {version}</span>
         </span>
         <span class='title-item info'>{status.info}</span>
         <span class='title-item right'>
@@ -65,7 +66,11 @@ window._status = status;
                 </span>
                 <span class='editor-btns'>
                     <i onclick={() => {
-                        copy(status.exampleCode);
+                        status.copyLink();
+                        status.showInfo('Copy Link succeeded!');
+                    }} title='Copy Link' class="ei-link"></i>
+                    <i onclick={() => {
+                        copy(status.editorCode);
                         status.showInfo('Copy succeeded!');
                     }} title='Copy Code' class="ei-copy"></i>
                     <i onclick={status.download} title='Download' class="ei-download-alt"></i>
@@ -77,6 +82,7 @@ window._status = status;
                 </span>
             </div>
             <EditorBox />
+            <span class='code-size'>{status.codeSize}</span>
         </div>
         <DragBar />
         <div class='body-result-container'>

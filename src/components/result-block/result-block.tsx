@@ -19,7 +19,7 @@ export function ResultBlock () {
             });
         }
     });
-    return <div>
+    return <div class='result-block'>
         <div class='result-header'>
             <span class={`${isActive(0) ? 'active' : ''}`}
                 onclick={status.resultNaviIndex = 0}>Result</span>
@@ -37,5 +37,6 @@ export function ResultBlock () {
                 }}
                 $html={status.outputCode}></div>
         </ElseIf>
+        <span class='code-size'>{status.outputSize}</span>
     </div>;
 }
