@@ -175,7 +175,7 @@ export const useStatus = createStore({
             this.showInfo(`Example "${this.exampleName}" Downloaded!`);
         },
         copyLink () {
-            copy(`${location.origin}?name=${this.exampleName}&code=${compressCode(this.editorCode)}`);
+            copy(`${location.origin}${location.pathname}?name=${this.exampleName}&code=${compressCode(this.editorCode)}`);
         }
     },
     getters: {

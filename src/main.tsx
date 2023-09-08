@@ -29,7 +29,7 @@ window._status = status;
     <div class='title-container'>
         <span class='title-item main' onclick={window.open('https://github.com/alinsjs/playground/')}>
             <img style='height: 30px' src="https://shiyix.cn/images/alins.png" alt="" />
-            <span style='color: var(--theme-color)'>Alins Playground {version}</span>
+            <span style='color: var(--theme-color)'>Alins Playground [v{version}]</span>
         </span>
         <span class='title-item info'>{status.info}</span>
         <span class='title-item right'>
