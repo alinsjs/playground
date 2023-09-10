@@ -80,13 +80,13 @@ export default [
     },
     {
         "name": "Basic Use",
-        "code": "let count = 0;\nfunction add () {\n    count++;\n}\n<div $$App>\n    <button onclick={count++}>count={count}</button>\n    <button onclick={()=>count++}>count={count}</button>\n    <button onclick={add}>count={count}</button>\n    <button onclick={add()}>count={count}</button>\n    <button onclick:add>count={count}</button>\n</div>;\n// onclick:add is short for onclick={add}",
+        "code": "let count = 0;\nfunction add () {\n    count++;\n}\n<div $$App>\n    <button onclick={count++}>count={count}</button>\n    <button onclick={() => count++}>count={count}</button>\n    <button onclick={add}>count={count}</button>\n    <button onclick={add()}>count={count}</button>\n    <button onclick:add>count={count}</button>\n</div>;\n// onclick:add is short for onclick={add}",
         "title": "Events",
         "head": "Events"
     },
     {
         "name": "Event Object",
-        "code": "let x = 0, y = 0;\nfunction onclick (e) {\n    x = e.clientX;\n    y = e.clientY;\n}\n<div $$App>\n    <button onclick={(e)=>{\n        x = e.clientX;\n        y = e.clientY;\n    }}>Button 1</button>\n    <button onclick={onclick}>Button 2</button>\n    <div>ClientX={x}; ClientY={y}</div>\n</div>;",
+        "code": "let x = 0, y = 0;\nfunction onclick (e) {\n    x = e.clientX;\n    y = e.clientY;\n}\n<div $$App>\n    <button onclick={(e) => {\n        x = e.clientX;\n        y = e.clientY;\n    }}>Button 1</button>\n    <button onclick={onclick}>Button 2</button>\n    <div>ClientX={x}; ClientY={y}</div>\n</div>;",
         "title": "Events"
     },
     {
@@ -210,9 +210,14 @@ export default [
     },
     {
         "name": "Computed Set",
-        "code": "let a = 1;\n\nlet b = a + 1; set: v => a = v + 1;\n\n<div $$App>\n    <button onclick={b++}>Modify B</button>\n    <div>a={a}; b={b}</div>\n</div>",
+        "code": "let a = 1;\n\nlet b = a + 1; set: v => a = v + 1;\n\n<div $$App>\n    <button onclick={b++}>Modify B</button>\n    <div>a={a}; b={b}</div>\n</div>;",
         "title": "Rules",
         "head": "Rules"
+    },
+    {
+        "name": "Watch",
+        "code": "let a = 1;\n\nconst b = a + 1;\n\nconst c = {\n    a: a + 2\n};\n\nwatch: a, (newValue, oldValue) => {\n    console.log('a changed:', newValue, oldValue);\n};\nwatch: a + 1, (newValue, oldValue) => {\n    console.log('a + 1 changed:', newValue, oldValue);\n};\nwatch: () => a * 2, (newValue, oldValue) => {\n    console.log('a * 2 changed:', newValue, oldValue);\n};\nwatch: b, (newValue, oldValue) => {\n    console.log('b changed:', newValue, oldValue);\n};\nwatch: c, (newValue, oldValue, prop) => {\n    console.log('c changed:', newValue, oldValue, prop);\n};\n\n<button $$App onclick={a++}>Modify A</button>;",
+        "title": "Rules"
     },
     {
         "name": "Short Attribute",
