@@ -4,7 +4,7 @@ function onclick (e) {
     y = e.clientY;
 }
 <div $$App>
-    <button onclick={(e)=>{
+    <button onclick={(e) => {
         x = e.clientX;
         y = e.clientY;
     }}>Button 1</button>

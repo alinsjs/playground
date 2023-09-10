@@ -3,11 +3,6 @@
  * @Date: 2023-08-10 01:17:26
  * @Description: Coding something
  */
-// import './counter';
-// import './todo';
-
-// import { parseWebAlins } from 'alins-compiler-web';
-// import {initMonaco} from './monaco';
 import { ExamplesList } from './components/assets-block/assets-list';
 import { EditorBox } from './components/code-block/code-editor';
 import { ResultBlock } from './components/result-block/result-block';

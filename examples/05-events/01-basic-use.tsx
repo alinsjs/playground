@@ -4,7 +4,7 @@ function add () {
 }
 <div $$App>
     <button onclick={count++}>count={count}</button>
-    <button onclick={()=>count++}>count={count}</button>
+    <button onclick={() => count++}>count={count}</button>
     <button onclick={add}>count={count}</button>
     <button onclick={add()}>count={count}</button>
     <button onclick:add>count={count}</button>
