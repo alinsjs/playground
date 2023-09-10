@@ -56,8 +56,8 @@ window._status = status;
         >
             <div class='editor-title'>
                 <span class='text-ellipsis'>
-                    <span style='color:#999'>{status.exampleTitle}: </span>
-                    {status.exampleName}
+                    <span style='color:#999'>{status.example.title}: </span>
+                    {status.example.name}
                 </span>
                 <span class='editor-btns'>
                     <i onclick={() => {

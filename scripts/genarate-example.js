@@ -11,16 +11,19 @@ const dirs = fs.readdirSync(path.resolve(__dirname, '../examples'));
 const list = [];
 
 dirs.forEach(dirName => {
-    if(dirName === '.DS_Store') return;
+    if (dirName === '.DS_Store') return;
     const subDirs = fs.readdirSync(path.resolve(__dirname, `../examples/${dirName}`));
-    let title = formatName(dirName);
-    let titleName = title
+    const title = formatName(dirName);
+    let titleName = title;
     subDirs.forEach(fileName => {
-        const itemName = formatName(fileName, fileName.indexOf('.'));
+        const iframe = fileName.includes(':iframe');
+        const fileTrueName = !iframe ? fileName : fileName.replace(':iframe', '');
+        const itemName = formatName(fileTrueName, fileTrueName.indexOf('.'));
         const item = {
             name: itemName,
             code: fs.readFileSync(path.resolve(__dirname, `../examples/${dirName}/${fileName}`), 'utf8'),
             title,
+            iframe,
         };
         if (titleName) {
             item.head = titleName;

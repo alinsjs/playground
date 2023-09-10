@@ -4,6 +4,7 @@
  * @Description: Coding something
  */
 
+import { IFrameRunner } from 'src/function/iframe-runner';
 import { useStatus } from 'src/store/store';
 
 export function ResultBlock () {
@@ -27,7 +28,12 @@ export function ResultBlock () {
                 onclick={status.resultNaviIndex = 1}>Output</span>
         </div>
         <If data={isActive(0)}>
-            <div id='App' style={{ height: status.resultPanelHeightCss }}></div>
+            <If data={status.example.iframe}>
+                <IFrameRunner/>
+            </If>
+            <Else>
+                <div id='App' style={{ height: status.resultPanelHeightCss }}></div>
+            </Else>
         </If>
         <ElseIf data={isActive(1)}>
             <div class='highlight-container'

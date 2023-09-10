@@ -9,5 +9,6 @@ function onclick (e) {
         y = e.clientY;
     }}>Button 1</button>
     <button onclick={onclick}>Button 2</button>
+    <button onclick={x = $e.clientX}>Button 3</button>
     <div>ClientX={x}; ClientY={y}</div>
 </div>;

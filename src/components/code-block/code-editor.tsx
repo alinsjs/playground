@@ -20,11 +20,15 @@ export function EditorBox () {
             };
             const _editor = new Editor({
                 dom,
-                code: status.exampleCode,
+                code: status.example.code,
                 onchange: parseCode,
             });
-            status.$watch('exampleCode', (code) => {
-                // console.log('examplecode');
+            // status.$watch('example.code', (code) => {
+            //     // console.log('examplecode');
+            //     _editor.code(code);
+            // });
+            status.$watch('example.code', (code) => {
+                console.log('examplecode change');
                 _editor.code(code);
             });
             parseCode(_editor.code());

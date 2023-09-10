@@ -105,3 +105,24 @@ ${code}
 </body>
 </html>`;
 }
+
+// <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
+export function createIFrameSrc (code: string) {
+    const alinsSrc = __DEV__ ? 'http://localhost:5173/alins.iife.min.js' : 'https://cdn.jsdelivr.net/npm/alins';
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe runner</title>
+    <script src="${alinsSrc}"></script>
+</head>
+<body>
+    <div id="App"></div>
+    <script>
+${code}
+    </script>
+</body>
+</html>`;
+    return `data:text/html;charset=utf-8,${html}`;
+}

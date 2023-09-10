@@ -3,19 +3,19 @@
  * @Date: 2023-08-16 16:24:25
  * @Description: Coding something
  */
-// import { createStore } from 'alins';
-// import { parseWebAlins } from 'alins-compiler-web';
+import { createStore } from 'alins';
+import { parseWebAlins } from 'alins-compiler-web';
 
-// @ts-ignore
-import { createStore } from '../dist/alins/alins.esm.min';
-import { parseWebAlins } from '../dist/compiler-web/alins-compiler-web.esm.min';
+// // @ts-ignore
+// import { createStore } from '../dist/alins/alins.esm.min';
+// import { parseWebAlins } from '../dist/compiler-web/alins-compiler-web.esm.min';
 
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';// Then register the languages you need
 
 import 'highlight.js/styles/vs2015.css';
 import 'src/function/custom-code';
-import { compressCode, copy, countCodeSize, createAlinsHTML, getUrlParam } from 'src/utils';
+import { compressCode, copy, countCodeSize, createAlinsHTML, createIFrameSrc, getUrlParam } from 'src/utils';
 import Examples from './examples';
 
 let downloadLink: any;
@@ -56,11 +56,10 @@ export const useStatus = createStore({
             editorCode: example.code,
             outputCode: '',
             runCode: '',
+            iframeCode: '',
             resultNaviIndex: 0,
             exampleIndex,
-            exampleName: example.name,
-            exampleTitle: example.title,
-            exampleCode: example.code,
+            example: { ...example },
             codeChange: false,
             info: '',
             timer: null as any,
@@ -111,9 +110,8 @@ export const useStatus = createStore({
             this.resultNaviIndex = 0;
             loadingResult();
             this.exampleIndex = index;
-            this.exampleName = Examples[index].name;
-            this.exampleCode =  Examples[index].code;
-            this.exampleTitle =  Examples[index].title;
+            this.example = { ...Examples[index] };
+            // this.example = Examples[index];
             location.hash = `${index}`;
         },
         setCode (v: string) {
@@ -134,6 +132,7 @@ export const useStatus = createStore({
             );
             this.outputCode = highlightedCode.value;
             this.runCode = result.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
+
             this.syntaxError = false;
 
             this.codeChange = true;
@@ -151,11 +150,15 @@ export const useStatus = createStore({
         runCodeResult (force = false) {
             if (!this.codeChange && !force) return;
             if (force) this.resultNaviIndex = 0;
-            document.getElementById('App')!.innerHTML = '';
 
             try {
                 this.clearConsole();
-                new Function(this.runCode)();
+                if (this.example.iframe) {
+                    this.iframeCode = this.runCode;
+                } else {
+                    document.getElementById('App')!.innerHTML = '';
+                    new Function(this.runCode)();
+                }
             } catch (e) {
                 console.error(e);
                 resultError(e);
@@ -171,18 +174,21 @@ export const useStatus = createStore({
                 downloadLink.setAttribute('style', 'position: fixed;top: -100px');
                 document.body.appendChild(downloadLink);
             }
-            downloadLink.setAttribute('download', `${this.exampleName.replace(/ /g, '-')}.alins.html`);
-            const blob = new Blob([ createAlinsHTML(this.exampleName, this.editorCode) ], { type: 'text/html' });
+            downloadLink.setAttribute('download', `${this.example.name.replace(/ /g, '-')}.alins.html`);
+            const blob = new Blob([ createAlinsHTML(this.example.name, this.editorCode) ], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             downloadLink.href = url;
             downloadLink.click();
-            this.showInfo(`Example "${this.exampleName}" Downloaded!`);
+            this.showInfo(`Example "${this.example.name}" Downloaded!`);
         },
         copyLink () {
-            copy(`${location.origin}${location.pathname}?name=${this.exampleName}&code=${compressCode(this.editorCode)}`);
+            copy(`${location.origin}${location.pathname}?name=${this.example.name}&code=${compressCode(this.editorCode)}`);
         }
     },
     getters: {
+        iframeSrc () {
+            return createIFrameSrc(this.runCode);
+        },
         codeWidthPx () {
             return `${this.codeEditorWidth}px`;
         },
