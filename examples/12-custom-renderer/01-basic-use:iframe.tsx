@@ -1,15 +1,10 @@
-/*
- * @Author: chenzhongsheng
- * @Date: 2023-09-10 17:09:58
- * @Description: Coding something
- */
 import { useRenderer, CustomElement } from 'alins';
 
 const root = useRenderer({
     render (node: CustomElement) {
         const prefix = new Array(node.deep).fill('  ').join('');
         const text = `${node.innerText}`;
-        console.log(`${prefix}text: ${text.trim()}`);
+        console.log(`${prefix}${node.tagName || 'text'}: ${text.trim()}`);
     }
 });
 
@@ -23,9 +18,9 @@ const v2 = v * 2;
 
 function loopRender () {
     v ++;
-    // console.clear();
+    console.clear();
     root.render();
-    // setTimeout(loopRender, 1000);
+    setTimeout(loopRender, 1000);
 }
 
 loopRender();

@@ -116,13 +116,39 @@ export function createIFrameSrc (code: string) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iframe runner</title>
     <script src="${alinsSrc}"></script>
+    <style>
+    body{color: #fff;}
+    button, input, select{
+        margin: 5px;
+        padding: 5px 8px;
+        background-color: #eee;
+        border: none;
+        border-radius: 1px;
+        outline: none;
+    }
+    button, select{
+        cursor: pointer;
+    }
+    button:active{
+        background-color: #ccc;
+    }
+    </style>
 </head>
 <body>
     <div id="App"></div>
+    <script>
+        console.log = (...args) => {
+            window.parent.postMessage({type: 'iframe_log', data: args});
+        };
+        console.clear = () => {
+            window.parent.postMessage({type: 'iframe_clear_log'});
+        };
+    </script>
     <script>
 ${code}
     </script>
 </body>
 </html>`;
-    return `data:text/html;charset=utf-8,${html}`;
+    const blob = new Blob([ html ], { type: 'text/html' });
+    return URL.createObjectURL(blob);
 }

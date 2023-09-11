@@ -4,22 +4,23 @@
  * @Description: Coding something
  */
 import { useStatus } from 'src/store/store';
+import eveit from 'eveit';
 
-export function DragBar ({type = 'code'}: {type?: 'code'|'console'}) {
-    const onDragSize = type === 'code' ? 'onDragSize': 'onDragConsoleSize';
+export function DragBar ({ type = 'code' }: {type?: 'code'|'console'}) {
+    const onDragSize = type === 'code' ? 'onDragSize' : 'onDragConsoleSize';
 
     // console.log(type, onDragSize);
-    
+
     const status = useStatus();
 
-    let dragActive = type === 'code' ? status.dragActive: status.console.dragActive; 
-        set: (b:boolean)=>{
-            if(type === 'code'){
-                status.dragActive = b;
-            }else{
-                status.console.dragActive = b;
-            }
+    let dragActive = type === 'code' ? status.dragActive : status.console.dragActive;
+    set: (b:boolean) => {
+        if (type === 'code') {
+            status.dragActive = b;
+        } else {
+            status.console.dragActive = b;
         }
+    };
 
     let _isDown = false;
 
@@ -30,17 +31,21 @@ export function DragBar ({type = 'code'}: {type?: 'code'|'console'}) {
 
     function mouseMove (e: MouseEvent) {
         if (_isDown) {
-            status[onDragSize](e[(type === 'code')?'clientX':'clientY']);
+            status[onDragSize](e[(type === 'code') ? 'clientX' : 'clientY']);
         }
     }
 
-    window.addEventListener('mousemove', mouseMove);
-    window.addEventListener('mouseup', () => {
+    const mouseUp = () => {
         if (_isDown) {
             _isDown = false;
             setDown(false);
         }
-    });
+    };
+
+    window.addEventListener('mousemove', mouseMove);
+    window.addEventListener('mouseup', mouseUp);
+    eveit.on('mousemove', mouseMove);
+    eveit.on('mouseup', mouseUp);
 
     return <div
         class={{

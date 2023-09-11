@@ -1,6 +1,6 @@
 let ref: HTMLElement;
 function created(dom){
-    console.log(`created: parent=${dom.parentElement?.tagName}`, )
+    console.log(`created: parent=${dom.parentElement?.tagName}`)
 }
 function appended(dom){
     const parent = dom.parentElement;

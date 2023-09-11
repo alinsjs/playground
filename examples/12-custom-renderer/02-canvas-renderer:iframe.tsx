@@ -1,8 +1,3 @@
-/*
- * @Author: chenzhongsheng
- * @Date: 2023-09-09 23:34:59
- * @Description: Coding something
- */
 import { useRenderer, CustomElement } from 'alins';
 
 let msg = 'Hello World';
@@ -17,8 +12,7 @@ const root = useRenderer({
         if (!parent.textLeft) parent.textLeft = 10;
         ctx.fillText(element.textContent, parent.textLeft, parent.deep  * 15 + 10);
         parent.textLeft += (ctx.measureText(element.textContent).width + 10);
-        // ctx.fillText(element.textContent, 10, 10);
-        return (el) => {el.textLeft = 0;};
+        return el => {el.textLeft = 0;};
     },
 });
 
@@ -27,7 +21,7 @@ startCanvasRender(canvas, root);
 function initCanvas () {
     let canvas;
     <div $$App>
-        <canvas $ref={canvas} style='border: 1px solid #222'></canvas>
+        <canvas $ref={canvas} style='border: 1px solid #666;'></canvas>
         <div>msg = {msg}</div>
         <button onclick={msg += '!'}>Click Me </button>
     </div>;
@@ -39,7 +33,7 @@ function initCanvasCtx (canvas, size = 300) {
     canvas.style.width = canvas.style.height = `${size}px`;
     const ctx = canvas.getContext('2d');
     ctx.font = `${15 * scale}px Microsoft Sans Serif`;
-    ctx.fillStyle = '#222';
+    ctx.fillStyle = '#eee';
     ctx.textBaseline = 'top';
     return ctx;
 }

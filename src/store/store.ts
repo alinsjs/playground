@@ -3,12 +3,12 @@
  * @Date: 2023-08-16 16:24:25
  * @Description: Coding something
  */
-// import { createStore } from 'alins';
-// import { parseWebAlins } from 'alins-compiler-web';
+import { createStore } from 'alins';
+import { parseWebAlins } from 'alins-compiler-web';
 
-// @ts-ignore
-import { createStore } from '../dist/alins/alins.esm.min';
-import { parseWebAlins } from '../dist/compiler-web/alins-compiler-web.esm.min';
+// // @ts-ignore
+// import { createStore } from '../dist/alins/alins.esm.min';
+// import { parseWebAlins } from '../dist/compiler-web/alins-compiler-web.esm.min';
 
 // // @ts-ignore
 // import { createStore } from '../dist/alins/alins.esm.min';
@@ -19,8 +19,9 @@ import javascript from 'highlight.js/lib/languages/javascript';// Then register 
 
 import 'highlight.js/styles/vs2015.css';
 import 'src/function/custom-code';
-import { compressCode, copy, countCodeSize, createAlinsHTML, createIFrameSrc, getUrlParam } from 'src/utils';
+import { compressCode, copy, countCodeSize, createAlinsHTML, createIFrameSrc, forceRefreshIframe, getUrlParam } from 'src/utils';
 import Examples from './examples';
+import eveit from 'eveit';
 
 let downloadLink: any;
 
@@ -54,6 +55,7 @@ export const useStatus = createStore({
             // 编辑器拖拽条
             codeEditorWidth,
             codeEditorLeft: 0,
+            // codeEditorLeft: 200,
             dragActive: false,
 
             syntaxError: false,
@@ -146,6 +148,7 @@ export const useStatus = createStore({
             }
         },
         onDragSize (x: number) {
+            // console.warn(x, this.codeEditorLeft);
             this.codeEditorWidth = x - this.codeEditorLeft;
         },
         onDragConsoleSize (y: number) {
@@ -159,6 +162,9 @@ export const useStatus = createStore({
                 this.clearConsole();
                 if (this.example.iframe) {
                     this.iframeCode = this.runCode;
+                    if (force) {
+                        eveit.emit('refresh-iframe');
+                    }
                 } else {
                     document.getElementById('App')!.innerHTML = '';
                     new Function(this.runCode)();

@@ -29,6 +29,11 @@ export function ConsoleBlock () {
 
         _inLog = false;
     };
+    const clearOrigin = console.clear;
+    console.clear = () => {
+        clearOrigin.apply(console);
+        status.clearConsole();
+    };
 
     return <div class='console-block'
         $ref:dom

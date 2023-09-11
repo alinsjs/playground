@@ -28,7 +28,7 @@ export function EditorBox () {
             //     _editor.code(code);
             // });
             status.$watch('example.code', (code) => {
-                console.log('examplecode change');
+                _editor.editor.setScrollTop(0);
                 _editor.code(code);
             });
             parseCode(_editor.code());
