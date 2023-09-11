@@ -108,7 +108,8 @@ ${code}
 
 // <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
 export function createIFrameSrc (code: string) {
-    const alinsSrc = __DEV__ ? 'http://localhost:5173/alins.iife.min.js' : 'https://cdn.jsdelivr.net/npm/alins';
+    const alinsSrc = `${location.origin}/${location.pathname}/alins.iife.min.js`;
+    // const alinsSrc = __DEV__ ? 'http://localhost:5173/alins.iife.min.js' : 'https://cdn.jsdelivr.net/npm/alins';
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
