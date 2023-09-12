@@ -138,7 +138,7 @@ export default [
     },
     {
         "name": "Pure Event",
-        "code": "function click(from: string){\n    console.log(`Execute click from ${from}`)\n    // The pure decorator is used to keep event expressions from being compiled\n    return ()=>{\n        console.log(`Click from ${from}!`);\n    }\n}\n<div $$App>\n    <div>\n        Normal [Won't Work]: \n        <button onclick={click('child1')}>Click Me!</button>\n    </div>\n    <div>\n        With Pure: \n        <button onclick:pure={click('child2')}>Click Me!</button>\n    </div>\n</div>",
+        "code": "function click (from: string) {\n    console.log(`Execute click from ${from}`);\n    // The pure decorator is used to keep event expressions from being compiled\n    return () => {\n        console.log(`Click from ${from}!`);\n    };\n}\n<div $$App>\n    <div>\n        Normal [Won't Log Click From]:\n        <button onclick={click('child1')}>Click Me!</button>\n    </div>\n    <div>\n        With Pure:\n        <button onclick:pure={click('child2')}>Click Me!</button>\n    </div>\n</div>;",
         "title": "Events",
         "iframe": false
     },
