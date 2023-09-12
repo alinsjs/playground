@@ -14,7 +14,8 @@ function initCustomCode () {
             name: 'Free Code',
             code: 'console.log("Hello Alins!")',
             'title': 'Custom',
-            'head': 'Custom'
+            'head': 'Custom',
+            iframe: false,
         });
         return;
     }
@@ -25,7 +26,8 @@ function initCustomCode () {
         name,
         'code': decompressCode(code),
         'title': 'Custom',
-        'head': 'Custom'
+        'head': 'Custom',
+        iframe: false,
     });
 }
 

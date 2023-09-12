@@ -19,7 +19,7 @@ import javascript from 'highlight.js/lib/languages/javascript';// Then register 
 
 import 'highlight.js/styles/vs2015.css';
 import 'src/function/custom-code';
-import { compressCode, copy, countCodeSize, createAlinsHTML, createIFrameSrc, forceRefreshIframe, getUrlParam } from 'src/utils';
+import { compressCode, copy, countCodeSize, createAlinsHTML, createIFrameSrc, getUrlParam } from 'src/utils';
 import Examples from './examples';
 import eveit from 'eveit';
 
@@ -41,6 +41,11 @@ function loadingResult () {
     </div>`;
 }
 
+function getHashIndex () {
+    const hash = location.hash === '#free' ? `#${Examples.length - 1}` : location.hash;
+    return hash ? parseInt(hash.substring(1)) : 0;
+}
+
 export const useStatus = createStore({
     state: () => {
 
@@ -48,7 +53,8 @@ export const useStatus = createStore({
 
         const codeEditorWidth = (window.innerWidth - sidebarWidth) * 0.5;
         hljs.registerLanguage('javascript', javascript);
-        const exampleIndex = location.hash ? parseInt(location.hash.substring(1)) : 0;
+
+        const exampleIndex = getHashIndex();
         const example = Examples[exampleIndex];
 
         return {
