@@ -116,7 +116,7 @@ function loopRender () {
     v ++;
     console.clear();
     Root.render();
-    setTimeout(loopRender, 1000);
+    setTimeout(() => {requestAnimationFrame(loopRender);}, 1000);
 }
 
 loopRender();

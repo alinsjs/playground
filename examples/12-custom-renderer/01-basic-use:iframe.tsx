@@ -20,7 +20,7 @@ function loopRender () {
     v ++;
     console.clear();
     root.render();
-    setTimeout(loopRender, 1000);
+    setTimeout(() => {requestAnimationFrame(loopRender);}, 1000);
 }
 
 loopRender();

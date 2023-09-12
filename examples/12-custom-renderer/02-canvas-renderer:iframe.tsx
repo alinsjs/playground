@@ -8,10 +8,10 @@ const ctx = initCanvasCtx(canvas);
 
 const root = useRenderer({
     render (element: CustomElement) {
-        const parent = element.parentElement || { deep: 0 }; // @static
-        if (!parent.textLeft) parent.textLeft = 10;
-        ctx.fillText(element.textContent, parent.textLeft, parent.deep  * 15 + 10);
-        parent.textLeft += (ctx.measureText(element.textContent).width + 10);
+        const _parent = element.parentElement || { deep: 0 };
+        if (!_parent.textLeft) _parent.textLeft = 10;
+        ctx.fillText(element.textContent, _parent.textLeft, (_parent.deep - 1)  * 15 + 10);
+        _parent.textLeft += (ctx.measureText(element.textContent).width);
         return el => {el.textLeft = 0;};
     },
 });
@@ -45,7 +45,6 @@ function startCanvasRender (canvas, root) {
     function loopRender () {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         root.render();
-        // setTimeout(loopRender, 1000);
         requestAnimationFrame(loopRender);
     }
     loopRender();

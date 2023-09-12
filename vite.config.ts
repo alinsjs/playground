@@ -28,8 +28,8 @@ export default defineConfig(({ mode }) => {
         ],
         define: {
             __DEV__: `${isDev}`,
-            __DEBUG__: `${true}`,
-            __VERSION__: '"__DEV__"',
+            __DEBUG__: `${false}`,
+            __VERSION__: '"0.0.29"',
         },
         build: {
             rollupOptions: {
