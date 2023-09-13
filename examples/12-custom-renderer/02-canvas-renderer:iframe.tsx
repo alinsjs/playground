@@ -31,6 +31,7 @@ function initCanvasCtx (canvas, size = 300) {
     const scale = window.devicePixelRatio;
     canvas.width = canvas.height = size * scale;
     canvas.style.width = canvas.style.height = `${size}px`;
+    canvas.style.backgroundColor = '#333';
     const ctx = canvas.getContext('2d');
     ctx.font = `${15 * scale}px Microsoft Sans Serif`;
     ctx.fillStyle = '#eee';
