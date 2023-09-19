@@ -10,7 +10,7 @@ import { useStatus } from './store/store';
 import { DragBar } from './components/widgets/drag-bar';
 import './styles/index.less';
 import { ConsoleBlock } from './components/console-block/console-block';
-import { copy } from './utils';
+import { IS_DEV, copy } from './utils';
 import { version } from 'alins';
 
 const status = useStatus();
@@ -94,3 +94,14 @@ window._status = status;
     </div>
     {/* <div class='status-container'>status</div> */}
 </div>;
+
+if (window.parent !== window) {
+    window.addEventListener('DOMContentLoaded', () => {
+        const data = { type: 'playground_loaded' };
+        if (IS_DEV) {
+            window.parent.postMessage(data, 'http://localhost:5173');
+        } else {
+            window.parent.postMessage(data);
+        }
+    });
+}

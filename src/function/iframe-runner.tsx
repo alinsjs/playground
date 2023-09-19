@@ -10,9 +10,11 @@ import eveit from 'eveit';
 export function IFrameRunner () {
     const status = useStatus();
     let iframe: HTMLIFrameElement;
+    let loading = false;
 
     eveit.on('refresh-iframe', () => {
         iframe.contentWindow?.location.reload();
+        loading = true;
     });
 
     window.addEventListener('message', (e)=>{
@@ -21,6 +23,8 @@ export function IFrameRunner () {
             console.log(...data.data);
         }else if(data.type === 'iframe_clear_log'){
             console.clear();
+        }else if(data.type === 'iframe_loaded'){
+            loading = false;
         }
     });
 
@@ -43,20 +47,34 @@ export function IFrameRunner () {
         _window?.addEventListener('mouseup', mouseUp);
     }
 
-    status.$watch('exampleIndex', ()=>{
-        setTimeout(()=>{
-            initDragEvent();
-        }, 500);
-    })
+    status.$watch('iframeSrc', ()=>{
+        loading = true;
+    });
+    watch: loading, ()=>{
+        initDragEvent();
+    }
 
-    return <iframe
-        $ref:iframe
-        $mounted={initDragEvent}
-        src={status.iframeSrc}
-        style={{
-            height: status.resultPanelHeightCss,
-            width: '100%',
-            border: 'none',
-        }}>
-    </iframe>;
+    return <div style={{
+        position:'relative',
+        width: '100%',
+        height: status.resultPanelHeightCss,
+        fontSize: 30,
+    }}>
+        <i $show={loading} style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+        }} class="ei-spinner-snake ei-spin"></i>
+        <iframe
+            $ref:iframe
+            $mounted={initDragEvent}
+            src={status.iframeSrc}
+            style={{
+                height: '100%',
+                width: '100%',
+                border: 'none',
+            }}>
+        </iframe>
+    </div>;
 }

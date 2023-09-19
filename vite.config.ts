@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
         base: isDev ? '/' : '/playground',
 
         server: {
-            port: 5173
+            port: 5174
         },
 
         plugins: [

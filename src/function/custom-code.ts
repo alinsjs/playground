@@ -27,7 +27,7 @@ function initCustomCode () {
         'code': decompressCode(code),
         'title': 'Custom',
         'head': 'Custom',
-        iframe: false,
+        iframe: getUrlParam('iframe') === '1',
     });
 }
 

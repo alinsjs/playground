@@ -6,6 +6,8 @@
 
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
 
+export const IS_DEV = location.hostname === 'localhost';
+
 export function debounce<T extends any[], Return> (fn: (...args: T)=>Return, time = 1000) {
     let t: any = null;
     return function (...args: T) {
@@ -99,7 +101,7 @@ export function createAlinsHTML (name: string, code: string) {
         For official use, please refer to https://alinsjs.github.io/docs/
     -->
     <div id="App"></div>
-    <script type="text/alins">
+    <script type="text/alins" ts>
 ${code}
     </script>
 </body>
@@ -108,8 +110,9 @@ ${code}
 
 // <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
 export function createIFrameSrc (code: string) {
-    const alinsSrc = `${location.origin}/${location.pathname}/alins.iife.min.js`;
-    // const alinsSrc = __DEV__ ? 'http://localhost:5173/alins.iife.min.js' : 'https://cdn.jsdelivr.net/npm/alins';
+    // const alinsSrc = `${location.origin}${location.pathname}/alins.iife.min.js`;
+    // debugger;
+    const alinsSrc = __DEV__ ? 'http://localhost:5173/alins.iife.min.js' : 'https://cdn.jsdelivr.net/npm/alins';
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,12 +141,18 @@ export function createIFrameSrc (code: string) {
 <body>
     <div id="App"></div>
     <script>
+        function postMsg(type, data=[]) {
+            window.parent.postMessage({type, data});
+        }
         console.log = (...args) => {
-            window.parent.postMessage({type: 'iframe_log', data: args});
+            postMsg('iframe_log', args);
         };
         console.clear = () => {
-            window.parent.postMessage({type: 'iframe_clear_log'});
+            postMsg('iframe_clear_log');
         };
+        window.addEventListener('DOMContentLoaded', () => {
+            postMsg('iframe_loaded');
+        });
     </script>
     <script>
 ${code}
