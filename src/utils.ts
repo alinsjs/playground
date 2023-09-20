@@ -93,7 +93,7 @@ export function createAlinsHTML (name: string, code: string) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${name}</title>
-    <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
+    <script src="https://unpkg.com/alins-compiler-web"></script>
 </head>
 <body>
     <!--
@@ -108,11 +108,10 @@ ${code}
 </html>`;
 }
 
-// <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
 export function createIFrameSrc (code: string) {
     // const alinsSrc = `${location.origin}${location.pathname}/alins.iife.min.js`;
     // debugger;
-    const alinsSrc = __DEV__ ? 'http://localhost:5173/alins.iife.min.js' : 'https://cdn.jsdelivr.net/npm/alins';
+    const alinsSrc = __DEV__ ? 'http://localhost:5173/alins.iife.min.js' : 'https://unpkg.com/alins';
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
