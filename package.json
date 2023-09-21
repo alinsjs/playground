@@ -16,8 +16,8 @@
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vitejs/plugin-legacy": "^4.0.2",
-    "alins": "0.0.28",
-    "alins-compiler-web": "0.0.28",
+    "alins": "0.0.34",
+    "alins-compiler-web": "0.0.34",
     "copy-util": "^1.0.1",
     "eslint": "8.2.0",
     "eslint-plugin-react": "^7.33.1",
@@ -34,6 +34,6 @@
     "typescript": "^4.9.3",
     "typescript-eslint": "0.0.1-alpha.0",
     "vite": "^4.2.0",
-    "vite-plugin-alins": "0.0.28"
+    "vite-plugin-alins": "0.0.34"
   }
 }

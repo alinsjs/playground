@@ -21,11 +21,11 @@ devDependencies:
     specifier: ^4.0.2
     version: 4.1.1(terser@5.19.4)(vite@4.4.9)
   alins:
-    specifier: 0.0.28
-    version: 0.0.28
+    specifier: 0.0.34
+    version: 0.0.34
   alins-compiler-web:
-    specifier: 0.0.28
-    version: 0.0.28
+    specifier: 0.0.34
+    version: 0.0.34
   copy-util:
     specifier: ^1.0.1
     version: 1.0.1
@@ -75,8 +75,8 @@ devDependencies:
     specifier: ^4.2.0
     version: 4.4.9(less@4.2.0)(terser@5.19.4)
   vite-plugin-alins:
-    specifier: 0.0.28
-    version: 0.0.28
+    specifier: 0.0.34
+    version: 0.0.34
 
 packages:
 
@@ -1857,46 +1857,46 @@ packages:
       uri-js: 4.4.1
     dev: true
 
-  /alins-compiler-core@0.0.28:
-    resolution: {integrity: sha512-+A5R/rUBuQIlL0S1TtH0hm+rEa6kfUN0/SfyVZGplet1sK9KuUY4s8wibQ6tNbtpBU8zH3poar+H33i7tBZ1mA==}
+  /alins-compiler-core@0.0.34:
+    resolution: {integrity: sha512-GMD5IvZguqUeJD0mKq6cA92O0FNKSFI6CkJJbwb1/xYZ5+PNvucxT4BqFGSWIZCcfIu5eDxHecm/Z35kWKqPqQ==}
     dependencies:
       '@babel/types': 7.22.15
       '@types/babel__traverse': 7.20.1
     dev: true
 
-  /alins-compiler-node@0.0.28:
-    resolution: {integrity: sha512-wPXULloQIi/egTlmyUQvl5VtK7pAPMZZDQQYSrxNGMFZP1+4nrfsJP5/xA5+urytnexdMcg3Ie+qMwIBm0XXGQ==}
+  /alins-compiler-node@0.0.34:
+    resolution: {integrity: sha512-Qs2OUuPgM31EY+wPGnP1vrTh+M/wviwvY04V9x6reGggleVTA35B0Z2UMIqawloiIECqDqX9+B0X+GCBIlGiOw==}
     dependencies:
       '@babel/core': 7.22.15
       '@babel/preset-react': 7.22.15(@babel/core@7.22.15)
       '@babel/preset-typescript': 7.22.15(@babel/core@7.22.15)
-      alins-compiler-core: 0.0.28
+      alins-compiler-core: 0.0.34
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /alins-compiler-web@0.0.28:
-    resolution: {integrity: sha512-9PqFoPbqoMDSyMJa2fw5FLCVUm4ZeDYlkDoopJmMGRXHcfqGm2IHldbzwPN4yFDSP5/Rg8n5YjJ9v3IgFC5qyQ==}
+  /alins-compiler-web@0.0.34:
+    resolution: {integrity: sha512-wBKq+IhBAvrHg8eLGYRJW6PfUZL2ATPheYSsp9GrswC8KAa4vQeVK79hyml+TZx0rQbWoa41HmpCNjQvMaKO/A==}
     dependencies:
-      alins: 0.0.28
-      alins-compiler-core: 0.0.28
+      alins: 0.0.34
+      alins-compiler-core: 0.0.34
     dev: true
 
-  /alins-reactive@0.0.28:
-    resolution: {integrity: sha512-4v+o6CkwhHRj/8wql+xcfi5Ve/v1p+Y9hHDpyqvERFmDwTET/0WQWL68w6iCGdYoyp7N69rKVt9kUaDqs6hlFg==}
+  /alins-reactive@0.0.34:
+    resolution: {integrity: sha512-C2WgFB0srYM8s098lxigWiRlAmJUMQSqe3z8QIRWPtaAimIuSUwSZeUCjuOoih9Nljdwi2Dv82UQ0wKxsteFZw==}
     dependencies:
-      alins-utils: 0.0.28
+      alins-utils: 0.0.34
     dev: true
 
-  /alins-utils@0.0.28:
-    resolution: {integrity: sha512-ND2E09TPR92QEZB/r8tmKD0izcMMXOuU95HOve4BX8lr9ko4veEMMtnC31swS2NH5psTuz0Emem6ZmvZ5+aC1A==}
+  /alins-utils@0.0.34:
+    resolution: {integrity: sha512-pxfIh8+/Y7eveMltvv//dfmd0iIiRiM9wgnKE0+l/yI6jzWad3cZdFBR32ksQsIOYoOpmOlB+LMFkEhfc+AhXg==}
     dev: true
 
-  /alins@0.0.28:
-    resolution: {integrity: sha512-2A3eEf4rPzqT1IShlYtOrxCdYHis7WlI0YiTeWaw/Zj6FNx2G2rvteIkDYmd0fCh2vBe/zLncUVm3Z9r20ogXg==}
+  /alins@0.0.34:
+    resolution: {integrity: sha512-U3n8KvVaMcXUGkx7dH8sR1/XJOGr4j0kj22myNGQ6ZefmiBnorPXJBP5Dyi+/8QEdGseTD2HmL/ShpwefS/Brw==}
     dependencies:
-      alins-reactive: 0.0.28
-      alins-utils: 0.0.28
+      alins-reactive: 0.0.34
+      alins-utils: 0.0.34
     dev: true
 
   /ansi-colors@4.1.3:
@@ -3916,10 +3916,10 @@ packages:
     resolution: {integrity: sha512-ocyWc3bAHBB/guyqJQVI5o4BZkPhznPYUG2ea80Gond/BgNWpap8TOmLSeeQG7bnh2KMISxskdADG59j7zruhw==}
     dev: true
 
-  /vite-plugin-alins@0.0.28:
-    resolution: {integrity: sha512-7h6K1kOYVdSsi0zFGnABjjFI9krvscBo8MYPYu1D6GQkgnAG5LyjlD1ipBHy4Ly5/E9xN5j9/LAFmHVTWVle8g==}
+  /vite-plugin-alins@0.0.34:
+    resolution: {integrity: sha512-0vxSE5vuqaNEzJE8A+KxinO/han50i9L/a1GRPgtADIO5PkoTaX8LiNSsPxpkmgcagDg5G3gS2Rx7YrGhLPLTA==}
     dependencies:
-      alins-compiler-node: 0.0.28
+      alins-compiler-node: 0.0.34
     transitivePeerDependencies:
       - supports-color
     dev: true

@@ -39,7 +39,7 @@ export default [
     },
     {
         "name": "Computed",
-        "code": "let count = 1;\n\nlet countAdd2 = count + 2;\n\nlet countAdd3 = countAdd2 + 1;\n\nfunction countMultiply2 () {\n    return count * 2\n}\n\n<div $$App>\n    <button onclick={count++}>\n        click:{count}\n    </button>\n    <div>count + 2 = {countAdd2}</div>\n    <div>count + 3 = {countAdd3}</div>\n    <div>count * 2 = {countMultiply2}</div>\n    <div>count * 2 = {countMultiply2()}</div>\n</div>",
+        "code": "let count = 1;\nconst countAdd2 = count + 2;\nconst countAdd3 = countAdd2 + 1;\nfunction countMultiply2 () {\n    return count * 2;\n}\n<div $$App>\n    <button onclick={count++}>\n         click:{count}\n    </button>\n    <div>count + 2 = {countAdd2}</div>\n    <div>count + 3 = {countAdd3}</div>\n    <div>count + 4 = {countAdd3 + 1}</div>\n    <div>count * 2 = {countMultiply2}</div>\n    <div>count * 2 = {countMultiply2()}</div>\n    <div>count * 4 = {countMultiply2() * 2}</div>\n</div>;",
         "title": "Reactivity",
         "iframe": false
     },
@@ -194,7 +194,7 @@ export default [
     },
     {
         "name": "Async Component",
-        "code": "function mockFetch () {\n    return new Promise(resolve => {\n        setTimeout(() => {\n            resolve({ name: 'Bob', age: 10 });\n        }, 2000);\n    });\n}\n\nfunction Component () {\n    // You can specify the name of the $data through the name attribute: name='persion'\n    return <Async data={mockFetch()}>\n        <div>name={$data.name}; age={$data.age}</div>\n    </Async>;\n}\nfunction Attribute () {\n    // You can specify the name of the $data through the name attribute: $name='persion'\n    return <div $async={mockFetch()}>name={$data.name}; age={$data.age}</div>;\n}\n\n<Component $$App/>;\n<Attribute $$App/>;\n",
+        "code": "function mockFetch () {\n    return new Promise(resolve => {\n        setTimeout(() => {\n            resolve({ name: 'Bob', age: 10 });\n        }, 2000);\n    });\n}\n\nfunction Component () {\n    // You can specify the name of the $data through the name attribute: name='persion'\n    return <Async data={mockFetch()}>\n        <div>name={$data.name}; age={$data.age}</div>\n    </Async>;\n}\nfunction Attribute () {\n    // You can specify the name of the $data through the name attribute: $name='persion'\n    return <div $async={mockFetch()}>name={$data.name}; age={$data.age}</div>;\n}\n\n<div $$App>\n    <Component/>\n    <Attribute/>\n</div>;\n",
         "title": "Logic",
         "iframe": false
     },

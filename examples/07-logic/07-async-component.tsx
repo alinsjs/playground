@@ -17,5 +17,7 @@ function Attribute () {
     return <div $async={mockFetch()}>name={$data.name}; age={$data.age}</div>;
 }
 
-<Component $$App/>;
-<Attribute $$App/>;
+<div $$App>
+    <Component/>
+    <Attribute/>
+</div>;
