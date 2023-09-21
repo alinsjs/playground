@@ -11,3 +11,8 @@ function _staticFunction () {
     let v = 0; // Review the compilation artifacts to confirm that the static scope is in effect
     v ++;
 }
+
+static_scope: {
+    let v = 0; // Review the compilation artifacts to confirm that the static scope is in effect
+    v ++;
+};

@@ -1,4 +1,4 @@
-function Main () {
+function Component () {
     let count: number = 0;
     const add = () => {count++};
     return <>
@@ -13,4 +13,28 @@ function Main () {
         </Else>
     </>;
 }
-<Main $$App/>;
+function Attribute () {
+    let count: number = 0;
+    const add = () => {count++};
+    return <>
+        <div $if={count > 3}>Now count > 3</div>
+        <button $elseif={count > 2} onclick:add>continue[count>2]</button>
+        <button $else onclick:add>count={count}</button>
+    </>;
+}
+function MixUse () {
+    let count: number = 0;
+    const add = () => {count++};
+    return <>
+        <div $if={count > 3}>Now count > 3</div>
+        <ElseIf data={count > 2}>
+            <button onclick:add>continue[count>2]</button>
+        </ElseIf>
+        <button $else onclick:add>count={count}</button>
+    </>;
+}
+<div $$App>
+    <Component/>
+    <Attribute/>
+    <MixUse/>
+</div>;

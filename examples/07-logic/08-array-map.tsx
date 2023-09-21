@@ -1,4 +1,4 @@
-function Componnt(){
+function Component(){
     const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]
     let age = 10;
     return <>
@@ -11,4 +11,4 @@ function Componnt(){
     </>
 }
 
-<Componnt $$App/>;
+<Component $$App/>;

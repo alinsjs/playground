@@ -164,7 +164,7 @@ export default [
     },
     {
         "name": "If Component",
-        "code": "function Main () {\n    let count: number = 0;\n    const add = () => {count++};\n    return <>\n        <If data={count > 3}>\n            <div>Now count > 3</div>\n        </If>\n        <ElseIf data={count > 2}>\n            <button onclick:add>continue[count>2]</button>\n        </ElseIf>\n        <Else>\n            <button onclick:add>count={count}</button>\n        </Else>\n    </>;\n}\n<Main $$App/>;",
+        "code": "function Component () {\n    let count: number = 0;\n    const add = () => {count++};\n    return <>\n        <If data={count > 3}>\n            <div>Now count > 3</div>\n        </If>\n        <ElseIf data={count > 2}>\n            <button onclick:add>continue[count>2]</button>\n        </ElseIf>\n        <Else>\n            <button onclick:add>count={count}</button>\n        </Else>\n    </>;\n}\nfunction Attribute () {\n    let count: number = 0;\n    const add = () => {count++};\n    return <>\n        <div $if={count > 3}>Now count > 3</div>\n        <button $elseif={count > 2} onclick:add>continue[count>2]</button>\n        <button $else onclick:add>count={count}</button>\n    </>;\n}\nfunction MixUse () {\n    let count: number = 0;\n    const add = () => {count++};\n    return <>\n        <div $if={count > 3}>Now count > 3</div>\n        <ElseIf data={count > 2}>\n            <button onclick:add>continue[count>2]</button>\n        </ElseIf>\n        <button $else onclick:add>count={count}</button>\n    </>;\n}\n<div $$App>\n    <Component/>\n    <Attribute/>\n    <MixUse/>\n</div>;\n",
         "title": "Logic",
         "iframe": false
     },
@@ -176,37 +176,37 @@ export default [
     },
     {
         "name": "Switch Component",
-        "code": "function Main () {\n    let count = 0;\n    const add = () => {count++;};\n    return <Switch data:count>\n        <Case data={[1,2]}>\n            <button onclick:add>Count is 1 or 2:{count}</button>\n        </Case>\n        <Case data={3}>\n            <button onclick:add>Count is 3[count=3]</button>\n        </Case>\n        <Case data={4}>\n            <button onclick:add>Now Count = 4</button>\n        </Case>\n        <Default>\n            <button onclick:add>Other Count:{count}</button>\n        </Default>\n    </Switch>;\n}\n<Main $$App/>;",
+        "code": "function Component () {\n    let count = 0;\n    const add = () => {count++;};\n    return <Switch data:count>\n        <Case data={[ 1, 2 ]}>\n            <button onclick:add>Count is 1 or 2:{count}</button>\n        </Case>\n        <Case data={3}>\n            <button onclick:add>Count is 3[count=3]</button>\n        </Case>\n        <Case data={4}>\n            <button onclick:add>Now Count = 4</button>\n        </Case>\n        <Default>\n            <button onclick:add>Other Count:{count}</button>\n        </Default>\n    </Switch>;\n}\nfunction Attribute () {\n    let count = 0;\n    const add = () => {count++;};\n    return <span $switch={count}>\n        <button $case={[ 1, 2 ]} onclick:add>Count is 1 or 2:{count}</button>\n        <button $case={3} onclick:add>Count is 3[count=3]</button>\n        <button $case={4} onclick:add>Now Count = 4</button>\n        <button $default onclick:add>Other Count:{count}</button>\n    </span>;\n}\nfunction MixUse () {\n    let count = 0;\n    const add = () => {count++;};\n    return <span $switch={count}>\n        <Case data={[ 1, 2 ]}>\n            <button onclick:add>Count is 1 or 2:{count}</button>\n        </Case>\n        <button $case={3} onclick:add>Count is 3[count=3]</button>\n        <Case data={4}>\n            <button onclick:add>Now Count = 4</button>\n        </Case>\n        <button $default onclick:add>Other Count:{count}</button>\n    </span>;\n}\n\n<div $$App>\n    <Component/>\n    <Attribute/>\n    <MixUse/>\n</div>;\n",
         "title": "Logic",
         "iframe": false
     },
     {
         "name": "Show Component",
-        "code": "function Componnt(){\n    let show: boolean = false;\n    return <>\n        <button onclick={show = !show}>Toggle Show</button>\n        <Show data:show>\n            <div>Show Element 1</div>\n        </Show>\n        <div $show:show>Show Element 2</div>\n    </>\n}\n\n<Componnt $$App/>;",
+        "code": "function Component () {\n    let show: boolean = false;\n    return <>\n        <button onclick={show = !show}>Toggle Show</button>\n        <Show data:show>\n            <div>Show Element 1</div>\n        </Show>\n        <div $show:show>Show Element 2</div>\n    </>;\n}\n\n<Component $$App/>;",
         "title": "Logic",
         "iframe": false
     },
     {
         "name": "Async Block",
-        "code": "function mockFetch(){\n    return new Promise(resolve => {\n        setTimeout(()=>{\n            resolve({name: 'Bob', age: 10})\n        }, 2000)\n    });\n}\n\nasync function Componnt(){\n    const data = await mockFetch();\n    return <div>name={data.name}; age={data.age}</div>\n}\n\n<Componnt $$App/>;",
+        "code": "function mockFetch () {\n    return new Promise(resolve => {\n        setTimeout(() => {\n            resolve({ name: 'Bob', age: 10 });\n        }, 2000);\n    });\n}\n\nasync function Component () {\n    const data = await mockFetch();\n    return <div>name={data.name}; age={data.age}</div>;\n}\n\n<Component $$App/>;",
         "title": "Logic",
         "iframe": false
     },
     {
         "name": "Async Component",
-        "code": "function mockFetch(){\n    return new Promise(resolve => {\n        setTimeout(() => {\n            resolve({name: 'Bob', age: 10})\n        }, 2000)\n    });\n}\n\nfunction Componnt(){\n    // You can specify the name of the $data through the name attribute: name='persion'\n    return <Async data={mockFetch()}>\n        <div>name={$data.name}; age={$data.age}</div>\n    </Async>\n}\n\n<Componnt $$App/>;",
+        "code": "function mockFetch () {\n    return new Promise(resolve => {\n        setTimeout(() => {\n            resolve({ name: 'Bob', age: 10 });\n        }, 2000);\n    });\n}\n\nfunction Component () {\n    // You can specify the name of the $data through the name attribute: name='persion'\n    return <Async data={mockFetch()}>\n        <div>name={$data.name}; age={$data.age}</div>\n    </Async>;\n}\nfunction Attribute () {\n    // You can specify the name of the $data through the name attribute: $name='persion'\n    return <div $async={mockFetch()}>name={$data.name}; age={$data.age}</div>;\n}\n\n<Component $$App/>;\n<Attribute $$App/>;\n",
         "title": "Logic",
         "iframe": false
     },
     {
         "name": "Array Map",
-        "code": "function Componnt(){\n    const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]\n    let age = 10;\n    return <>\n        <button onclick={\n            list.unshift({name: 'Tom', age: age++})\n        }>Add Person</button>\n        {list.map((item, index) => (\n            <div>{index+1}: name={item.name}; age={item.age};</div>\n        ))}\n    </>\n}\n\n<Componnt $$App/>;",
+        "code": "function Component(){\n    const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]\n    let age = 10;\n    return <>\n        <button onclick={\n            list.unshift({name: 'Tom', age: age++})\n        }>Add Person</button>\n        {list.map((item, index) => (\n            <div>{index+1}: name={item.name}; age={item.age};</div>\n        ))}\n    </>\n}\n\n<Component $$App/>;",
         "title": "Logic",
         "iframe": false
     },
     {
         "name": "For Component",
-        "code": "function Componnt(){\n    const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]\n    let age = 10;\n    return <>\n        <button onclick={\n            list.unshift({name: 'Tom', age: age++})\n        }>Add Person</button>\n        <For data:list>\n            <div>{$index+1}: name={$item.name}; age={$item.age};</div>\n        </For>\n    </>\n    // You can specify the name of the $item and $index through the name attribute: item='person' index='i'\n}\n\n<Componnt $$App/>;",
+        "code": "function Component () {\n    const list = [ { name: 'Bob', age: 10 }, { name: 'Alice', age: 11 } ];\n    let age = 10;\n    return <>\n        <button onclick={\n            list.unshift({ name: 'Tom', age: age++ })\n        }>Add Person</button>\n        <For data:list>\n            <div>{$index + 1}: name={$item.name}; age={$item.age};</div>\n        </For>\n    </>;\n    // You can specify the name of the $item and $index through the name attribute: item='person' index='i'\n}\nfunction Attribute () {\n    const list = [ { name: 'Bob', age: 10 }, { name: 'Alice', age: 11 } ];\n    let age = 10;\n    return <>\n        <button onclick={\n            list.unshift({ name: 'Tom', age: age++ })\n        }>Add Person</button>\n        <div $for={list}>{$index + 1}: name={$item.name}; age={$item.age};</div>\n    </>;\n    // You can specify the name of the $item and $index through the name attribute: $item='person' $index='i'\n}\n\n<div $$App>\n    <Component/>\n    <Attribute/>\n</div>;",
         "title": "Logic",
         "iframe": false
     },
@@ -275,7 +275,7 @@ export default [
     },
     {
         "name": "Variable Naming",
-        "code": "let _name = 1;\n_name ++;\n// Variables starting with _ are compiled as static data even if the value changes\n\nlet $name = 2;\n// Variables starting with $ are compiled into reactive data even if the value does not change\n\nconst $$shallowReactive = {a:1};\n// Variables starting with $$ are compiled into shallow reactive data\n\n<div $$App>Click output to view the compilation product</div>",
+        "code": "let _name = 1;\n_name ++;\n// Variables starting with _ are compiled as static data even if the value changes\n\n_: name = 1;\nname ++;\n\nconst $name = 2;\n// Variables starting with $ are compiled into reactive data even if the value does not change\n\nconst $$shallowReactive = { a: 1 };\n// Variables starting with $$ are compiled into shallow reactive data\n\n$: name2 = 2;\n\n<div $$App>Click output to view the compilation product</div>;",
         "title": "Rules",
         "iframe": false
     },
@@ -287,7 +287,7 @@ export default [
     },
     {
         "name": "Static Scope",
-        "code": "// At a static scope, assignments will not cause data to be marked as reactive\n// @static-scope\nfunction Component1 () {\n    let count = 0;\n    return <button onclick={count++}>count is {count}[Won't Work]</button>;\n}\n<Component1 $$App/>;\n\n// Or you can use the function name at the beginning of the underscore to specify a static scope\nfunction _staticFunction () {\n    let v = 0; // Review the compilation artifacts to confirm that the static scope is in effect\n    v ++;\n}\n",
+        "code": "// At a static scope, assignments will not cause data to be marked as reactive\n// @static-scope\nfunction Component1 () {\n    let count = 0;\n    return <button onclick={count++}>count is {count}[Won't Work]</button>;\n}\n<Component1 $$App/>;\n\n// Or you can use the function name at the beginning of the underscore to specify a static scope\nfunction _staticFunction () {\n    let v = 0; // Review the compilation artifacts to confirm that the static scope is in effect\n    v ++;\n}\n\nstatic_scope: {\n    let v = 0; // Review the compilation artifacts to confirm that the static scope is in effect\n    v ++;\n};\n",
         "title": "Rules",
         "iframe": false
     },
