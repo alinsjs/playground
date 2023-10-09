@@ -1,13 +1,13 @@
-function click(){
+function click () {
     console.log('Clicked, try again!');
 }
-<div $$App>
+<div $mount='#App'>
     <div>
-        Normal: 
+        Normal:
         <button onclick={click}>Click Me!</button>
     </div>
     <div>
-        Only Once: 
+        Only Once:
         <button onclick:once={click}>Click Me!</button>
     </div>
-</div>
+</div>;

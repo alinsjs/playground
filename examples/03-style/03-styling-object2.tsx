@@ -4,7 +4,7 @@ const style = {
     fontWeight: 'bold',
 };
 
-<div $$App>
+<div $mount='#App'>
     <button onclick={() => {
         style.color = '#4f4';
         style.fontSize = '30px';

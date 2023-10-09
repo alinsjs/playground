@@ -5,7 +5,7 @@ function click (from: string) {
         console.log(`Click from ${from}!`);
     };
 }
-<div $$App>
+<div $mount='#App'>
     <div>
         Normal [Won't Log Click From]:
         <button onclick={click('child1')}>Click Me!</button>

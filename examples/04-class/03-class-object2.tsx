@@ -10,7 +10,7 @@ function toggleClass(e){
     console.log(e.target.className)
 }
 
-<div $$App>
+<div $mount='#App'>
     <button class={classObject}
         onclick={toggleClass}>
         Toggle Class

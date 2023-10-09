@@ -1,4 +1,4 @@
 let count = 1;
-<button onclick={count++} $$App>
+<button onclick={count++} $mount='#App'>
     count:{count}
 </button>;

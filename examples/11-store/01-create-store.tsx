@@ -23,7 +23,7 @@ const useStore = createStore({
 
 const store = useStore();
 
-<div $$App>
+<div $mount='#App'>
     <div>Count = {store.count}</div>
     <div>countAdd2 = {store.countAdd2}</div>
     <div>countAddX = {store.countAddX(4)}</div>

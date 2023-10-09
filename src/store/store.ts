@@ -48,20 +48,27 @@ function getHashIndex () {
 
 export const useStatus = createStore({
     state: () => {
+        function initSizeInfo () {
+            const codeEditorLeft = window.innerWidth < 600 ? 0 : 200;
+            const isMiniScreen = !codeEditorLeft;
+            const sidebarWidth = getUrlParam('side') === '0' ? 0 : codeEditorLeft;
+            const codeEditorWidth = isMiniScreen ? window.innerWidth : (window.innerWidth - sidebarWidth) * 0.5;
+            return { codeEditorLeft, sidebarWidth, codeEditorWidth, isMiniScreen };
+        }
 
-        const sidebarWidth = getUrlParam('side') === '0' ? 0 : 200;
 
-        const codeEditorWidth = (window.innerWidth - sidebarWidth) * 0.5;
         hljs.registerLanguage('javascript', javascript);
 
         const exampleIndex = getHashIndex();
         const example = Examples[exampleIndex];
 
+        window.addEventListener('resize', () => {
+            Object.assign(useStatus(), initSizeInfo());
+        });
+
         return {
             // 编辑器拖拽条
-            codeEditorWidth,
-            codeEditorLeft: 0,
-            // codeEditorLeft: 200,
+            ...initSizeInfo(),
             dragActive: false,
 
             syntaxError: false,
@@ -84,11 +91,11 @@ export const useStatus = createStore({
                 dragActive: false,
             },
 
-            sidebarWidth,
+            showSideBar: false,
+            showResultBox: true,
         };
     },
     actions: {
-
         toggleConsole () {
             const cs = this.console;
             if (cs.prevHeight) {
@@ -99,7 +106,12 @@ export const useStatus = createStore({
                 cs.height = 0;
             }
         },
-
+        toggleSidebar () {
+            this.showSideBar = !this.showSideBar;
+        },
+        toggleResultBox () {
+            this.showResultBox = !this.showResultBox;
+        },
         clearConsole () {
             this.console.list = [];
             // console.clear();
@@ -222,7 +234,7 @@ export const useStatus = createStore({
         }
     }
 });
-
+window.useStatus = useStatus;
 // const status = useStatus();
 // status.download();
 

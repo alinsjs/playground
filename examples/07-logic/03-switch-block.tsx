@@ -10,4 +10,4 @@ function Main () {
     }
     return <button onclick:add>Other Count:{count}</button>;
 }
-<Main $$App/>;
+<Main $mount='#App'/>;

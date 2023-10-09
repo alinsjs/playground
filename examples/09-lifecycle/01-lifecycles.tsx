@@ -16,7 +16,7 @@ function removed(dom){
     console.log(`removed: parent=${dom.parentElement}`)
 }
 
-<div $$App>
+<div $mount='#App'>
     <div
         $ref:ref
         $created:created

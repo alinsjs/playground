@@ -41,7 +41,7 @@ function MixUse () {
     </span>;
 }
 
-<div $$App>
+<div $mount='#App'>
     <Component/>
     <Attribute/>
     <MixUse/>

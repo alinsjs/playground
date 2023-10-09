@@ -2,7 +2,7 @@ let selected = 'Apple';
 
 let fruitList = ['Apple', 'Banana', 'Orange'];
 
-<div $$App>
+<div $mount='#App'>
     <select value={selected}>
         <For data={fruitList}>
             <option>{$item}</option>

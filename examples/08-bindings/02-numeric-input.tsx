@@ -1,6 +1,6 @@
 let a = 1, b = 2, c = '';
 
-<div $$App>
+<div $mount='#App'>
     <div>
         <input type='number' value={a} min='0' max='10'/>
         <input type='range' value={a} min='0' max='10'/>

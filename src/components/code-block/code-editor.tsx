@@ -18,7 +18,7 @@ export function EditorBox () {
             const parseCode = (v: string) => {
                 status.setCode(v);
             };
-            const _editor = new Editor({
+            const editor = new Editor({
                 dom,
                 code: status.example.code,
                 onchange: parseCode,
@@ -28,10 +28,10 @@ export function EditorBox () {
             //     _editor.code(code);
             // });
             status.$watch('example.code', (code) => {
-                _editor.editor.setScrollTop(0);
-                _editor.code(code);
+                editor.editor.setScrollTop(0);
+                editor.code(code);
             });
-            parseCode(_editor.code());
+            parseCode(editor.code());
         }}
     ></div>;
 }

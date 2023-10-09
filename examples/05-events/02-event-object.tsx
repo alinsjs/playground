@@ -3,7 +3,7 @@ function onclick (e) {
     x = e.clientX;
     y = e.clientY;
 }
-<div $$App>
+<div $mount='#App'>
     <button onclick={(e) => {
         x = e.clientX;
         y = e.clientY;

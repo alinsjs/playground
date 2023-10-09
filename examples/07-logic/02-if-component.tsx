@@ -33,7 +33,7 @@ function MixUse () {
         <button $else onclick:add>count={count}</button>
     </>;
 }
-<div $$App>
+<div $mount='#App'>
     <Component/>
     <Attribute/>
     <MixUse/>

@@ -1,7 +1,7 @@
 let redNumber = 100;
 let fontSize = 14;
 
-<div $$App>
+<div $mount='#App'>
     <button onclick={() => {
         redNumber += 10;
         fontSize ++;

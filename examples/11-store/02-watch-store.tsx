@@ -33,7 +33,7 @@ store.$watch(() => store.countAddX(4), (newValue, oldValue) => {
     console.log('store.countAddX(4) change', newValue, oldValue);
 });
 
-<div $$App>
+<div $mount='#App'>
     <div>Count = {store.count}</div>
     <div>countAdd2 = {store.countAdd2}</div>
     <div>countAddX = {store.countAddX(4)}</div>

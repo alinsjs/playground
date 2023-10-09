@@ -23,7 +23,7 @@ function Attribute () {
     // You can specify the name of the $item and $index through the name attribute: $item='person' $index='i'
 }
 
-<div $$App>
+<div $mount='#App'>
     <Component/>
     <Attribute/>
 </div>;

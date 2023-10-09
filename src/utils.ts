@@ -111,7 +111,7 @@ ${code}
 export function createIFrameSrc (code: string) {
     // const alinsSrc = `${location.origin}${location.pathname}/alins.iife.min.js`;
     // debugger;
-    const alinsSrc = __DEV__ ? 'http://localhost:5173/alins.iife.min.js' : 'https://unpkg.com/alins';
+    const alinsSrc = __DEV__ ? 'http://localhost:5174/alins.iife.min.js' : 'https://unpkg.com/alins';
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>

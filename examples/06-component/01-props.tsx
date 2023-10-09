@@ -1,6 +1,6 @@
 let count = 0;
 
-<div $$App>
+<div $mount='#App'>
     <Component $count/>
     <button onclick={count++}>Increse</button>
 </div>;

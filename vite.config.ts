@@ -6,8 +6,8 @@
 import { defineConfig } from 'vite';
 // loadEnv
 import legacy from '@vitejs/plugin-legacy';
-import alins from 'vite-plugin-alins';
-// import alins from './src/dist/vite-plugin/vite-plugin-alins.esm.min';
+// import alins from 'vite-plugin-alins';
+import alins from './src/dist/vite-plugin/vite-plugin-alins.esm.min';
 
 // https://vitejs.dev/config/
 // @ts-ignore
@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => {
         define: {
             __DEV__: `${isDev}`,
             __DEBUG__: `${false}`,
-            __VERSION__: '"0.0.34"',
+            __VERSION__: '"0.0.35"',
         },
         build: {
             rollupOptions: {

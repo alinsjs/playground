@@ -22,4 +22,4 @@ watch: c, (newValue, oldValue, prop) => {
     console.log('c changed:', newValue, oldValue, prop);
 };
 
-<button $$App onclick={a++}>Modify A</button>;
+<button $mount='#App' onclick={a++}>Modify A</button>;

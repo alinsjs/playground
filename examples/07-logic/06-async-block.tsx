@@ -11,4 +11,4 @@ async function Component () {
     return <div>name={data.name}; age={data.age}</div>;
 }
 
-<Component $$App/>;
+<Component $mount='#App'/>;

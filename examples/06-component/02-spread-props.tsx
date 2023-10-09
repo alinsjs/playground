@@ -7,7 +7,7 @@ function Component ({ name, age }) {
     return <div>{name}: age={age}</div>;
 }
 
-<div $$App>
+<div $mount='#App'>
     <Component {...data}/>
     <button onclick={data.age++}>Modify</button>
 </div>;

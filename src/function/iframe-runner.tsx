@@ -40,11 +40,11 @@ export function IFrameRunner () {
     }   
 
     function initDragEvent(){
-        const _window = iframe.contentWindow;
-        _window?.removeEventListener('mousemove', mouseMove);
-        _window?.removeEventListener('mouseup', mouseUp);
-        _window?.addEventListener('mousemove', mouseMove);
-        _window?.addEventListener('mouseup', mouseUp);
+        const window = iframe.contentWindow;
+        window?.removeEventListener('mousemove', mouseMove);
+        window?.removeEventListener('mouseup', mouseUp);
+        window?.addEventListener('mousemove', mouseMove);
+        window?.addEventListener('mouseup', mouseUp);
     }
 
     status.$watch('iframeSrc', ()=>{

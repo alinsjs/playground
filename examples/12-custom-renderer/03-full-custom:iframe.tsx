@@ -118,7 +118,7 @@ const Root = new LogElement(ElementType.Element, '', 'Root');
 let v = 0;
 const v2 = v * 2;
 
-<div $$Root>
+<div $mount='#Root'>
     value = {v}
     <div>value * 2 = {v2}</div>
 </div>;

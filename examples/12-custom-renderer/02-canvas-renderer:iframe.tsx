@@ -8,10 +8,10 @@ const ctx = initCanvasCtx(canvas);
 
 const root = useRenderer({
     render (element: CustomElement) {
-        const _parent = element.parentElement || { deep: 0 };
-        if (!_parent.textLeft) _parent.textLeft = 10;
-        ctx.fillText(element.textContent, _parent.textLeft, (_parent.deep - 1)  * 15 + 10);
-        _parent.textLeft += (ctx.measureText(element.textContent).width);
+        const parent = element.parentElement || { deep: 0 }; // @static
+        if (!parent.textLeft) parent.textLeft = 10;
+        ctx.fillText(element.textContent, parent.textLeft, (parent.deep - 1)  * 15 + 10);
+        parent.textLeft += (ctx.measureText(element.textContent).width);
         return el => {el.textLeft = 0;};
     },
 });
@@ -20,7 +20,7 @@ startCanvasRender(canvas, root);
 
 function initCanvas () {
     let canvas;
-    <div $$App>
+    <div $mount='#App'>
         <canvas $ref={canvas} style='border: 1px solid #666;'></canvas>
         <div>msg = {msg}</div>
         <button onclick={msg += '!'}>Click Me </button>

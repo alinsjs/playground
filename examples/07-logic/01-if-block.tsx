@@ -8,4 +8,4 @@ function Main () {
     }
     return <button onclick:add>count={count}</button>
 }
-<Main $$App/>;
+<Main $mount='#App'/>;

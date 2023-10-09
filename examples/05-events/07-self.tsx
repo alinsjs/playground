@@ -1,13 +1,13 @@
-function click(from: string){
+function click (from: string) {
     console.log(`Click from ${from}!`);
 }
-<div $$App>
+<div $mount='#App'>
     <div onclick={click('parent')}>
-        Normal: 
+        Normal:
         <button onclick={click('child')}>Click Me!</button>
     </div>
     <div onclick:self={click('parent')}>
-        With Self: 
+        With Self:
         <button onclick={click('child')}>Click Me!</button>
     </div>
-</div>
+</div>;

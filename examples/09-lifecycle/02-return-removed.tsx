@@ -8,7 +8,7 @@ function mounted (dom) {
     };
 }
 
-<div $$App>
+<div $mount='#App'>
     <div $ref:ref $mounted:mounted>Hello World!</div>
     <button onclick={ref.remove()}>Remove DOM</button>
 </div>;

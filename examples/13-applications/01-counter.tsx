@@ -1,5 +1,5 @@
 let count = 1;
-<div $$App>
+<div $mount='#App'>
     <input type="number" value={count} />
     <button onclick={count++}>
         click:{count}

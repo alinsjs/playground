@@ -1,6 +1,6 @@
 let value = 'Hello';
 
-<div $$App>
+<div $mount='#App'>
     <input value={value} /><br/>
     <textarea value={value}></textarea>
     <p>Content = "{value}"</p>

@@ -7,7 +7,7 @@ function toggleClass(e){
     console.log(e.target.className)
 }
 
-<div $$App>
+<div $mount='#App'>
     <button class='a'
         class:a1={a1Flag}
         class:a2={a2Count % 2 === 0}

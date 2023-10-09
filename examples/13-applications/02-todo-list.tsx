@@ -26,4 +26,4 @@ function Item ({item, index}, children) {
     </div>;
 }
 
-<List $$App/>;
+<List $mount='#App'/>;

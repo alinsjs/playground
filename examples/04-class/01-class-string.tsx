@@ -11,7 +11,7 @@ function addClass (e) {
     console.log(e.target.className);
 }
 
-<div $$App>
+<div $mount='#App'>
     <button
         class={`a ${classList.join(' ')}`}
         onclick={addClass}

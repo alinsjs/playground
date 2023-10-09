@@ -23,24 +23,36 @@ window._status = status;
     class='main-container'>
     <div class='title-container'>
         <span class='title-item main' onclick={window.open('https://github.com/alinsjs/playground/')}>
+            <i class="mobile-mode sidebar-btn" 
+                class:ei-chevron-left={status.showSideBar}
+                class:ei-chevron-right={!status.showSideBar}
+                onclick:stop={status.toggleSidebar}></i>
             <img style='height: 30px' src="https://shiyix.cn/images/alins.png" alt="" />
-            <span style='color: var(--theme-color)'>Alins Playground [v{version}]</span>
+            <span class='pc-mode' style='color: var(--theme-color)'>Alins Playground [v{version}]</span>
+            <span class='mobile-mode' style='color: var(--theme-color)'>Alins Playground</span>
         </span>
         <span class='title-item info'>{status.info}</span>
         <span class='title-item right'>
             <span onclick={window.open('https://alinsjs.github.io/docs/')}>
                 <i class="ei-file-text-o"></i>
-                Docs
+                <span class='pc-mode'>Docs</span>
             </span>
             <span onclick={window.open('https://github.com/alinsjs/alins')}>
                 <i class="ei-github"></i>
-                GitHub
+                <span class='pc-mode'>GitHub</span>
+            </span>
+            <span class="mobile-mode">
+                <i class="sidebar-btn" 
+                    class:ei-chevron-left={!status.showResultBox}
+                    class:ei-chevron-right={status.showResultBox}
+                    onclick:stop={status.toggleResultBox}></i>
             </span>
         </span>
     </div>
     <div class='body-container'>
         <div class='body-assets-container'
-            style={`width: ${status.sidebarWidth}px;min-width: ${status.sidebarWidth}px;`}
+            style={status.isMiniScreen ? '' : `width: ${status.sidebarWidth}px;min-width: ${status.sidebarWidth}px;`}
+            style:transform={`translateX(${(status.isMiniScreen && !status.showSideBar) ? '-100%': '0'})`}
             $mounted={(dom) => {
                 // @ts-ignore
                 dom.scrollTop = document.querySelector('.example-item.active')!.offsetTop - 100;
@@ -50,9 +62,6 @@ window._status = status;
         <div
             class='body-code-container'
             style={{ width: status.codeWidthPx }}
-            $mounted={(dom) => {
-                status.codeEditorLeft = dom.getBoundingClientRect().left;
-            }}
         >
             <div class='editor-title'>
                 <span class='text-ellipsis'>
@@ -80,7 +89,9 @@ window._status = status;
             <span class='code-size'>{status.codeSize}</span>
         </div>
         <DragBar />
-        <div class='body-result-container'>
+        <div class='body-result-container' 
+            class:open={status.showResultBox}
+        >
             <ResultBlock />
             <div class='console-title'>
                 <div class='console-btns'>
@@ -99,7 +110,7 @@ if (window.parent !== window) {
     window.addEventListener('DOMContentLoaded', () => {
         const data = { type: 'playground_loaded' };
         if (IS_DEV) {
-            window.parent.postMessage(data, 'http://localhost:5173');
+            window.parent.postMessage(data, 'http://localhost:5174');
         } else {
             window.parent.postMessage(data);
         }

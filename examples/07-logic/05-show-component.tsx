@@ -9,4 +9,4 @@ function Component () {
     </>;
 }
 
-<Component $$App/>;
+<Component $mount='#App'/>;
